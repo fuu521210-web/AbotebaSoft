@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abo Teba Software Services</title>
+    <title>Abo Teba Software Services | خدمات وحلول السوفت وير</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* شريط التنبيهات والعروض علوي */
+        /* شريط التنبيهات علوي */
         .top-banner {
             background: linear-gradient(90deg, #0072ff, #00c6ff);
             color: #fff;
@@ -31,6 +31,34 @@
             border-bottom-right-radius: 12px;
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0, 114, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* مؤشر حالة السيرفرات المباشر */
+        .server-status-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            background-color: #00e676;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00e676;
+            animation: pulseDot 1.5s infinite;
+        }
+        @keyframes pulseDot {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px #00e676; }
+            100% { transform: scale(0.9); opacity: 0.7; }
         }
 
         header { 
@@ -80,14 +108,8 @@
         }
 
         @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 15px rgba(0, 114, 255, 0.6), 0 0 30px rgba(0, 198, 255, 0.4);
-            }
-            100% {
-                transform: scale(1.04);
-                box-shadow: 0 0 25px rgba(230, 0, 126, 0.8), 0 0 45px rgba(0, 230, 118, 0.6);
-            }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 114, 255, 0.6); }
+            100% { transform: scale(1.04); box-shadow: 0 0 25px rgba(230, 0, 126, 0.8); }
         }
 
         .header-logo {
@@ -128,6 +150,27 @@
         .fb { background: #1877f2; }
         .tg { background: #229ED9; }
         .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+        /* قسم عداد الثقة والإحصائيات الجديد */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            width: 100%;
+        }
+        .stat-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+        .stat-box i { font-size: 2rem; color: #0072ff; margin-bottom: 8px; }
+        .stat-number { font-size: 1.8rem; font-weight: 900; color: #1e293b; margin-bottom: 4px; }
+        .stat-text { color: #666; font-size: 0.9rem; font-weight: bold; }
 
         /* قسم الخدمات السريعة */
         .quick-services {
@@ -196,7 +239,7 @@
         }
         .submit-btn:hover { background: #1eb954; }
 
-        /* جعل كل كارت يظهر تحت الآخر بشكل مستقل تماماً وبدون استخدام Grid */
+        /* الكارتات ورسومات المعرض */
         .grid { 
             max-width: 500px; 
             margin: 0 auto; 
@@ -210,7 +253,7 @@
             transition: transform 0.2s;
             overflow: hidden;
             width: 100%;
-            margin-bottom: 25px; /* مسافة فاصلة واضحة تحت كل صورة */
+            margin-bottom: 25px;
             box-sizing: border-box;
             display: block;
         }
@@ -228,7 +271,7 @@
         
         .card h3 { font-size: 1.05rem; margin-top: 12px; color: #0072ff; font-weight: 700; line-height: 1.4; }
 
-        /* قسم مميزات الخدمة */
+        /* قسم مميزات التعامل */
         .why-us {
             background: #ffffff;
             padding: 30px 20px;
@@ -289,7 +332,6 @@
             overflow: hidden;
         }
         .faq-question {
-            page-break-inside: avoid;
             padding: 15px 20px;
             font-weight: bold;
             color: #1e293b;
@@ -307,7 +349,7 @@
             line-height: 1.6;
         }
 
-        /* أزرار التواصل العائمة */
+        /* أزرار التواصل العائمة بنبض جذاب */
         .floating-btns {
             position: fixed;
             bottom: 20px;
@@ -318,20 +360,28 @@
             z-index: 999;
         }
         .float-btn {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: transform 0.2s;
         }
-        .float-btn:hover { transform: scale(1.1); }
-        .float-wa { background: #25d366; }
+        .float-btn:hover { transform: scale(1.12); }
+        .float-wa { 
+            background: #25d366; 
+            animation: pulseWa 2s infinite;
+        }
+        @keyframes pulseWa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
         .float-call { background: #0072ff; }
 
         .modal {
@@ -391,9 +441,12 @@
 </head>
 <body>
 
-    <!-- شريط التنبيهات -->
+    <!-- شريط التنبيهات مع مؤشر حالة السيرفرات -->
     <div class="top-banner">
-        🔥 لطلب خدمه انزل الي الاسفل وعنينا ليك 🔥
+        <span>🔥 لطلب خدمة انزل إلى الأسفل وعنينا ليك 🔥</span>
+        <div class="server-status-badge">
+            <span class="status-dot"></span> سيرفرات التفعيل: أونلاين 🟢
+        </div>
     </div>
 
     <header>
@@ -411,6 +464,25 @@
             <a href="https://www.instagram.com/ahmad_abo_tebaa?stkn=MW4yNnRlMWsxeTVnaQ%3D%3D&utm_source=qr" target="_blank" class="btn ig"><i class="fa-brands fa-instagram"></i> إنستجرام</a>
         </div>
     </header>
+
+    <!-- عداد إحصائيات الثقة والانجازات -->
+    <div class="stats-container">
+        <div class="stat-box">
+            <i class="fas fa-mobile-alt"></i>
+            <div class="stat-number">+1500</div>
+            <div class="stat-text">جهاز تم فكه وتخطيه</div>
+        </div>
+        <div class="stat-box">
+            <i class="fas fa-smile-beam"></i>
+            <div class="stat-number">100%</div>
+            <div class="stat-text">نسبة رضاء العملاء</div>
+        </div>
+        <div class="stat-box">
+            <i class="fas fa-clock"></i>
+            <div class="stat-number">24/7</div>
+            <div class="stat-text">دعم فني سريع</div>
+        </div>
+    </div>
 
     <!-- أقسام الخدمات السريعة -->
     <div class="quick-services">
@@ -505,12 +577,12 @@
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>"سرعة ممتازة في تخطي الآيكلود واشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو طيبة!"</p>
-                <div class="client-name">-بودي </div>
+                <div class="client-name">- بودي</div>
             </div>
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>"خرجت تاب المدرسة من المنظومة في أقل من نص ساعة وبأعلى كفاءة. شغل محترف جداً."</p>
-                <div class="client-name">- محمد </div>
+                <div class="client-name">- محمد</div>
             </div>
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
@@ -552,7 +624,7 @@
         </div>
     </div>
 
-    <!-- أزرار التواصل العائمة -->
+    <!-- أزرار التواصل العائمة مع نبض مميز -->
     <div class="floating-btns">
         <a href="https://wa.me/201064721809" target="_blank" class="float-btn float-wa" title="واتساب"><i class="fab fa-whatsapp"></i></a>
         <a href="tel:01064721809" class="float-btn float-call" title="اتصال مباشر"><i class="fas fa-phone"></i></a>
@@ -591,7 +663,6 @@
 
         window.onload = updateVisitorCount;
 
-        // دالة تحويل بيانات الطلب إلى رسالة واتساب مباشرة
         function sendToWhatsApp(e) {
             e.preventDefault();
             const model = document.getElementById('phoneModel').value;
