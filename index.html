@@ -211,14 +211,16 @@
             padding: 15px; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: transform 0.2s;
+            overflow: hidden; /* لمنع أي خروج للصورة بره الكارت تماماً */
         }
         .card:hover { transform: translateY(-4px); }
         
-        /* تعديل الصور لتظهر بالطول وتناسب الكروت بدون خروج عن الشاشة */
+        /* تعديل الصور لتظهر بالطول وتملأ الكارت بشكل عمودي ومضبوط */
         .card img { 
             width: 100%; 
             height: 320px; 
-            object-fit: contain; 
+            object-fit: cover; /* قص الصورة تلقائياً لملء المساحة بالطول */
+            object-position: center;
             background: #111; 
             border-radius: 8px; 
             cursor: pointer; 
@@ -601,6 +603,19 @@
         }
 
         // دالة الأسئلة الشائعة Accordion
+        function toggleFact(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                icon.className = "fas fa-chevron-down";
+            } else {
+                answer.style.display = "block";
+                icon.className = "fas fa-chevron-up";
+            }
+        }
+        
         function toggleFaq(element) {
             const answer = element.nextElementSibling;
             const icon = element.querySelector('i');
