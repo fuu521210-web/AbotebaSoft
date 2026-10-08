@@ -7,20 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #131d31;
-            --border-color: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-glow: #60a5fa;
-            --whatsapp-green: #10b981;
-        }
-
         body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
+            background-color: #f4f7fb; 
+            color: #222; 
             font-family: 'Tajawal', sans-serif; 
             text-align: center; 
             margin: 0; 
@@ -31,55 +20,54 @@
             overflow-x: hidden;
         }
 
-        /* شريط التنبيهات العلوي */
+        /* شريط التنبيهات علوي */
         .top-banner {
-            background: linear-gradient(90deg, #1d4ed8, #2563eb);
+            background: linear-gradient(90deg, #0072ff, #00c6ff);
             color: #fff;
-            padding: 12px;
+            padding: 10px;
             font-size: 0.95rem;
             font-weight: 700;
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 114, 255, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
+        /* مؤشر حالة السيرفرات المباشر */
         .server-status-badge {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
             border-radius: 20px;
             font-size: 0.85rem;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .status-dot {
             width: 9px;
             height: 9px;
-            background-color: #34d399;
+            background-color: #00e676;
             border-radius: 50%;
-            box-shadow: 0 0 10px #34d399;
+            box-shadow: 0 0 8px #00e676;
             animation: pulseDot 1.5s infinite;
         }
         @keyframes pulseDot {
             0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px #34d399; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px #00e676; }
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
         header { 
-            background: var(--card-bg); 
-            padding: 35px 20px; 
-            border-bottom: 3px solid var(--accent-blue); 
-            border-radius: 20px; 
+            background: #ffffff; 
+            padding: 30px; 
+            border-bottom: 3px solid #0072ff; 
+            border-radius: 16px; 
             margin-bottom: 30px; 
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
         
         .logo-container {
@@ -91,10 +79,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(60deg, #3b82f6, #10b981, #6366f1, #3b82f6);
+            background: linear-gradient(60deg, #00c6ff, #0072ff, #e6007e, #00e676, #00c6ff);
             background-size: 300% 300%;
-            animation: moveGradient 4s ease infinite, pulseGlow 2s infinite alternate;
-            padding: 4px;
+            animation: moveGradient 4s ease infinite, pulseGlow 1.8s infinite alternate;
+            padding: 5px;
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(60deg, #00c6ff, #0072ff, #e6007e, #00e676, #00c6ff);
+            background-size: 300% 300%;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(12px);
+            opacity: 0.8;
+            animation: moveGradient 4s ease infinite;
         }
 
         @keyframes moveGradient {
@@ -104,8 +108,8 @@
         }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
-            100% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.7); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 114, 255, 0.6); }
+            100% { transform: scale(1.04); box-shadow: 0 0 25px rgba(230, 0, 126, 0.8); }
         }
 
         .header-logo {
@@ -113,21 +117,21 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
-            background-color: var(--bg-color);
+            background-color: #fff;
             display: block;
             position: relative;
             z-index: 1;
         }
 
-        h1 { color: #60a5fa; margin-bottom: 10px; font-weight: 900; letter-spacing: 0.5px; }
-        p { color: var(--text-muted); font-size: 1.1rem; }
+        h1 { color: #0072ff; margin-bottom: 10px; font-weight: 900; }
+        p { color: #555; font-size: 1.1rem; }
         
         .social-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
-            margin-top: 25px;
+            margin-top: 20px;
         }
         .btn { 
             display: inline-flex; 
@@ -139,15 +143,15 @@
             text-decoration: none; 
             font-weight: bold; 
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
-        .wa { background: #059669; }
-        .fb { background: #1d4ed8; }
-        .tg { background: #0284c7; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+        .wa { background: #25d366; }
+        .fb { background: #1877f2; }
+        .tg { background: #229ED9; }
         .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
-        /* إحصائيات الثقة */
+        /* قسم عداد الثقة والإحصائيات الجديد */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -157,18 +161,18 @@
             width: 100%;
         }
         .stat-box {
-            background: var(--card-bg);
+            background: #ffffff;
             padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             text-align: center;
         }
-        .stat-box i { font-size: 2rem; color: var(--accent-glow); margin-bottom: 8px; }
-        .stat-number { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 4px; }
-        .stat-text { color: var(--text-muted); font-size: 0.9rem; font-weight: bold; }
+        .stat-box i { font-size: 2rem; color: #0072ff; margin-bottom: 8px; }
+        .stat-number { font-size: 1.8rem; font-weight: 900; color: #1e293b; margin-bottom: 4px; }
+        .stat-text { color: #666; font-size: 0.9rem; font-weight: bold; }
 
-        /* الخدمات السريعة */
+        /* قسم الخدمات السريعة */
         .quick-services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -178,57 +182,52 @@
             width: 100%;
         }
         .service-box {
-            background: var(--card-bg);
+            background: #ffffff;
             padding: 20px 15px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s, border-color 0.2s;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
         }
-        .service-box:hover { transform: translateY(-3px); border-color: var(--accent-blue); }
-        .service-box i { font-size: 2rem; color: var(--accent-glow); margin-bottom: 8px; }
-        .service-box h4 { margin: 0; font-size: 0.95px; color: #e2e8f0; }
+        .service-box:hover { transform: translateY(-3px); }
+        .service-box i { font-size: 2rem; color: #0072ff; margin-bottom: 8px; }
+        .service-box h4 { margin: 0; font-size: 0.95rem; color: #333; }
 
-        h2 { color: #f1f5f9; margin-bottom: 20px; }
+        h2 { color: #1e293b; margin-bottom: 20px; }
 
-        /* فورم طلب الخدمة */
+        /* فورم طلب خدمة سريع */
         .order-section {
-            background: var(--card-bg);
+            background: #ffffff;
             padding: 30px 20px;
             margin: 0 auto 30px auto;
-            border-radius: 20px;
+            border-radius: 16px;
             max-width: 800px;
             width: 100%;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
             text-align: right;
             box-sizing: border-box;
         }
-        .order-section h2 { text-align: center; color: var(--accent-glow); margin-top: 0; }
+        .order-section h2 { text-align: center; color: #0072ff; margin-top: 0; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 6px; font-weight: 700; color: #cbd5e1; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 700; color: #333; }
         .form-control {
             width: 100%;
             padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border: 1px solid #d1d9e6;
+            border-radius: 8px;
             font-family: 'Tajawal', sans-serif;
             font-size: 1rem;
             box-sizing: border-box;
-            background: #0b0f19;
-            color: #fff;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-blue);
+            background: #fdfdfd;
         }
         .submit-btn {
             width: 100%;
-            background: #059669;
+            background: #25d366;
             color: white;
             padding: 14px;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
@@ -238,50 +237,50 @@
             gap: 10px;
             transition: background 0.2s;
         }
-        .submit-btn:hover { background: #047857; }
+        .submit-btn:hover { background: #1eb954; }
 
-        /* معرض الأعمال */
+        /* الكارتات ورسومات المعرض */
         .grid { 
             max-width: 500px; 
             margin: 0 auto; 
         }
         .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border-color); 
-            border-radius: 16px; 
+            background: #ffffff; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 12px; 
             padding: 15px; 
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
             overflow: hidden;
             width: 100%;
             margin-bottom: 25px;
             box-sizing: border-box;
             display: block;
         }
-        .card:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
+        .card:hover { transform: translateY(-4px); }
         
         .card img { 
             width: 100%; 
             height: 380px; 
             object-fit: cover; 
             object-position: center;
-            background: #000; 
-            border-radius: 10px; 
+            background: #111; 
+            border-radius: 8px; 
             cursor: pointer; 
         }
         
-        .card h3 { font-size: 1.05rem; margin-top: 12px; color: var(--accent-glow); font-weight: 700; line-height: 1.4; }
+        .card h3 { font-size: 1.05rem; margin-top: 12px; color: #0072ff; font-weight: 700; line-height: 1.4; }
 
-        /* مميزات التعامل */
+        /* قسم مميزات التعامل */
         .why-us {
-            background: var(--card-bg);
+            background: #ffffff;
             padding: 30px 20px;
             margin: 40px auto 0 auto;
-            border-radius: 20px;
+            border-radius: 16px;
             max-width: 1200px;
             width: 100%;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
             box-sizing: border-box;
         }
         .why-grid {
@@ -291,9 +290,9 @@
             margin-top: 20px;
         }
         .why-card { text-align: center; padding: 15px; }
-        .why-card i { font-size: 2.2rem; color: #34d399; margin-bottom: 10px; }
-        .why-card h4 { margin: 0 0 5px 0; color: var(--accent-glow); }
-        .why-card p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+        .why-card i { font-size: 2.2rem; color: #25d366; margin-bottom: 10px; }
+        .why-card h4 { margin: 0 0 5px 0; color: #0072ff; }
+        .why-card p { margin: 0; color: #666; font-size: 0.9rem; }
 
         /* آراء العملاء */
         .reviews-section {
@@ -307,16 +306,16 @@
             gap: 20px;
         }
         .review-card {
-            background: var(--card-bg);
+            background: #fff;
             padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             text-align: right;
         }
-        .stars { color: #f59e0b; margin-bottom: 10px; }
-        .review-card p { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 12px; }
-        .client-name { font-weight: bold; color: var(--accent-glow); font-size: 0.9rem; }
+        .stars { color: #ffc107; margin-bottom: 10px; }
+        .review-card p { font-size: 0.95rem; color: #444; margin-bottom: 12px; }
+        .client-name { font-weight: bold; color: #0072ff; font-size: 0.9rem; }
 
         /* الأسئلة الشائعة FAQ */
         .faq-section {
@@ -326,31 +325,31 @@
             text-align: right;
         }
         .faq-item {
-            background: var(--card-bg);
+            background: #ffffff;
             margin-bottom: 10px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
             overflow: hidden;
         }
         .faq-question {
             padding: 15px 20px;
             font-weight: bold;
-            color: #f8fafc;
+            color: #1e293b;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--card-bg);
+            background: #fff;
         }
         .faq-answer {
             padding: 0 20px 15px 20px;
-            color: var(--text-muted);
+            color: #555;
             font-size: 0.95rem;
             display: none;
             line-height: 1.6;
         }
 
-        /* أزرار التواصل العائمة */
+        /* أزرار التواصل العائمة بنبض جذاب */
         .floating-btns {
             position: fixed;
             bottom: 20px;
@@ -370,20 +369,20 @@
             color: #fff;
             font-size: 1.5rem;
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: transform 0.2s;
         }
         .float-btn:hover { transform: scale(1.12); }
         .float-wa { 
-            background: #059669; 
+            background: #25d366; 
             animation: pulseWa 2s infinite;
         }
         @keyframes pulseWa {
-            0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(5, 150, 105, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
-        .float-call { background: #2563eb; }
+        .float-call { background: #0072ff; }
 
         .modal {
             display: none;
@@ -393,15 +392,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.85);
             justify-content: center;
             align-items: center;
         }
         .modal-content {
             max-width: 92%;
             max-height: 90vh;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
         }
         .close-btn {
             position: absolute;
@@ -416,15 +415,14 @@
         footer {
             margin-top: 40px;
             padding: 20px;
-            background: var(--card-bg);
-            border-top: 2px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
+            background: #ffffff;
+            border-top: 2px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
         }
         .visitor-counter {
             font-size: 1.1rem;
-            color: var(--text-muted);
+            color: #555;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -432,17 +430,18 @@
         }
         .counter-number {
             font-weight: 900;
-            color: var(--accent-glow);
-            background: #0b0f19;
+            color: #0072ff;
+            background: #f4f7fb;
             padding: 5px 15px;
             border-radius: 15px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #d1d9e6;
             font-family: 'Courier New', Courier, monospace;
         }
     </style>
 </head>
 <body>
 
+    <!-- شريط التنبيهات مع مؤشر حالة السيرفرات -->
     <div class="top-banner">
         <span>🔥 لطلب خدمة انزل إلى الأسفل وعنينا ليك 🔥</span>
         <div class="server-status-badge">
@@ -466,10 +465,11 @@
         </div>
     </header>
 
+    <!-- عداد إحصائيات الثقة والانجازات -->
     <div class="stats-container">
         <div class="stat-box">
             <i class="fas fa-mobile-alt"></i>
-            <div class="stat-number">+648</div>
+            <div class="stat-number">+1500</div>
             <div class="stat-text">جهاز تم فكه وتخطيه</div>
         </div>
         <div class="stat-box">
@@ -484,6 +484,7 @@
         </div>
     </div>
 
+    <!-- أقسام الخدمات السريعة -->
     <div class="quick-services">
         <div class="service-box">
             <i class="fab fa-apple"></i>
@@ -503,6 +504,7 @@
         </div>
     </div>
 
+    <!-- نموذج طلب خدمة سريع متصل بالواتساب -->
     <div class="order-section">
         <h2><i class="fas fa-paper-plane"></i> طلب خدمة سريع</h2>
         <form id="whatsappForm" onsubmit="sendToWhatsApp(event)">
@@ -546,6 +548,7 @@
         <div class="card"><img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)"><h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3></div>
     </div>
 
+    <!-- قسم مميزات التعامل -->
     <div class="why-us">
         <h2>لماذا تختار خدماتنا؟</h2>
         <div class="why-grid">
@@ -567,6 +570,7 @@
         </div>
     </div>
 
+    <!-- آراء العملاء -->
     <div class="reviews-section">
         <h2>آراء وتقييمات العملاء</h2>
         <div class="reviews-grid">
@@ -588,6 +592,7 @@
         </div>
     </div>
 
+    <!-- الأسئلة الشائعة -->
     <div class="faq-section">
         <h2 style="text-align: center;">الأسئلة الشائعة</h2>
         <div class="faq-item">
@@ -619,11 +624,13 @@
         </div>
     </div>
 
+    <!-- أزرار التواصل العائمة مع نبض مميز -->
     <div class="floating-btns">
         <a href="https://wa.me/201064721809" target="_blank" class="float-btn float-wa" title="واتساب"><i class="fab fa-whatsapp"></i></a>
         <a href="tel:01064721809" class="float-btn float-call" title="اتصال مباشر"><i class="fas fa-phone"></i></a>
     </div>
 
+    <!-- تذييل الصفحة مع عداد الزوار -->
     <footer>
         <div class="visitor-counter">
             <i class="fas fa-users"></i>
