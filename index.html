@@ -212,7 +212,17 @@
             transition: transform 0.2s;
         }
         .card:hover { transform: translateY(-4px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; background: #e2e8f0; cursor: pointer; }
+        
+        /* تعديل الصور لتظهر بالطول بشكل كامل */
+        .card img { 
+            width: 100%; 
+            height: 320px; 
+            object-fit: contain; 
+            background: #0f172a; 
+            border-radius: 8px; 
+            cursor: pointer; 
+        }
+        
         .card h3 { font-size: 1.05rem; margin-top: 12px; color: #0072ff; font-weight: 700; line-height: 1.4; }
 
         /* قسم مميزات الخدمة */
@@ -238,11 +248,12 @@
         .why-card h4 { margin: 0 0 5px 0; color: #0072ff; }
         .why-card p { margin: 0; color: #666; font-size: 0.9rem; }
 
-        /* آراء العملاء */
+        /* آراء العملاء وقسم إضافة التقييمات */
         .reviews-section {
             max-width: 1200px;
             margin: 40px auto 0 auto;
             width: 100%;
+            text-align: right;
         }
         .reviews-grid {
             display: grid;
@@ -260,6 +271,30 @@
         .stars { color: #ffc107; margin-bottom: 10px; }
         .review-card p { font-size: 0.95rem; color: #444; margin-bottom: 12px; }
         .client-name { font-weight: bold; color: #0072ff; font-size: 0.9rem; }
+
+        /* فورم إضافة تقييم جديد */
+        .add-review-box {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        .star-rating input { display: none; }
+        .star-rating label { color: #cbd5e1; transition: color 0.2s; cursor: pointer; }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label { color: #ffc107; }
 
         /* الأسئلة الشائعة FAQ */
         .faq-section {
@@ -462,7 +497,7 @@
         <div class="card"><img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)"><h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3></div>
     </div>
 
-    <!-- قسم مميزات التعامل -->
+    <!-- قسم مميزات الخدمة -->
     <div class="why-us">
         <h2>لماذا تختار خدماتنا؟</h2>
         <div class="why-grid">
@@ -490,7 +525,7 @@
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>"سرعة ممتازة في تخطي الآيكلود واشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو تيبة!"</p>
+                <p>"سرعة ممتازة في تخطي الآيكلود واشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو طيبه!"</p>
                 <div class="client-name">- أحمد صبحي</div>
             </div>
             <div class="review-card">
@@ -503,6 +538,34 @@
                 <p>"أفضل مكان لخدمات أجهزة شاومي وسامسونج، تعامل راقي ومصداقية عالية."</p>
                 <div class="client-name">- مصطفى علي</div>
             </div>
+        </div>
+
+        <!-- صندوق إضافة تقييم جديد -->
+        <div class="add-review-box">
+            <h3 style="color: #0072ff; margin-top: 0; text-align: center;">أضف تقييمك ورأيك في الخدمة</h3>
+            <form onsubmit="sendReviewToWhatsApp(event)">
+                <div class="form-group">
+                    <label>اسمك الكريم:</label>
+                    <input type="text" id="clientName" class="form-control" placeholder="اكتب اسمك..." required>
+                </div>
+                <div class="form-group" style="text-align: center;">
+                    <label>اختر التقييم (عدد النجوم):</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" checked><label for="star5" title="5 نجوم"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 نجوم"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 نجوم"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 نجوم"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="نجمة واحدة"><i class="fas fa-star"></i></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>تعليقك أو رأيك في الخدمة:</label>
+                    <textarea id="clientComment" class="form-control" rows="3" placeholder="اكتب تجربتك مع الخدمة..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fab fa-whatsapp"></i> إرسال التقييم عبر الواتساب
+                </button>
+            </form>
         </div>
     </div>
 
@@ -585,6 +648,20 @@
             const notes = document.getElementById('notes').value;
 
             const text = `السلام عليكم، حابب أستفسر عن طلب خدمة سوفت وير:%0A%0A📱 *موديل الجهاز:* ${model}%0A🛠️ *نوع الخدمة:* ${service}%0A📝 *ملاحظات:* ${notes || 'لا يوجد'}`;
+            
+            window.open(`https://wa.me/201064721809?text=${text}`, '_blank');
+        }
+
+        // دالة إرسال تقييم العميل عبر الواتساب
+        function sendReviewToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+            const comment = document.getElementById('clientComment').value;
+
+            let starsText = '⭐'.repeat(parseInt(rating));
+
+            const text = `⭐ *تقييم جديد من عميل للموقع:*%0A%0A👤 *اسم العميل:* ${name}%0A🌟 *التقييم:* ${starsText} (${rating}/5)%0A💬 *التعليق:* ${comment}`;
             
             window.open(`https://wa.me/201064721809?text=${text}`, '_blank');
         }
