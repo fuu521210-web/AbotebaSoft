@@ -19,7 +19,7 @@
             --text-sub: #a0aec0;
         }
 
-        /* برواز علوي تقني مضيء ونابض */
+        /* برواز علوي تقني مضيء */
         body::after {
             content: '';
             position: fixed;
@@ -50,7 +50,6 @@
             overflow-x: hidden;
         }
 
-        /* خلفية شبكة نيون هندسية متحركة خفيفة */
         body::before {
             content: '';
             position: fixed;
@@ -58,11 +57,11 @@
             background-image: 
                 linear-gradient(rgba(0, 242, 254, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 242, 254, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-size: 400px 40px;
             z-index: -2;
         }
 
-        /* شريط التنبيهات العلوي */
+        /* شريط التنبيهات */
         .top-banner {
             background: linear-gradient(135deg, rgba(16, 24, 48, 0.9), rgba(26, 38, 74, 0.9));
             border: 1px solid var(--border-glow);
@@ -71,11 +70,11 @@
             font-size: 0.95rem;
             font-weight: 700;
             border-radius: 16px;
-            margin: 10px auto 25px auto;
+            margin: 10px auto 15px auto;
             max-width: 1200px;
             width: 100%;
             box-sizing: border-box;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,6 +112,31 @@
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
+        /* شريط الأخبار المتحرك السريع (جديد) */
+        .news-ticker {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto 25px auto;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 12px;
+            padding: 8px 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+        .ticker-text {
+            display: inline-block;
+            animation: marquee 22s linear infinite;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.92rem;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
         header { 
             background: var(--card-bg); 
             backdrop-filter: blur(15px);
@@ -120,7 +144,7 @@
             border: 1px solid var(--border-glow);
             border-radius: 24px; 
             margin-bottom: 35px; 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             position: relative;
             overflow: hidden;
         }
@@ -176,13 +200,7 @@
             z-index: 1;
         }
 
-        h1 { 
-            color: var(--primary); 
-            margin-bottom: 10px; 
-            font-weight: 900; 
-            letter-spacing: 1.5px; 
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.5); 
-        }
+        h1 { color: var(--primary); margin-bottom: 10px; font-weight: 900; letter-spacing: 1.5px; text-shadow: 0 0 20px rgba(0, 242, 254, 0.5); }
         p { color: var(--text-sub); font-size: 1.15rem; font-weight: 600; }
         
         .social-links {
@@ -202,7 +220,7 @@
             color: #fff; 
             text-decoration: none; 
             font-weight: bold; 
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
             border: 1px solid rgba(255,255,255,0.15);
         }
@@ -245,7 +263,7 @@
 
         h2 { color: #fff; margin-bottom: 25px; font-weight: 900; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
-        /* قسم مميزات حصريّة خرافية (جديد تماماً من الذكاء الاصطناعي لك) */
+        /* مميزات خدماتنا */
         .features-grid-section {
             max-width: 1200px;
             margin: 0 auto 35px auto;
@@ -290,12 +308,11 @@
             color: var(--primary);
             font-size: 1.6rem;
             margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(0,242,254,0.15);
         }
         .feature-card h3 { margin: 0 0 8px 0; color: #fff; font-size: 1.15rem; font-weight: 800; }
         .feature-card p { margin: 0; color: var(--text-sub); font-size: 0.92rem; line-height: 1.6; }
 
-        /* فورم طلب خدمة */
+        /* طلب خدمة */
         .order-section {
             background: var(--card-bg);
             backdrop-filter: blur(15px);
@@ -351,7 +368,32 @@
             box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6); 
         }
 
-        /* كارتات المعرض */
+        /* أزرار الفلترة لمعرض الأعمال (جديد) */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(16, 24, 48, 0.8);
+            border: 1px solid var(--border-glow);
+            color: var(--text-sub);
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* المعرض */
         .grid { 
             max-width: 520px; 
             margin: 0 auto; 
@@ -387,7 +429,7 @@
         }
         .card h3 { font-size: 1.15rem; margin-top: 15px; color: var(--primary); font-weight: 700; line-height: 1.4; }
 
-        /* مميزات التعامل السابقة */
+        /* لماذا تختارنا */
         .why-us {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -415,11 +457,11 @@
             transition: transform 0.3s;
         }
         .why-card:hover { transform: translateY(-5px); border-color: var(--success); }
-        .why-card i { font-size: 2.5rem; color: var(--success); margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(0,255,136,0.3)); }
+        .why-card i { font-size: 2.5rem; color: var(--success); margin-bottom: 12px; }
         .why-card h4 { margin: 0 0 8px 0; color: var(--primary); font-size: 1.1rem; }
         .why-card p { margin: 0; color: var(--text-sub); font-size: 0.95rem; }
 
-        /* آراء العملاء */
+        /* التقييمات */
         .reviews-section {
             max-width: 1200px;
             margin: 45px auto 0 auto;
@@ -439,11 +481,11 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             text-align: right;
         }
-        .stars { color: #ffc107; margin-bottom: 12px; font-size: 1.1rem; filter: drop-shadow(0 0 5px rgba(255,193,7,0.4)); }
+        .stars { color: #ffc107; margin-bottom: 12px; font-size: 1.1rem; }
         .review-card p { font-size: 1rem; color: #e2e8f0; margin-bottom: 15px; line-height: 1.6; }
         .client-name { font-weight: bold; color: var(--primary); font-size: 0.95rem; }
 
-        /* الأسئلة الشائعة FAQ */
+        /* FAQ */
         .faq-section {
             max-width: 900px;
             margin: 45px auto 0 auto;
@@ -457,7 +499,6 @@
             border-radius: 14px;
             border: 1px solid var(--border-glow);
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         .faq-question {
             padding: 18px 22px;
@@ -476,7 +517,7 @@
             line-height: 1.7;
         }
 
-        /* أزرار التواصل العائمة */
+        /* أزرار عائمة وتمرير للقمة */
         .floating-btns {
             position: fixed;
             bottom: 25px;
@@ -487,19 +528,19 @@
             z-index: 999;
         }
         .float-btn {
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-decoration: none;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             transition: all 0.3s;
         }
-        .float-btn:hover { transform: scale(1.15) translateY(-3px); }
+        .float-btn:hover { transform: scale(1.15); }
         .float-wa { 
             background: linear-gradient(135deg, #25d366, #1be85e); 
             animation: pulseWa 2s infinite;
@@ -510,6 +551,12 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
         .float-call { background: linear-gradient(135deg, #00f2fe, #4facfe); }
+        
+        .back-to-top {
+            background: rgba(255, 0, 127, 0.8);
+            border: 1px solid #ff007f;
+            display: none;
+        }
 
         .modal {
             display: none;
@@ -545,7 +592,6 @@
             backdrop-filter: blur(12px);
             border-top: 1px solid var(--border-glow);
             border-radius: 20px;
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
         }
         .visitor-counter {
             font-size: 1.1rem;
@@ -563,17 +609,23 @@
             border-radius: 20px;
             border: 1px solid var(--border-glow);
             font-family: 'Courier New', Courier, monospace;
-            box-shadow: inset 0 0 10px rgba(0,242,254,0.2);
         }
     </style>
 </head>
 <body>
 
-    <!-- شريط التنبيهات علوي احترافي -->
+    <!-- شريط التنبيهات -->
     <div class="top-banner">
         <span>🔥 لطلب خدمة انزل إلى الأسفل يا كبير 🔥</span>
         <div class="server-status-badge">
             <span class="status-dot"></span> SERVER STATUS: ONLINE 🟢
+        </div>
+    </div>
+
+    <!-- شريط أخبار السيرفر المتحرك (جديد) -->
+    <div class="news-ticker">
+        <div class="ticker-text">
+            ⚡ تم تخطي آيكلود آيفون 13 برو بنجاح 🟢 | 📱 خروج تاب T509 من المنظومة بنجاح 🟢 | 🛠️ جميع سيرفرات التفعيل أونلاين 24/7 🟢 | 🚀 سرعة وأمان تام في تنفيذ الخدمات
         </div>
     </div>
 
@@ -613,7 +665,7 @@
         </div>
     </div>
 
-    <!-- قسم مميزات حصرية إضافية (جديد وخرافي) -->
+    <!-- مميزات الخدمات -->
     <div class="features-grid-section">
         <h2>مميزات خدماتنا الاحترافية</h2>
         <div class="features-grid">
@@ -635,7 +687,7 @@
         </div>
     </div>
 
-    <!-- نموذج طلب خدمة سريع متصل بالواتساب -->
+    <!-- فورم طلب خدمة -->
     <div class="order-section">
         <h2><i class="fas fa-paper-plane"></i> طلب خدمة سريع</h2>
         <form id="whatsappForm" onsubmit="sendToWhatsApp(event)">
@@ -666,19 +718,27 @@
 
     <h2>معرض الأعمال والخدمات</h2>
 
+    <!-- أزرار تصفية الكاردز (جديد) -->
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterGallery('all')">الكل</button>
+        <button class="filter-btn" onclick="filterGallery('iphone')">آيفون</button>
+        <button class="filter-btn" onclick="filterGallery('tablet')">تابلت</button>
+        <button class="filter-btn" onclick="filterGallery('android')">أندرويد</button>
+    </div>
+
     <div class="grid">
-        <div class="card"><img src="1.jpg" onerror="this.onerror=null; this.src='1.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 7 مع تشغيل الشبكه</h3></div>
-        <div class="card"><img src="2.jpg" onerror="this.onerror=null; this.src='2.png';" onclick="openModal(this.src)"><h3>ازاله mdm انفنكس</h3></div>
-        <div class="card"><img src="3.jpg" onerror="this.onerror=null; this.src='3.png';" onclick="openModal(this.src)"><h3>خروج تاب T509 من المنظومه</h3></div>
-        <div class="card"><img src="4.jpg" onerror="this.onerror=null; this.src='4.png';" onclick="openModal(this.src)"><h3>فك تاب x216B</h3></div>
-        <div class="card"><img src="5.jpg" onerror="this.onerror=null; this.src='5.png';" onclick="openModal(this.src)"><h3>تخطي بدون شبكه ايفون 7</h3></div>
-        <div class="card"><img src="6.jpg" onerror="this.onerror=null; this.src='6.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 13 برو ماكس</h3></div>
-        <div class="card"><img src="7.jpg" onerror="this.onerror=null; this.src='7.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 16 برو</h3></div>
-        <div class="card"><img src="8.jpg" onerror="this.onerror=null; this.src='8.png';" onclick="openModal(this.src)"><h3>تخطي ايفون 11</h3></div>
-        <div class="card"><img src="9.jpg" onerror="this.onerror=null; this.src='9.png';" onclick="openModal(this.src)"><h3>تخطي ايفون 7 مع اصلاح بيسباند</h3></div>
-        <div class="card"><img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)"><h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3></div>
-        <div class="card"><img src="11.jpg" onerror="this.onerror=null; this.src='11.png';" onclick="openModal(this.src)"><h3>frp سامسونج</h3></div>
-        <div class="card"><img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 8 بدون شبكه</h3></div>
+        <div class="card iphone"><img src="1.jpg" onerror="this.onerror=null; this.src='1.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 7 مع تشغيل الشبكه</h3></div>
+        <div class="card android"><img src="2.jpg" onerror="this.onerror=null; this.src='2.png';" onclick="openModal(this.src)"><h3>ازاله mdm انفنكس</h3></div>
+        <div class="card tablet"><img src="3.jpg" onerror="this.onerror=null; this.src='3.png';" onclick="openModal(this.src)"><h3>خروج تاب T509 من المنظومه</h3></div>
+        <div class="card tablet"><img src="4.jpg" onerror="this.onerror=null; this.src='4.png';" onclick="openModal(this.src)"><h3>فك تاب x216B</h3></div>
+        <div class="card iphone"><img src="5.jpg" onerror="this.onerror=null; this.src='5.png';" onclick="openModal(this.src)"><h3>تخطي بدون شبكه ايفون 7</h3></div>
+        <div class="card iphone"><img src="6.jpg" onerror="this.onerror=null; this.src='6.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 13 برو ماكس</h3></div>
+        <div class="card iphone"><img src="7.jpg" onerror="this.onerror=null; this.src='7.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 16 برو</h3></div>
+        <div class="card iphone"><img src="8.jpg" onerror="this.onerror=null; this.src='8.png';" onclick="openModal(this.src)"><h3>تخطي ايفون 11</h3></div>
+        <div class="card iphone"><img src="9.jpg" onerror="this.onerror=null; this.src='9.png';" onclick="openModal(this.src)"><h3>تخطي ايفون 7 مع اصلاح بيسباند</h3></div>
+        <div class="card android"><img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)"><h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3></div>
+        <div class="card android"><img src="11.jpg" onerror="this.onerror=null; this.src='11.png';" onclick="openModal(this.src)"><h3>frp سامسونج</h3></div>
+        <div class="card iphone"><img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 8 بدون شبكه</h3></div>
     </div>
 
     <!-- مميزات التعامل -->
@@ -725,7 +785,7 @@
         </div>
     </div>
 
-    <!-- الأسئلة الشائعة FAQ -->
+    <!-- الأسئلة الشائعة -->
     <div class="faq-section">
         <h2 style="text-align: center;">الأسئلة الشائعة</h2>
         <div class="faq-item">
@@ -757,10 +817,11 @@
         </div>
     </div>
 
-    <!-- أزرار التواصل العائمة -->
+    <!-- أزرار عائمة -->
     <div class="floating-btns">
         <a href="https://wa.me/201064721809" target="_blank" class="float-btn float-wa" title="واتساب"><i class="fab fa-whatsapp"></i></a>
         <a href="tel:01064721809" class="float-btn float-call" title="اتصال مباشر"><i class="fas fa-phone"></i></a>
+        <button onclick="scrollToTop()" class="float-btn back-to-top" id="topBtn" title="للأعلى"><i class="fas fa-arrow-up"></i></button>
     </div>
 
     <!-- تذييل الصفحة -->
@@ -787,7 +848,7 @@
             document.getElementById('imgModal').style.display = 'none';
         }
 
-        /* دالة العداد تبدأ من 2000 وتزيد مع كل دخول */
+        /* دالة العداد تبدأ من 2000 وتزيد */
         function updateVisitorCount() {
             let count = localStorage.getItem('visitorCount');
             if (!count || parseInt(count) < 2000) {
@@ -823,6 +884,37 @@
                 answer.style.display = "block";
                 icon.className = "fas fa-chevron-up";
             }
+        }
+
+        /* دالة فلترة الصور (جديد) */
+        function filterGallery(category) {
+            const cards = document.querySelectorAll('.grid .card');
+            const btns = document.querySelectorAll('.filter-btn');
+            
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        /* زر الصعود للأعلى (جديد) */
+        window.onscroll = function() {
+            const topBtn = document.getElementById("topBtn");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                topBtn.style.display = "flex";
+            } else {
+                topBtn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 
