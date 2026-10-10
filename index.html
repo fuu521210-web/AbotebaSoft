@@ -101,12 +101,12 @@
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
-        /* شريط الإحصائيات الحية البديل */
+        /* شريط الإحصائيات الحية الفخم */
         .live-stats-bar {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto 25px auto;
-            background: rgba(13, 20, 38, 0.9);
+            background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 14px;
             padding: 15px 20px;
@@ -642,7 +642,7 @@
         </div>
     </div>
 
-    <!-- شريط الإحصائيات الحية البديل -->
+    <!-- شريط الإحصائيات الحية -->
     <div class="live-stats-bar">
         <div class="stat-item">
             <i class="fas fa-microchip"></i>
@@ -857,12 +857,14 @@
     <script>
         const themes = [
             { primary: '#00f2fe', secondary: '#4facfe', accent: '#ff007f', success: '#00ff88', bg: '#05070e', card: 'rgba(13, 20, 38, 0.85)' },
+            { primary: '#d4af37', secondary: '#aa771c', accent: '#ffffff', success: '#50c878', bg: '#080808', card: 'rgba(20, 20, 20, 0.9)' }, // ذهبي ملكي أسود فخم
+            { primary: '#64ffda', secondary: '#00b4d8', accent: '#ff0055', success: '#06d6a0', bg: '#03071e', card: 'rgba(10, 15, 30, 0.9)' }, // تيتانيوم أزرق تقني فاخر
+            { primary: '#e0a96d', secondary: '#c68b59', accent: '#ff5e7e', success: '#2ecc71', bg: '#120d0b', card: 'rgba(25, 18, 15, 0.88)' }, // برونزي وقهوة دافئ
             { primary: '#ffc107', secondary: '#ff9800', accent: '#e91e63', success: '#ffeb3b', bg: '#121212', card: 'rgba(30, 30, 30, 0.85)' },
             { primary: '#b388ff', secondary: '#7c4dff', accent: '#ff4081', success: '#69f0ae', bg: '#0b0b1a', card: 'rgba(26, 20, 45, 0.85)' },
             { primary: '#00e5ff', secondary: '#1de9b6', accent: '#ffea00', success: '#76ff03', bg: '#001a1a', card: 'rgba(0, 35, 35, 0.85)' },
             { primary: '#ff5252', secondary: '#ff793f', accent: '#ffb142', success: '#33d9b2', bg: '#1a0808', card: 'rgba(40, 15, 15, 0.85)' },
             { primary: '#2ed573', secondary: '#1e90ff', accent: '#ff4757', success: '#7bed9f', bg: '#05140b', card: 'rgba(12, 35, 20, 0.85)' },
-            { primary: '#ff6b81', secondary: '#ff4757', accent: '#70a1ff', success: '#2ed573', bg: '#14050a', card: 'rgba(35, 12, 20, 0.85)' },
             { primary: '#00ff66', secondary: '#00cc44', accent: '#00ffff', success: '#00ffcc', bg: '#000803', card: 'rgba(5, 25, 10, 0.85)' }
         ];
         let currentThemeIndex = 0;
