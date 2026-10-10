@@ -24,11 +24,11 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #00f2fe, #4facfe, #ff007f, #00ff88, #00f2fe);
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--success), var(--primary));
             background-size: 400% 100%;
             z-index: 9999;
             animation: moveBorder 3s linear infinite;
-            box-shadow: 0 0 20px #00f2fe, 0 0 10px #ff007f;
+            box-shadow: 0 0 20px var(--primary), 0 0 10px var(--accent);
         }
 
         @keyframes moveBorder {
@@ -47,6 +47,7 @@
             flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background 0.3s;
         }
 
         body::before {
@@ -60,60 +61,10 @@
             z-index: -2;
         }
 
-        .top-banner {
-            background: linear-gradient(135deg, rgba(16, 24, 48, 0.9), rgba(26, 38, 74, 0.9));
-            border: 1px solid var(--border-glow);
-            color: #fff;
-            padding: 14px 22px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            border-radius: 16px;
-            margin: 10px auto 15px auto;
-            max-width: 1200px;
-            width: 100%;
-            box-sizing: border-box;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            backdrop-filter: blur(12px);
-        }
-
-        .server-status-badge {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.5);
-            color: var(--success);
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-size: 0.88rem;
-            font-weight: 800;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
-        }
-        
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background-color: var(--success);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--success);
-            animation: pulseDot 1.5s infinite;
-        }
-
-        @keyframes pulseDot {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 18px var(--success); }
-            100% { transform: scale(0.9); opacity: 0.7; }
-        }
-
         .news-ticker {
             max-width: 1200px;
             width: 100%;
-            margin: 0 auto 25px auto;
+            margin: 10px auto 25px auto;
             background: rgba(0, 242, 254, 0.08);
             border: 1px solid rgba(0, 242, 254, 0.25);
             border-radius: 12px;
@@ -164,18 +115,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(60deg, #00f2fe, #4facfe, #ff007f, #00ff88);
+            background: linear-gradient(60deg, var(--primary), var(--secondary), var(--accent), var(--success));
             background-size: 300% 300%;
             animation: moveGradient 4s ease infinite, pulseGlow 2s infinite alternate;
             padding: 4px;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+            box-shadow: 0 0 25px var(--border-glow);
         }
 
         .logo-container::before {
             content: '';
             position: absolute;
             top: -8px; left: -8px; right: -8px; bottom: -8px;
-            background: linear-gradient(60deg, #00f2fe, #4facfe, #ff007f, #00ff88);
+            background: linear-gradient(60deg, var(--primary), var(--secondary), var(--accent), var(--success));
             background-size: 300% 300%;
             border-radius: 50%;
             z-index: -1;
@@ -191,8 +142,8 @@
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 242, 254, 0.5); }
-            100% { transform: scale(1.04); box-shadow: 0 0 35px rgba(255, 0, 127, 0.6); }
+            0% { transform: scale(1); box-shadow: 0 0 20px var(--border-glow); }
+            100% { transform: scale(1.04); box-shadow: 0 0 35px var(--accent); }
         }
 
         .header-logo {
@@ -206,7 +157,7 @@
             z-index: 1;
         }
 
-        h1 { color: var(--primary); margin-bottom: 10px; font-weight: 900; letter-spacing: 1.5px; text-shadow: 0 0 20px rgba(0, 242, 254, 0.5); }
+        h1 { color: var(--primary); margin-bottom: 10px; font-weight: 900; letter-spacing: 1.5px; text-shadow: 0 0 20px var(--border-glow); }
         p { color: var(--text-sub); font-size: 1.15rem; font-weight: 600; }
         
         .social-links {
@@ -232,7 +183,7 @@
         }
         .btn:hover { 
             transform: translateY(-5px) scale(1.05); 
-            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.4); 
+            box-shadow: 0 12px 30px var(--border-glow); 
             border-color: var(--primary);
         }
         .wa { background: linear-gradient(135deg, #25d366, #1be85e); }
@@ -259,11 +210,11 @@
         }
         .service-box:hover { 
             transform: translateY(-6px); 
-            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 15px 35px var(--border-glow);
             border-color: var(--primary);
             background: rgba(26, 38, 74, 0.9);
         }
-        .service-box i { font-size: 2.3rem; color: var(--primary); margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(0,242,254,0.4)); }
+        .service-box i { font-size: 2.3rem; color: var(--primary); margin-bottom: 12px; filter: drop-shadow(0 0 10px var(--border-glow)); }
         .service-box h4 { margin: 0; font-size: 1rem; color: #fff; font-weight: 700; }
 
         h2 { color: #fff; margin-bottom: 25px; font-weight: 900; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
@@ -298,13 +249,13 @@
         }
         .feature-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.25);
+            box-shadow: 0 15px 35px var(--border-glow);
             border-color: var(--primary);
         }
         .feature-icon {
             width: 55px; height: 55px;
             background: rgba(0, 242, 254, 0.1);
-            border: 1px solid rgba(0, 242, 254, 0.3);
+            border: 1px solid var(--border-glow);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -347,7 +298,7 @@
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+            box-shadow: 0 0 20px var(--border-glow);
         }
         .submit-btn {
             width: 100%;
@@ -415,7 +366,7 @@
         }
         .card:hover { 
             transform: translateY(-8px); 
-            box-shadow: 0 20px 45px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 20px 45px var(--border-glow);
             border-color: var(--primary);
         }
         .card img { 
@@ -515,6 +466,7 @@
             line-height: 1.7;
         }
 
+        /* زر الصعود وزر تغيير الألوان الجانبي */
         .floating-btns {
             position: fixed;
             bottom: 25px;
@@ -525,33 +477,31 @@
             z-index: 999;
         }
         .float-btn {
-            width: 58px;
-            height: 58px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             text-decoration: none;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--border-glow);
         }
         .float-btn:hover { transform: scale(1.15); }
-        .float-wa { 
-            background: linear-gradient(135deg, #25d366, #1be85e); 
-            animation: pulseWa 2s infinite;
-        }
-        @keyframes pulseWa {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.8); }
-            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-        .float-call { background: linear-gradient(135deg, #00f2fe, #4facfe); }
         
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            color: var(--primary);
+        }
+
         .back-to-top {
             background: rgba(255, 0, 127, 0.8);
-            border: 1px solid #ff007f;
+            border-color: #ff007f;
             display: none;
         }
 
@@ -570,7 +520,7 @@
             max-width: 92%;
             max-height: 90vh;
             border-radius: 16px;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.5);
+            box-shadow: 0 0 40px var(--border-glow);
             border: 2px solid var(--border-glow);
         }
         .close-btn {
@@ -610,13 +560,6 @@
     </style>
 </head>
 <body>
-
-    <div class="top-banner">
-        <span>🔥 لطلب خدمة انزل إلى الأسفل يا كبير 🔥</span>
-        <div class="server-status-badge">
-            <span class="status-dot"></span> SERVER STATUS: ONLINE 🟢
-        </div>
-    </div>
 
     <div class="news-ticker">
         <div class="ticker-text">
@@ -811,8 +754,7 @@
     </div>
 
     <div class="floating-btns">
-        <a href="https://wa.me/201064721809" target="_blank" class="float-btn float-wa" title="واتساب"><i class="fab fa-whatsapp"></i></a>
-        <a href="tel:01064721809" class="float-btn float-call" title="اتصال مباشر"><i class="fas fa-phone"></i></a>
+        <button onclick="changeTheme()" class="float-btn theme-toggle-btn" id="themeBtn" title="تغيير الألوان"><i class="fas fa-palette"></i></button>
         <button onclick="scrollToTop()" class="float-btn back-to-top" id="topBtn" title="للأعلى"><i class="fas fa-arrow-up"></i></button>
     </div>
 
@@ -830,6 +772,31 @@
     </div>
 
     <script>
+        // ألوان مختلفة للموقع يتم التبديل بينها عند الضغط على زر اللوحة
+        const themes = [
+            { primary: '#00f2fe', secondary: '#4facfe', accent: '#ff007f', success: '#00ff88', bg: '#060913', card: 'rgba(16, 24, 48, 0.75)' },
+            { primary: '#ffc107', secondary: '#ff9800', accent: '#e91e63', success: '#4caf50', bg: '#121212', card: 'rgba(30, 30, 30, 0.8)' },
+            { primary: '#b388ff', secondary: '#7c4dff', accent: '#ff4081', success: '#69f0ae', bg: '#0b0b1a', card: 'rgba(26, 20, 45, 0.8)' },
+            { primary: '#00e5ff', secondary: '#1de9b6', accent: '#ffea00', success: '#76ff03', bg: '#001a1a', card: 'rgba(0, 35, 35, 0.8)' }
+        ];
+        let currentThemeIndex = 0;
+
+        function changeTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const t = themes[currentThemeIndex];
+            const root = document.documentElement;
+            
+            root.style.setProperty('--primary', t.primary);
+            root.style.setProperty('--secondary', t.secondary);
+            root.style.setProperty('--accent', t.accent);
+            root.style.setProperty('--success', t.success);
+            root.style.setProperty('--bg-deep', t.bg);
+            root.style.setProperty('--card-bg', t.card);
+            root.style.setProperty('--border-glow', t.primary + '66');
+            
+            document.body.style.background = t.bg;
+        }
+
         function openModal(src) {
             document.getElementById('fullImg').src = src;
             document.getElementById('imgModal').style.display = 'flex';
