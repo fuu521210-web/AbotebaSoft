@@ -80,6 +80,7 @@
             color: var(--primary);
             font-weight: bold;
             font-size: 0.95rem;
+            will-change: transform;
         }
         .ticker-text span {
             margin: 0 15px;
@@ -90,8 +91,8 @@
             margin-left: 5px;
         }
         @keyframes marquee {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
         }
 
         header { 
@@ -466,7 +467,7 @@
             line-height: 1.7;
         }
 
-        /* زر الصعود وزر تغيير الألوان الجانبي */
+        /* أزرار الجانب */
         .floating-btns {
             position: fixed;
             bottom: 25px;
@@ -503,6 +504,41 @@
             background: rgba(255, 0, 127, 0.8);
             border-color: #ff007f;
             display: none;
+        }
+
+        /* شارة السيرفر في الجانب */
+        .server-status-floating {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: rgba(16, 24, 48, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.5);
+            color: var(--success);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+            z-index: 999;
+        }
+        
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success);
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 15px var(--success); }
+            100% { transform: scale(0.9); opacity: 0.7; }
         }
 
         .modal {
@@ -562,14 +598,22 @@
 <body>
 
     <div class="news-ticker">
-        <div class="ticker-text">
+        <div class="ticker-text" id="tickerText">
             <i class="fas fa-check-circle"></i> تم تخطي آيكلود آيفون 16 برو ماكس بنجاح 🟢 <span>|</span>
             <i class="fas fa-bolt"></i> خروج تاب T509 و x216B من المنظومة التعليمية بأعلى كفاءة 🟢 <span>|</span>
             <i class="fas fa-shield-alt"></i> إزالة حسابات جوجل FRP لجميع هواتف سامسونج وشاومي فورياً 🟢 <span>|</span>
             <i class="fas fa-microchip"></i> إصلاح أخطاء البيسباند والسيريال IMEI وتصليح الشبكة 🟢 <span>|</span>
             <i class="fas fa-unlock-alt"></i> إزالة رسمي لحسابات Mi Account وتفعيل السيرفرات الرسمية 🟢 <span>|</span>
             <i class="fas fa-headset"></i> دعم فني متواصل 24 ساعة لاستقبال جميع طلبات السوفت وير Direct 🟢
+            <!-- تكرار العناصر لضمان سلاسة وسرعة حركة الشريط من لحظة الفتح -->
+            <i class="fas fa-check-circle"></i> تم تخطي آيكلود آيفون 16 برو ماكس بنجاح 🟢 <span>|</span>
+            <i class="fas fa-bolt"></i> خروج تاب T509 و x216B من المنظومة التعليمية بأعلى كفاءة 🟢 <span>|</span>
         </div>
+    </div>
+
+    <!-- زر السيرفر اونلاين الجانبي -->
+    <div class="server-status-floating">
+        <span class="status-dot"></span> SERVER: ONLINE 🟢
     </div>
 
     <header>
@@ -772,7 +816,6 @@
     </div>
 
     <script>
-        // ألوان مختلفة للموقع يتم التبديل بينها عند الضغط على زر اللوحة
         const themes = [
             { primary: '#00f2fe', secondary: '#4facfe', accent: '#ff007f', success: '#00ff88', bg: '#060913', card: 'rgba(16, 24, 48, 0.75)' },
             { primary: '#ffc107', secondary: '#ff9800', accent: '#e91e63', success: '#4caf50', bg: '#121212', card: 'rgba(30, 30, 30, 0.8)' },
