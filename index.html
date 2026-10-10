@@ -101,7 +101,7 @@
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
-        /* شريط الأخبار المتحرك المستمر */
+        /* شريط الأخبار المتحرك الفوري السريع والشامل */
         .news-ticker {
             max-width: 1200px;
             width: 100%;
@@ -119,7 +119,8 @@
         .ticker-track {
             display: flex;
             width: max-content;
-            animation: marqueeScroll 28s linear infinite;
+            will-change: transform;
+            animation: marqueeScroll 40s linear infinite;
         }
         .ticker-track:hover {
             animation-play-state: paused;
@@ -130,7 +131,7 @@
             white-space: nowrap;
             color: var(--primary);
             font-weight: bold;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             padding: 0 15px;
             transition: color 0.4s;
         }
@@ -144,8 +145,9 @@
             filter: drop-shadow(0 0 5px var(--accent));
             transition: color 0.4s;
         }
+
         @keyframes marqueeScroll {
-            0% { transform: translateX(0); }
+            0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); }
         }
 
@@ -491,7 +493,6 @@
             line-height: 1.8;
         }
 
-        /* الإشعار الحي للمبيعات/الخدمات */
         .live-popup {
             position: fixed;
             bottom: 25px;
@@ -536,7 +537,6 @@
             text-align: right;
         }
 
-        /* أزرار الجانب */
         .floating-btns {
             position: fixed;
             bottom: 25px;
@@ -643,21 +643,27 @@
         </div>
     </div>
 
-    <!-- شريط الأخبار المتحرك المستمر (بلا توقف) -->
+    <!-- شريط الأخبار المتحرك الفوري والكثيف (يتحرك فور الفتح وبلا توقف) -->
     <div class="news-ticker">
         <div class="ticker-track">
+            <!-- المجموعة الأولى -->
             <div class="ticker-item"><i class="fas fa-check-circle"></i> تم تخطي آيكلود آيفون 16 برو ماكس بنجاح 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-bolt"></i> خروج تاب T509 و x216B من المنظومة التعليمية بأعلى كفاءة 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-shield-alt"></i> إزالة حسابات جوجل FRP لجميع هواتف سامسونج وشاومي فورياً 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-microchip"></i> إصلاح أخطاء البيسباند والسيريال IMEI وتصليح الشبكة 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-unlock-alt"></i> إزالة رسمي لحسابات Mi Account وتفعيل السيرفرات الرسمية 🟢 <span>|</span></div>
+            <div class="ticker-item"><i class="fas fa-mobile-alt"></i> فك تشفير شبكات الآيفون ورسائل التفعيل كود 🟢 <span>|</span></div>
+            <div class="ticker-item"><i class="fas fa-laptop-code"></i> تعريب وتفليش أجهزة هواوي وأوبو وانفينكس بأحدث الرومات 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-headset"></i> دعم فني متواصل 24 ساعة لاستقبال جميع طلبات السوفت وير Direct 🟢 <span>|</span></div>
-            
+
+            <!-- المجموعة الثانية (مكررة بالكامل لضمان الاستمرارية والظهور المباشر) -->
             <div class="ticker-item"><i class="fas fa-check-circle"></i> تم تخطي آيكلود آيفون 16 برو ماكس بنجاح 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-bolt"></i> خروج تاب T509 و x216B من المنظومة التعليمية بأعلى كفاءة 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-shield-alt"></i> إزالة حسابات جوجل FRP لجميع هواتف سامسونج وشاومي فورياً 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-microchip"></i> إصلاح أخطاء البيسباند والسيريال IMEI وتصليح الشبكة 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-unlock-alt"></i> إزالة رسمي لحسابات Mi Account وتفعيل السيرفرات الرسمية 🟢 <span>|</span></div>
+            <div class="ticker-item"><i class="fas fa-mobile-alt"></i> فك تشفير شبكات الآيفون ورسائل التفعيل كود 🟢 <span>|</span></div>
+            <div class="ticker-item"><i class="fas fa-laptop-code"></i> تعريب وتفليش أجهزة هواوي وأوبو وانفينكس بأحدث الرومات 🟢 <span>|</span></div>
             <div class="ticker-item"><i class="fas fa-headset"></i> دعم فني متواصل 24 ساعة لاستقبال جميع طلبات السوفت وير Direct 🟢 <span>|</span></div>
         </div>
     </div>
@@ -850,7 +856,6 @@
     </div>
 
     <script>
-        // 8 ثيمات وألوان متنوعة وجذابة
         const themes = [
             { primary: '#00f2fe', secondary: '#4facfe', accent: '#ff007f', success: '#00ff88', bg: '#05070e', card: 'rgba(13, 20, 38, 0.85)' },
             { primary: '#ffc107', secondary: '#ff9800', accent: '#e91e63', success: '#ffeb3b', bg: '#121212', card: 'rgba(30, 30, 30, 0.85)' },
