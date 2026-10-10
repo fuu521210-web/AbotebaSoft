@@ -642,7 +642,7 @@
         </div>
     </div>
 
-    <!-- الأسئلة الشائعة -->
+    <!-- الأسئلة الشائعة FAQ -->
     <div class="faq-section">
         <h2 style="text-align: center;">الأسئلة الشائعة</h2>
         <div class="faq-item">
@@ -685,7 +685,7 @@
         <div class="visitor-counter">
             <i class="fas fa-users"></i>
             <span>عدد زيارات الموقع:</span>
-            <span class="counter-number" id="vistorCount">0</span>
+            <span class="counter-number" id="vistorCount">2000</span>
         </div>
     </footer>
 
@@ -704,9 +704,14 @@
             document.getElementById('imgModal').style.display = 'none';
         }
 
+        /* دالة العداد تبدأ من 2000 وتزيد مع كل دخول */
         function updateVisitorCount() {
-            let count = localStorage.getItem('visitorCount') || 0;
-            count = parseInt(count) + 1;
+            let count = localStorage.getItem('visitorCount');
+            if (!count || parseInt(count) < 2000) {
+                count = 2000;
+            } else {
+                count = parseInt(count) + 1;
+            }
             localStorage.setItem('visitorCount', count);
             document.getElementById('vistorCount').innerText = count;
         }
