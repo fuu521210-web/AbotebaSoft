@@ -101,54 +101,53 @@
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
-        /* شريط الأخبار المتحرك الفوري السريع والشامل */
-        .news-ticker {
+        /* شريط الإحصائيات الحية البديل */
+        .live-stats-bar {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto 25px auto;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(13, 20, 38, 0.9);
             border: 1px solid var(--border-glow);
             border-radius: 14px;
-            padding: 12px 0;
-            overflow: hidden;
+            padding: 15px 20px;
             box-sizing: border-box;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            display: flex;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            align-items: center;
+            backdrop-filter: blur(15px);
             transition: border-color 0.4s;
         }
-        .ticker-track {
-            display: flex;
-            width: max-content;
-            will-change: transform;
-            animation: marqueeScroll 40s linear infinite;
-        }
-        .ticker-track:hover {
-            animation-play-state: paused;
-        }
-        .ticker-item {
+        .stat-item {
             display: flex;
             align-items: center;
-            white-space: nowrap;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .stat-item i {
+            font-size: 1.6rem;
             color: var(--primary);
-            font-weight: bold;
-            font-size: 0.95rem;
-            padding: 0 15px;
+            filter: drop-shadow(0 0 8px var(--border-glow));
             transition: color 0.4s;
         }
-        .ticker-item span {
-            margin: 0 15px;
+        .stat-info {
+            text-align: right;
+        }
+        .stat-info h5 {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 600;
+        }
+        .stat-info span {
+            font-size: 1.1rem;
+            font-weight: 900;
             color: var(--text-main);
-        }
-        .ticker-item i {
-            color: var(--accent);
-            margin-left: 8px;
-            filter: drop-shadow(0 0 5px var(--accent));
-            transition: color 0.4s;
-        }
-
-        @keyframes marqueeScroll {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
         }
 
         header { 
@@ -643,28 +642,28 @@
         </div>
     </div>
 
-    <!-- شريط الأخبار المتحرك الفوري والكثيف (يتحرك فور الفتح وبلا توقف) -->
-    <div class="news-ticker">
-        <div class="ticker-track">
-            <!-- المجموعة الأولى -->
-            <div class="ticker-item"><i class="fas fa-check-circle"></i> تم تخطي آيكلود آيفون 16 برو ماكس بنجاح 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-bolt"></i> خروج تاب T509 و x216B من المنظومة التعليمية بأعلى كفاءة 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-shield-alt"></i> إزالة حسابات جوجل FRP لجميع هواتف سامسونج وشاومي فورياً 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-microchip"></i> إصلاح أخطاء البيسباند والسيريال IMEI وتصليح الشبكة 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-unlock-alt"></i> إزالة رسمي لحسابات Mi Account وتفعيل السيرفرات الرسمية 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-mobile-alt"></i> فك تشفير شبكات الآيفون ورسائل التفعيل كود 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-laptop-code"></i> تعريب وتفليش أجهزة هواوي وأوبو وانفينكس بأحدث الرومات 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-headset"></i> دعم فني متواصل 24 ساعة لاستقبال جميع طلبات السوفت وير Direct 🟢 <span>|</span></div>
-
-            <!-- المجموعة الثانية (مكررة بالكامل لضمان الاستمرارية والظهور المباشر) -->
-            <div class="ticker-item"><i class="fas fa-check-circle"></i> تم تخطي آيكلود آيفون 16 برو ماكس بنجاح 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-bolt"></i> خروج تاب T509 و x216B من المنظومة التعليمية بأعلى كفاءة 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-shield-alt"></i> إزالة حسابات جوجل FRP لجميع هواتف سامسونج وشاومي فورياً 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-microchip"></i> إصلاح أخطاء البيسباند والسيريال IMEI وتصليح الشبكة 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-unlock-alt"></i> إزالة رسمي لحسابات Mi Account وتفعيل السيرفرات الرسمية 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-mobile-alt"></i> فك تشفير شبكات الآيفون ورسائل التفعيل كود 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-laptop-code"></i> تعريب وتفليش أجهزة هواوي وأوبو وانفينكس بأحدث الرومات 🟢 <span>|</span></div>
-            <div class="ticker-item"><i class="fas fa-headset"></i> دعم فني متواصل 24 ساعة لاستقبال جميع طلبات السوفت وير Direct 🟢 <span>|</span></div>
+    <!-- شريط الإحصائيات الحية البديل -->
+    <div class="live-stats-bar">
+        <div class="stat-item">
+            <i class="fas fa-microchip"></i>
+            <div class="stat-info">
+                <h5>حالة السيرفرات</h5>
+                <span style="color: var(--success);">مفعلة وتعمل بكفاءة</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-headset"></i>
+            <div class="stat-info">
+                <h5>الدعم الفني المباشر</h5>
+                <span>متاح 24 / 7 ساعة</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-shield-alt"></i>
+            <div class="stat-info">
+                <h5>الضمان والأمان</h5>
+                <span style="color: var(--primary);">حماية تامة للبيانات</span>
+            </div>
         </div>
     </div>
 
