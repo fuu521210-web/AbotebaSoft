@@ -13,7 +13,7 @@
             font-family: 'Tajawal', sans-serif; 
             text-align: center; 
             margin: 0; 
-            padding: 0 20px 20px 20px; 
+            padding: 0 15px 20px 15px; 
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -70,6 +70,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
         
+        /* تعديل إطار الشعار بألوان سريعة وناعمة */
         .logo-container {
             position: relative;
             width: 140px;
@@ -79,10 +80,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(60deg, #00c6ff, #0072ff, #e6007e, #00e676, #00c6ff);
-            background-size: 300% 300%;
-            animation: moveGradient 4s ease infinite, pulseGlow 1.8s infinite alternate;
-            padding: 5px;
+            background: linear-gradient(45deg, #00c6ff, #0072ff, #7928ca, #ff007f, #00c6ff);
+            background-size: 400% 400%;
+            animation: moveGradient 2.5s linear infinite, pulseGlow 1.5s infinite alternate;
+            padding: 4px;
         }
 
         .logo-container::before {
@@ -92,13 +93,13 @@
             left: -4px;
             right: -4px;
             bottom: -4px;
-            background: linear-gradient(60deg, #00c6ff, #0072ff, #e6007e, #00e676, #00c6ff);
-            background-size: 300% 300%;
+            background: linear-gradient(45deg, #00c6ff, #0072ff, #7928ca, #ff007f, #00c6ff);
+            background-size: 400% 400%;
             border-radius: 50%;
             z-index: -1;
-            filter: blur(12px);
-            opacity: 0.8;
-            animation: moveGradient 4s ease infinite;
+            filter: blur(10px);
+            opacity: 0.85;
+            animation: moveGradient 2.5s linear infinite;
         }
 
         @keyframes moveGradient {
@@ -108,8 +109,8 @@
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 114, 255, 0.6); }
-            100% { transform: scale(1.04); box-shadow: 0 0 25px rgba(230, 0, 126, 0.8); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 114, 255, 0.5); }
+            100% { transform: scale(1.04); box-shadow: 0 0 25px rgba(121, 40, 202, 0.7); }
         }
 
         .header-logo {
@@ -123,7 +124,7 @@
             z-index: 1;
         }
 
-        h1 { color: #0072ff; margin-bottom: 10px; font-weight: 900; }
+        h1 { color: #0072ff; margin-bottom: 10px; font-weight: 900; font-size: 1.7rem; }
         p { color: #555; font-size: 1.1rem; }
         
         .social-links {
@@ -151,7 +152,7 @@
         .tg { background: #229ED9; }
         .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
-        /* قسم عداد الثقة والإحصائيات الجديد */
+        /* قسم عداد الثقة والإحصائيات */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -239,10 +240,13 @@
         }
         .submit-btn:hover { background: #1eb954; }
 
-        /* الكارتات ورسومات المعرض */
+        /* تحسين شبكة معرض الأعمال لتكون متجاوبة واحترافية */
         .grid { 
-            max-width: 500px; 
+            max-width: 1200px; 
             margin: 0 auto; 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
         .card { 
             background: #ffffff; 
@@ -250,26 +254,29 @@
             border-radius: 12px; 
             padding: 15px; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             overflow: hidden;
             width: 100%;
-            margin-bottom: 25px;
             box-sizing: border-box;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .card:hover { transform: translateY(-4px); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         
         .card img { 
             width: 100%; 
-            height: 380px; 
+            height: 280px; 
             object-fit: cover; 
             object-position: center;
             background: #111; 
             border-radius: 8px; 
             cursor: pointer; 
+            transition: opacity 0.2s;
         }
+        .card img:hover { opacity: 0.92; }
         
-        .card h3 { font-size: 1.05rem; margin-top: 12px; color: #0072ff; font-weight: 700; line-height: 1.4; }
+        .card h3 { font-size: 1rem; margin-top: 12px; color: #0072ff; font-weight: 700; line-height: 1.4; text-align: right; }
 
         /* قسم مميزات التعامل */
         .why-us {
@@ -443,7 +450,7 @@
 
     <!-- شريط التنبيهات مع مؤشر حالة السيرفرات -->
     <div class="top-banner">
-        <span>🔥لطلب خدمة انزل إلى الأسفل يا كبير    🔥</span>
+        <span>🔥 لطلب خدمة انزل إلى الأسفل يا كبير 🔥</span>
         <div class="server-status-badge">
             <span class="status-dot"></span> سيرفرات التفعيل: أونلاين 🟢
         </div>
@@ -533,22 +540,60 @@
         </form>
     </div>
 
-    <h2>معرض الأعمال والخدمات</h2>
+    <h2 style="margin-top: 40px;">معرض الأعمال والخدمات</h2>
 
+    <!-- معرض الأعمال الشبكي المحدث -->
     <div class="grid">
-        <div class="card"><img src="1.jpg" onerror="this.onerror=null; this.src='1.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون  7مع تشغيل الشبكه</h3></div>
-        <div class="card"><img src="2.jpg" onerror="this.onerror=null; this.src='2.png';" onclick="openModal(this.src)"><h3>ازاله mdm انفنكيس </h3></div>
-        <div class="card"><img src="3.jpg" onerror="this.onerror=null; this.src='3.png';" onclick="openModal(this.src)"><h3>خروج تاب T509 من المنظومه</h3></div>
-        <div class="card"><img src="4.jpg" onerror="this.onerror=null; this.src='4.png';" onclick="openModal(this.src)"><h3>فك تاب  x216B</h3></div>
-        <div class="card"><img src="5.jpg" onerror="this.onerror=null; this.src='5.png';" onclick="openModal(this.src)"><h3>تخطي بدون شبكه ايفون 7</h3></div>
-        <div class="card"><img src="6.jpg" onerror="this.onerror=null; this.src='6.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 13برو ماكس</h3></div>
-        <div class="card"><img src="7.jpg" onerror="this.onerror=null; this.src='7.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 16برو</h3></div>
-        <div class="card"><img src="8.jpg" onerror="this.onerror=null; this.src='8.png';" onclick="openModal(this.src)"><h3>تخطي ايفون 11 </h3></div>
-        <div class="card"><img src="9.jpg" onerror="this.onerror=null; this.src='9.png';" onclick="openModal(this.src)"><h3>تخطي ايفون 7 مع اصلاح بيسباند</h3></div>
-        <div class="card"><img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)"><h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3></div>
+        <div class="card">
+            <img src="1.jpg" onerror="this.onerror=null; this.src='1.png';" onclick="openModal(this.src)" alt="خدمة 1">
+            <h3>تخطي ايكلاود ايفون 7 مع تشغيل الشبكه</h3>
+        </div>
+        <div class="card">
+            <img src="2.jpg" onerror="this.onerror=null; this.src='2.png';" onclick="openModal(this.src)" alt="خدمة 2">
+            <h3>ازاله mdm انفنيكس</h3>
+        </div>
+        <div class="card">
+            <img src="3.jpg" onerror="this.onerror=null; this.src='3.png';" onclick="openModal(this.src)" alt="خدمة 3">
+            <h3>خروج تاب T509 من المنظومه</h3>
+        </div>
+        <div class="card">
+            <img src="4.jpg" onerror="this.onerror=null; this.src='4.png';" onclick="openModal(this.src)" alt="خدمة 4">
+            <h3>فك تاب x216B</h3>
+        </div>
+        <div class="card">
+            <img src="5.jpg" onerror="this.onerror=null; this.src='5.png';" onclick="openModal(this.src)" alt="خدمة 5">
+            <h3>تخطي بدون شبكه ايفون 7</h3>
+        </div>
+        <div class="card">
+            <img src="6.jpg" onerror="this.onerror=null; this.src='6.png';" onclick="openModal(this.src)" alt="خدمة 6">
+            <h3>تخطي ايكلاود ايفون 13 برو ماكس</h3>
+        </div>
+        <div class="card">
+            <img src="7.jpg" onerror="this.onerror=null; this.src='7.png';" onclick="openModal(this.src)" alt="خدمة 7">
+            <h3>تخطي ايكلاود ايفون 16 برو</h3>
+        </div>
+        <div class="card">
+            <img src="8.jpg" onerror="this.onerror=null; this.src='8.png';" onclick="openModal(this.src)" alt="خدمة 8">
+            <h3>تخطي ايفون 11</h3>
+        </div>
+        <div class="card">
+            <img src="9.jpg" onerror="this.onerror=null; this.src='9.png';" onclick="openModal(this.src)" alt="خدمة 9">
+            <h3>تخطي ايفون 7 مع اصلاح بيسباند</h3>
+        </div>
+        <div class="card">
+            <img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)" alt="خدمة 10">
+            <h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3>
+        </div>
+        <div class="card">
+            <img src="11.jpg" onerror="this.onerror=null; this.src='11.png';" onclick="openModal(this.src)" alt="خدمة 11">
+            <h3>frp سامسونج</h3>
+        </div>
+        <div class="card">
+            <img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal(this.src)" alt="خدمة 12">
+            <h3>تخطي ايكلاود ايفون 8 بدون شبكه</h3>
+        </div>
     </div>
- <div class="card"><img src="11.jpg" onerror="this.onerror=null; this.src='.11.jpg';" onclick="openModal(this.src)"><h3>frp سامسونج </h3></div>
-     <div class="card"><img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 8 بدون شبكه  </h3></div>
+
     <!-- قسم مميزات التعامل -->
     <div class="why-us">
         <h2>لماذا تختار خدماتنا؟</h2>
@@ -583,7 +628,7 @@
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>"خرجت تاب المدرسة من المنظومة في أقل من نص ساعة وبأعلى كفاءة. شغل محترف جداً."</p>
-                <div class="client-name">- زياد مجدي </div>
+                <div class="client-name">- زياد مجدي</div>
             </div>
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
