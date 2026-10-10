@@ -211,34 +211,6 @@
         .tg { background: linear-gradient(135deg, #229ED9, #1b7fad); }
         .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
-        /* إحصائيات الثقة */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto 35px auto;
-            width: 100%;
-        }
-        .stat-box {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            padding: 25px 20px;
-            border-radius: 18px;
-            border: 1px solid var(--border-glow);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .stat-box:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.2);
-        }
-        .stat-box i { font-size: 2.2rem; color: var(--primary); margin-bottom: 10px; }
-        .stat-number { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 4px; }
-        .stat-text { color: var(--text-sub); font-size: 0.95rem; font-weight: bold; }
-
         /* قسم الخدمات السريعة */
         .quick-services {
             display: grid;
@@ -263,65 +235,6 @@
         }
         .service-box i { font-size: 2.2rem; color: var(--primary); margin-bottom: 10px; }
         .service-box h4 { margin: 0; font-size: 1rem; color: #fff; font-weight: 700; }
-
-        /* قسم خدمات السوفت وير التفصيلية */
-        .detailed-services-section {
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-            width: 100%;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-        .detailed-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glow);
-            border-radius: 18px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: right;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .detailed-card::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-        .detailed-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.25);
-            border-color: var(--primary);
-        }
-        .detailed-icon {
-            width: 55px; height: 55px;
-            background: rgba(0, 210, 255, 0.1);
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-        }
-        .detailed-card h3 {
-            margin: 0 0 10px 0;
-            color: #fff;
-            font-size: 1.15rem;
-            font-weight: 800;
-        }
-        .detailed-card p {
-            margin: 0;
-            color: var(--text-sub);
-            font-size: 0.92rem;
-            line-height: 1.6;
-        }
 
         h2 { color: #fff; margin-bottom: 25px; font-weight: 900; }
 
@@ -619,25 +532,6 @@
         </div>
     </header>
 
-    <!-- عداد إحصائيات الثقة -->
-    <div class="stats-container">
-        <div class="stat-box">
-            <i class="fas fa-mobile-alt"></i>
-            <div class="stat-number">+642</div>
-            <div class="stat-text">جهاز تم فكه وتخطيه</div>
-        </div>
-        <div class="stat-box">
-            <i class="fas fa-smile-beam"></i>
-            <div class="stat-number">100%</div>
-            <div class="stat-text">نسبة رضاء العملاء</div>
-        </div>
-        <div class="stat-box">
-            <i class="fas fa-clock"></i>
-            <div class="stat-number">24/7</div>
-            <div class="stat-text">دعم فني سريع</div>
-        </div>
-    </div>
-
     <!-- أقسام الخدمات السريعة -->
     <div class="quick-services">
         <div class="service-box">
@@ -655,33 +549,6 @@
         <div class="service-box">
             <i class="fas fa-tablet-alt"></i>
             <h4>فك أجهزة التابلت</h4>
-        </div>
-    </div>
-
-    <!-- قسم تفاصيل خدمات السوفت وير الاحترافية -->
-    <div class="detailed-services-section">
-        <h2>قسم خدمات سوفت وير المحمول الاحترافية</h2>
-        <div class="services-grid">
-            <div class="detailed-card">
-                <div class="detailed-icon"><i class="fas fa-unlock-alt"></i></div>
-                <h3>تخطي وتفعيل الحسابات</h3>
-                <p>تخطي حساب آيكلود iCloud لجميع أجهزة أيفون مع تشغيل الشبكة، وتخطي حساب جوجل FRP لجميع هواتف الأندرويد.</p>
-            </div>
-            <div class="detailed-card">
-                <div class="detailed-icon"><i class="fas fa-laptop-code"></i></div>
-                <h3>التفليش والسوفت وير الرسمي</h3>
-                <p>إعادة إحياء الهواتف الميتة، تحديثات النظام الرسمية، حل مشاكل التهنيج، السقوط على اللوجو، وتعريب الأجهزة.</p>
-            </div>
-            <div class="detailed-card">
-                <div class="detailed-icon"><i class="fas fa-shield-virus"></i></div>
-                <h3>إزالة المنظومة و MDM</h3>
-                <p>إزالة حماية الأجهزة التعليمية (تابلت المدارس) والمنظومات الإدارية بكفاءة عالية وبدون أضرار.</p>
-            </div>
-            <div class="detailed-card">
-                <div class="detailed-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>إصلاح السيريال والشبكة</h3>
-                <p>إصلاح أخطاء البيسباند (Baseband)، تصليح رقم IMEI المفقود، وفك شفرات الشبكة والشبكات المغلقة.</p>
-            </div>
         </div>
     </div>
 
@@ -759,7 +626,7 @@
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>"سرعة ممتازة في تخطي الآيكلود وااشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو طيبة!"</p>
+                <p>"سرعة ممتازة في تخطي الآيكلود واشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو طيبة!"</p>
                 <div class="client-name">- بودي</div>
             </div>
             <div class="review-card">
