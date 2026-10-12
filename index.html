@@ -61,16 +61,20 @@
             z-index: -2;
         }
 
-        /* شارة السيرفر في أعلى الموقع */
-        .top-server-bar {
+        /* شريط علوي يجمع حالة السيرفر وأزرار الثيمات */
+        .top-bar-container {
             max-width: 1200px;
-            margin: 0 auto 10px auto;
+            margin: 0 auto 12px auto;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
             box-sizing: border-box;
             padding: 0 5px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
+
         .server-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -86,6 +90,7 @@
             box-shadow: 0 0 15px var(--success);
             transition: all 0.4s;
         }
+        
         .status-dot {
             width: 9px;
             height: 9px;
@@ -99,6 +104,41 @@
             0% { transform: scale(0.9); opacity: 0.7; }
             50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 15px var(--success); }
             100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        /* شريط اختيار الثيمات في الأعلى */
+        .themes-switcher-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            transition: all 0.4s;
+        }
+
+        .themes-switcher-bar span {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-left: 5px;
+        }
+
+        .theme-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .theme-circle:hover {
+            transform: scale(1.2);
+            border-color: #fff;
         }
 
         /* شريط الإحصائيات الحية الفخم */
@@ -536,6 +576,7 @@
             text-align: right;
         }
 
+        /* زر الصعود للأعلى فقط في الجانب السفلي */
         .floating-btns {
             position: fixed;
             bottom: 25px;
@@ -561,12 +602,6 @@
             border: 1px solid var(--border-glow);
         }
         .float-btn:hover { transform: scale(1.15); box-shadow: 0 0 20px var(--primary); }
-        
-        .theme-toggle-btn {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            color: var(--primary);
-        }
 
         .back-to-top {
             background: rgba(255, 0, 127, 0.85);
@@ -635,10 +670,23 @@
 </head>
 <body>
 
-    <!-- شارة السيرفر في أعلى الموقع -->
-    <div class="top-server-bar">
+    <!-- شريط علوي يجمع حالة السيرفر وثيمات الألوان -->
+    <div class="top-bar-container">
         <div class="server-status-top">
-            <span class="status-dot"></span> SERVER: ONLINE 🟢 (سرعة استجابة السيرفر: 0.1s)
+            <span class="status-dot"></span> SERVER: ONLINE 🟢 (استجابة: 0.1s)
+        </div>
+        
+        <div class="themes-switcher-bar">
+            <span>الثيمات:</span>
+            <div class="theme-circle" style="background: #00f2fe;" onclick="setTheme(0)" title="نيون أزرق"></div>
+            <div class="theme-circle" style="background: #d4af37;" onclick="setTheme(1)" title="ذهبي ملكي"></div>
+            <div class="theme-circle" style="background: #64ffda;" onclick="setTheme(2)" title="تيتانيوم تقني"></div>
+            <div class="theme-circle" style="background: #e0a96d;" onclick="setTheme(3)" title="برونزي دافئ"></div>
+            <div class="theme-circle" style="background: #ffc107;" onclick="setTheme(4)" title="أصفر ساطع"></div>
+            <div class="theme-circle" style="background: #b388ff;" onclick="setTheme(5)" title="بنفَسجي ملكي"></div>
+            <div class="theme-circle" style="background: #00e5ff;" onclick="setTheme(6)" title="سماوي لامع"></div>
+            <div class="theme-circle" style="background: #ff5252;" onclick="setTheme(7)" title="أحمر ناري"></div>
+            <div class="theme-circle" style="background: #2ed573;" onclick="setTheme(8)" title="أخضر إيميرالد"></div>
         </div>
     </div>
 
@@ -836,8 +884,8 @@
         </div>
     </div>
 
+    <!-- الزر العائم للصعود للأعلى فقط -->
     <div class="floating-btns">
-        <button onclick="changeTheme()" class="float-btn theme-toggle-btn" id="themeBtn" title="تغيير الألوان"><i class="fas fa-palette"></i></button>
         <button onclick="scrollToTop()" class="float-btn back-to-top" id="topBtn" title="للأعلى"><i class="fas fa-arrow-up"></i></button>
     </div>
 
@@ -857,21 +905,18 @@
     <script>
         const themes = [
             { primary: '#00f2fe', secondary: '#4facfe', accent: '#ff007f', success: '#00ff88', bg: '#05070e', card: 'rgba(13, 20, 38, 0.85)' },
-            { primary: '#d4af37', secondary: '#aa771c', accent: '#ffffff', success: '#50c878', bg: '#080808', card: 'rgba(20, 20, 20, 0.9)' }, // ذهبي ملكي أسود فخم
-            { primary: '#64ffda', secondary: '#00b4d8', accent: '#ff0055', success: '#06d6a0', bg: '#03071e', card: 'rgba(10, 15, 30, 0.9)' }, // تيتانيوم أزرق تقني فاخر
-            { primary: '#e0a96d', secondary: '#c68b59', accent: '#ff5e7e', success: '#2ecc71', bg: '#120d0b', card: 'rgba(25, 18, 15, 0.88)' }, // برونزي وقهوة دافئ
+            { primary: '#d4af37', secondary: '#aa771c', accent: '#ffffff', success: '#50c878', bg: '#080808', card: 'rgba(20, 20, 20, 0.9)' },
+            { primary: '#64ffda', secondary: '#00b4d8', accent: '#ff0055', success: '#06d6a0', bg: '#03071e', card: 'rgba(10, 15, 30, 0.9)' },
+            { primary: '#e0a96d', secondary: '#c68b59', accent: '#ff5e7e', success: '#2ecc71', bg: '#120d0b', card: 'rgba(25, 18, 15, 0.88)' },
             { primary: '#ffc107', secondary: '#ff9800', accent: '#e91e63', success: '#ffeb3b', bg: '#121212', card: 'rgba(30, 30, 30, 0.85)' },
             { primary: '#b388ff', secondary: '#7c4dff', accent: '#ff4081', success: '#69f0ae', bg: '#0b0b1a', card: 'rgba(26, 20, 45, 0.85)' },
             { primary: '#00e5ff', secondary: '#1de9b6', accent: '#ffea00', success: '#76ff03', bg: '#001a1a', card: 'rgba(0, 35, 35, 0.85)' },
             { primary: '#ff5252', secondary: '#ff793f', accent: '#ffb142', success: '#33d9b2', bg: '#1a0808', card: 'rgba(40, 15, 15, 0.85)' },
-            { primary: '#2ed573', secondary: '#1e90ff', accent: '#ff4757', success: '#7bed9f', bg: '#05140b', card: 'rgba(12, 35, 20, 0.85)' },
-            { primary: '#00ff66', secondary: '#00cc44', accent: '#00ffff', success: '#00ffcc', bg: '#000803', card: 'rgba(5, 25, 10, 0.85)' }
+            { primary: '#2ed573', secondary: '#1e90ff', accent: '#ff4757', success: '#7bed9f', bg: '#05140b', card: 'rgba(12, 35, 20, 0.85)' }
         ];
-        let currentThemeIndex = 0;
 
-        function changeTheme() {
-            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-            const t = themes[currentThemeIndex];
+        function setTheme(index) {
+            const t = themes[index];
             const root = document.documentElement;
             
             root.style.setProperty('--primary', t.primary);
@@ -883,6 +928,7 @@
             root.style.setProperty('--border-glow', t.primary + '66');
             
             document.body.style.background = t.bg;
+            localStorage.setItem('selectedThemeIndex', index);
         }
 
         function openModal(src) {
@@ -908,6 +954,10 @@
         window.onload = function() {
             updateVisitorCount();
             startLiveNotifications();
+            const savedTheme = localStorage.getItem('selectedThemeIndex');
+            if (savedTheme !== null) {
+                setTheme(parseInt(savedTheme));
+            }
         };
 
         const fakeNotifications = [
