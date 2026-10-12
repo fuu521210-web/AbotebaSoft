@@ -17,7 +17,19 @@
             --border-glow: rgba(0, 242, 254, 0.45);
             --text-main: #ffffff;
             --text-sub: #a0aec0;
-            --server-gold: #f39c12;
+        }
+
+        /* الثيم الفاتح */
+        body.light-theme {
+            --primary: #0284c7;
+            --secondary: #0ea5e9;
+            --accent: #2563eb;
+            --success: #16a34a;
+            --bg-deep: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --border-glow: rgba(2, 132, 199, 0.25);
+            --text-main: #0f172a;
+            --text-sub: #475569;
         }
 
         body::after {
@@ -38,7 +50,7 @@
         }
 
         body { 
-            background: var(--bg-deep) radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, var(--bg-deep) 85%); 
+            background: var(--bg-deep); 
             color: var(--text-main); 
             font-family: 'Tajawal', sans-serif; 
             text-align: center; 
@@ -49,17 +61,6 @@
             min-height: 100vh;
             overflow-x: hidden;
             transition: all 0.4s ease;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 45px 45px;
-            z-index: -2;
         }
 
         .top-bar-container {
@@ -75,83 +76,59 @@
             gap: 10px;
         }
 
+        /* شارة السيرفر باللون الأخضر الصريح */
         .server-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--server-gold);
-            color: var(--server-gold);
+            border: 1px solid var(--success);
+            color: var(--success);
             padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 800;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 0 18px rgba(243, 156, 18, 0.35);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
         }
         
         .status-dot {
-            width: 9px;
-            height: 9px;
-            background-color: var(--server-gold);
+            width: 10px;
+            height: 10px;
+            background-color: var(--success);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--server-gold);
+            box-shadow: 0 0 10px var(--success);
             animation: pulseDot 1.5s infinite;
         }
 
         @keyframes pulseDot {
             0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 15px var(--server-gold); }
+            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 15px var(--success); }
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
         .top-tools {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .lang-btn {
+        .mode-btn, .lang-btn {
             background: var(--card-bg);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 5px 14px;
+            border: 1px solid var(--border-glow);
+            color: var(--text-main);
+            padding: 6px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .lang-btn:hover { background: var(--primary); color: #000; }
-
-        .themes-switcher-bar {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glow);
-            padding: 5px 12px;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        .mode-btn:hover, .lang-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
-
-        .themes-switcher-bar span {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--text-sub);
-            margin-left: 5px;
-        }
-
-        .theme-circle {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: transform 0.3s;
-        }
-        .theme-circle:hover { transform: scale(1.2); }
 
         .live-stats-bar {
             max-width: 1200px;
@@ -190,7 +167,7 @@
             border: 1px solid var(--border-glow);
             border-radius: 28px; 
             margin-bottom: 35px; 
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
         }
 
         .logo-container {
@@ -221,7 +198,7 @@
         .btn { 
             display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 35px; 
             color: #fff; text-decoration: none; font-weight: bold; transition: all 0.3s;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); font-size: 1rem;
         }
         .btn:hover { transform: translateY(-6px); border-color: var(--primary); }
         .wa { background: linear-gradient(135deg, #25d366, #1be85e); }
@@ -239,35 +216,33 @@
         }
         .service-box:hover { transform: translateY(-8px); border-color: var(--primary); }
         .service-box i { font-size: 2.5rem; color: var(--primary); margin-bottom: 12px; }
-        .service-box h4 { margin: 0; font-size: 1.05rem; color: #fff; }
+        .service-box h4 { margin: 0; font-size: 1.05rem; color: var(--text-main); }
 
-        h2 { color: #fff; margin-bottom: 25px; font-weight: 900; font-size: 1.8rem; }
+        h2 { color: var(--text-main); margin-bottom: 25px; font-weight: 900; font-size: 1.8rem; }
 
         .section-card {
             background: var(--card-bg); backdrop-filter: blur(18px); padding: 35px 25px;
             margin: 0 auto 40px auto; border-radius: 28px; max-width: 800px; width: 100%;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.7); border: 1px solid var(--border-glow); text-align: right; box-sizing: border-box;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1px solid var(--border-glow); text-align: right; box-sizing: border-box;
         }
 
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; color: #e2e8f0; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--text-main); }
         .form-control {
-            width: 100%; padding: 15px; border: 1px solid rgba(255,255,255,0.15); border-radius: 16px;
-            font-family: 'Tajawal', sans-serif; font-size: 1rem; box-sizing: border-box; background: rgba(0, 0, 0, 0.5); color: #fff;
+            width: 100%; padding: 15px; border: 1px solid var(--border-glow); border-radius: 16px;
+            font-family: 'Tajawal', sans-serif; font-size: 1rem; box-sizing: border-box; background: rgba(0, 0, 0, 0.2); color: var(--text-main);
         }
         .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 20px var(--border-glow); }
         
         .submit-btn {
-            width: 100%; background: linear-gradient(135deg, #25d366, #1be85e); color: white; padding: 18px;
-            border: none; border-radius: 16px; font-size: 1.2rem; font-weight: bold; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
-            transition: all 0.3s;
+            width: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; padding: 16px;
+            border: none; border-radius: 16px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s;
         }
-        .submit-btn:hover { transform: translateY(-4px); }
+        .submit-btn:hover { transform: translateY(-3px); }
 
-        /* نتائج وأدوات */
         .diag-result, .receipt-output {
-            margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.6); border-radius: 16px;
+            margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 16px;
             border: 1px solid var(--primary); display: none; text-align: center;
         }
 
@@ -275,7 +250,7 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;
         }
         .download-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow);
             padding: 15px; border-radius: 14px; text-align: center;
         }
         .download-card h5 { margin: 0 0 10px 0; color: var(--primary); }
@@ -302,7 +277,7 @@
         .why-us, .reviews-section, .faq-section { max-width: 1200px; margin: 45px auto 0 auto; width: 100%; box-sizing: border-box; }
         .why-us { background: var(--card-bg); backdrop-filter: blur(12px); padding: 45px 30px; border-radius: 28px; border: 1px solid var(--border-glow); }
         .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-top: 25px; }
-        .why-card { text-align: center; padding: 25px; background: rgba(0,0,0,0.4); border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); }
+        .why-card { text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 18px; border: 1px solid var(--border-glow); }
         .why-card i { font-size: 2.8rem; color: var(--success); margin-bottom: 15px; }
         .why-card h4 { margin: 0 0 8px 0; color: var(--primary); font-size: 1.15rem; }
         .why-card p { margin: 0; color: var(--text-sub); font-size: 0.95rem; }
@@ -310,20 +285,20 @@
         .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .review-card { background: var(--card-bg); backdrop-filter: blur(12px); padding: 28px; border-radius: 20px; border: 1px solid var(--border-glow); text-align: right; }
         .stars { color: #ffc107; margin-bottom: 12px; font-size: 1.1rem; }
-        .review-card p { font-size: 1.02rem; color: #e2e8f0; margin-bottom: 15px; line-height: 1.7; }
+        .review-card p { font-size: 1.02rem; color: var(--text-main); margin-bottom: 15px; line-height: 1.7; }
         .client-name { font-weight: bold; color: var(--primary); font-size: 1rem; }
 
         .faq-section { max-width: 900px; text-align: right; }
         .faq-item { background: var(--card-bg); backdrop-filter: blur(12px); margin-bottom: 15px; border-radius: 16px; border: 1px solid var(--border-glow); overflow: hidden; }
-        .faq-question { padding: 20px 24px; font-weight: bold; color: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question { padding: 20px 24px; font-weight: bold; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-answer { padding: 0 24px 20px 24px; color: var(--text-sub); font-size: 0.98rem; display: none; line-height: 1.8; }
 
         .floating-btns { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
         .float-btn {
             width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.35rem; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.6); cursor: pointer; border: 1px solid var(--border-glow);
+            color: #fff; font-size: 1.35rem; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer; border: 1px solid var(--border-glow);
         }
-        .back-to-top { background: rgba(255, 0, 127, 0.85); border-color: #ff007f; display: none; }
+        .back-to-top { background: var(--accent); border-color: var(--accent); display: none; }
 
         .modal {
             display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%;
@@ -334,28 +309,20 @@
 
         footer { margin-top: 50px; padding: 30px; background: var(--card-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--border-glow); border-radius: 22px; }
         .visitor-counter { font-size: 1.15rem; color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 12px; }
-        .counter-number { font-weight: 900; color: var(--primary); background: rgba(0, 0, 0, 0.6); padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border-glow); font-family: 'Courier New', Courier, monospace; }
+        .counter-number { font-weight: 900; color: var(--primary); background: rgba(0, 0, 0, 0.3); padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border-glow); font-family: 'Courier New', Courier, monospace; }
     </style>
 </head>
 <body>
 
-    <!-- شريط علوي يجمع حالة السيرفر، اللغة وثيمات الألوان -->
+    <!-- شريط علوي يجمع حالة السيرفر باللون الأخضر، زر اللغة وزر تبديل الوضع (دارك / أبيض) -->
     <div class="top-bar-container">
         <div class="server-status-top">
-            <span class="status-dot"></span> <span id="txtServerStatus">SERVER: ONLINE 👑 (استجابة: 0.1s)</span>
+            <span class="status-dot"></span> <span id="txtServerStatus">SERVER: ONLINE (استجابة: 0.1s)</span>
         </div>
         
         <div class="top-tools">
+            <button class="mode-btn" onclick="toggleThemeMode()" id="modeToggleBtn">☀️ الوضع الفاتح</button>
             <button class="lang-btn" onclick="toggleLanguage()" id="langToggleBtn">English</button>
-            <div class="themes-switcher-bar">
-                <span id="txtThemes">الثيمات:</span>
-                <div class="theme-circle" style="background: #00f2fe;" onclick="setTheme(0)" title="نيون أزرق"></div>
-                <div class="theme-circle" style="background: #d4af37;" onclick="setTheme(1)" title="ذهبي ملكي"></div>
-                <div class="theme-circle" style="background: #64ffda;" onclick="setTheme(2)" title="تيتانيوم تقني"></div>
-                <div class="theme-circle" style="background: #ffc107;" onclick="setTheme(3)" title="أصفر ساطع"></div>
-                <div class="theme-circle" style="background: #b388ff)" onclick="setTheme(4)" title="بنفَسجي ملكي"></div>
-                <div class="theme-circle" style="background: #2ed573;" onclick="setTheme(5)" title="أخضر إيميرالد"></div>
-            </div>
         </div>
     </div>
 
@@ -441,36 +408,7 @@
         <div id="diagResult" class="diag-result"></div>
     </div>
 
-    <!-- قسم طلب الخدمة -->
-    <div class="section-card">
-        <h2><i class="fas fa-paper-plane"></i> <span id="txtOrderTitle">طلب خدمة سريع</span></h2>
-        <form id="whatsappForm" onsubmit="sendToWhatsApp(event)">
-            <div class="form-group">
-                <label id="lblPhoneModel">موديل الجهاز:</label>
-                <input type="text" id="phoneModel" class="form-control" placeholder="مثال: iPhone 14 Pro Max / Samsung A54" required>
-            </div>
-            <div class="form-group">
-                <label id="lblServiceType">نوع الخدمة المطلوبة:</label>
-                <select id="serviceType" class="form-control" required>
-                    <option value="تخطي حساب آيكلود iCloud">تخطي حساب آيكلود iCloud</option>
-                    <option value="تخطي حساب جوجل FRP">تخطي حساب جوجل FRP</option>
-                    <option value="فك رمز الشاشة / الباسورد">فك رمز الشاشة / الباسورد</option>
-                    <option value="إصلاح السيريال و IMEI">إصلاح السيريال و IMEI</option>
-                    <option value="خروج من المنظومة / تفليش">خروج من المنظومة / تفليش وتعريب</option>
-                    <option value="خدمة أخرى">خدمة أخرى</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label id="lblNotes">تفاصيل أو ملاحظات إضافية:</label>
-                <textarea id="notes" class="form-control" rows="2" placeholder="اكتب أي تفاصيل أخرى عن حالة الجهاز..."></textarea>
-            </div>
-            <button type="submit" class="submit-btn">
-                <i class="fab fa-whatsapp"></i> <span id="btnSubmitForm">إرسال الطلب عبر الواتساب Direct</span>
-            </button>
-        </form>
-    </div>
-
-    <!-- ميزة 2: مولد كروت الاستلام والضمان (خاص بالفنيين والعملاء) -->
+    <!-- ميزة 2: مولد كروت الاستلام والضمان -->
     <div class="section-card">
         <h2><i class="fas fa-file-invoice"></i> <span id="txtReceiptTitle">مولد كارت الاستلام والضمان</span></h2>
         <div class="form-group">
@@ -485,7 +423,7 @@
             <label>الخدمة المقدمة:</label>
             <input type="text" id="recService" class="form-control" placeholder="تخطي آيكلود / تفليش / إصلاح IMEI">
         </div>
-        <button type="button" class="submit-btn" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color:#000;" onclick="generateReceipt()">
+        <button type="button" class="submit-btn" onclick="generateReceipt()">
             <i class="fas fa-print"></i> إصدار كارت الضمان الإلكتروني
         </button>
         
@@ -496,7 +434,7 @@
             <p><strong>الخدمة:</strong> <span id="outService"></span></p>
             <p><strong>التاريخ:</strong> <span id="outDate"></span></p>
             <p style="color:var(--success); font-size:0.85rem;">🔒 نضمن لك استقرار النظام والخدمة المقدمة كلياً.</p>
-            <button class="lang-btn" onclick="window.print()">طباعة الإيصال 🖨️</button>
+            <button class="mode-btn" onclick="window.print()">طباعة الإيصال 🖨️</button>
         </div>
     </div>
 
@@ -649,31 +587,21 @@
     </div>
 
     <script>
-        const themes = [
-            { primary: '#00f2fe', secondary: '#4facfe', accent: '#ff007f', success: '#00ff88', bg: '#05070e', card: 'rgba(13, 20, 38, 0.85)' },
-            { primary: '#d4af37', secondary: '#aa771c', accent: '#ffffff', success: '#50c878', bg: '#080808', card: 'rgba(20, 20, 20, 0.9)' },
-            { primary: '#64ffda', secondary: '#00b4d8', accent: '#ff0055', success: '#06d6a0', bg: '#03071e', card: 'rgba(10, 15, 30, 0.9)' },
-            { primary: '#ffc107', secondary: '#ff9800', accent: '#e91e63', success: '#ffeb3b', bg: '#121212', card: 'rgba(30, 30, 30, 0.85)' },
-            { primary: '#b388ff', secondary: '#7c4dff', accent: '#ff4081', success: '#69f0ae', bg: '#0b0b1a', card: 'rgba(26, 20, 45, 0.85)' },
-            { primary: '#2ed573', secondary: '#1e90ff', accent: '#ff4757', success: '#7bed9f', bg: '#05140b', card: 'rgba(12, 35, 20, 0.85)' }
-        ];
-
         let currentLang = 'ar';
+        let isLightMode = false;
 
-        function setTheme(index) {
-            const t = themes[index];
-            const root = document.documentElement;
-            
-            root.style.setProperty('--primary', t.primary);
-            root.style.setProperty('--secondary', t.secondary);
-            root.style.setProperty('--accent', t.accent);
-            root.style.setProperty('--success', t.success);
-            root.style.setProperty('--bg-deep', t.bg);
-            root.style.setProperty('--card-bg', t.card);
-            root.style.setProperty('--border-glow', t.primary + '66');
-            
-            document.body.style.background = t.bg;
-            localStorage.setItem('selectedThemeIndex', index);
+        // تبديل بين الدارك مود والوضع الأبيض الفاتح
+        function toggleThemeMode() {
+            isLightMode = !isLightMode;
+            if (isLightMode) {
+                document.body.classList.add('light-theme');
+                document.getElementById('modeToggleBtn').innerText = "🌙 الوضع المظلم";
+                localStorage.setItem('themeMode', 'light');
+            } else {
+                document.body.classList.remove('light-theme');
+                document.getElementById('modeToggleBtn').innerText = "☀️ الوضع الفاتح";
+                localStorage.setItem('themeMode', 'dark');
+            }
         }
 
         // تشغيل التشخيص الذكي
@@ -696,11 +624,7 @@
             }
 
             resBox.style.display = 'block';
-            resBox.innerHTML = message + `<br><br><button class="submit-btn" onclick="directWaFromDiag('${issue}')">اطلب الخدمة فوراً لهذه المشكلة 💬</button>`;
-        }
-
-        function directWaFromDiag(issue) {
-            window.open(`https://wa.me/201064721809?text=${encodeURIComponent('السلام عليكم، استفسرت عبر مساعد التشخيص في الموقع بخصوص مشكلة: ' + issue)}`, '_blank');
+            resBox.innerHTML = message + `<br><br><a href="https://wa.me/201064721809?text=${encodeURIComponent('السلام عليكم، استفسرت عبر مساعد التشخيص في الموقع بخصوص مشكلة: ' + issue)}" target="_blank" class="submit-btn" style="text-decoration:none; display:inline-flex; width:auto; padding:10px 20px; margin:0 auto;"><i class="fab fa-whatsapp"></i> اطلب الخدمة فوراً لهذه المشكلة</a>`;
         }
 
         // مولد كروت الاستلام
@@ -725,7 +649,7 @@
 
             if (currentLang === 'en') {
                 document.getElementById('langToggleBtn').innerText = "عربي";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE 👑 (Ping: 0.1s)";
+                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE (Ping: 0.1s)";
                 document.getElementById('txtSubHeading').innerText = "The First Choice for Mobile Software Solutions";
                 document.getElementById('btnWa').innerText = "Direct WhatsApp";
                 document.getElementById('btnFb').innerText = "Facebook Page";
@@ -736,8 +660,6 @@
                 document.getElementById('serv3').innerText = "IMEI & Baseband Repair";
                 document.getElementById('serv4').innerText = "School Tablet Unlock";
                 document.getElementById('txtDiagTitle').innerText = "Smart Troubleshooting Assistant";
-                document.getElementById('txtOrderTitle').innerText = "Quick Service Order";
-                document.getElementById('btnSubmitForm').innerText = "Send Order via WhatsApp Direct";
                 document.getElementById('txtReceiptTitle').innerText = "Warranty & Receipt Generator";
                 document.getElementById('txtDownloadTitle').innerText = "Download Software Drivers & Tools";
                 document.getElementById('txtGalleryTitle').innerText = "Work Portfolio & Services";
@@ -748,7 +670,7 @@
                 document.getElementById('txtVisitorLbl').innerText = "Total Visits:";
             } else {
                 document.getElementById('langToggleBtn').innerText = "English";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE 👑 (استجابة: 0.1s)";
+                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE (استجابة: 0.1s)";
                 document.getElementById('txtSubHeading').innerText = "الوجهة الأولى لاحتراف خدمات وحلول سوفت وير المحمول";
                 document.getElementById('btnWa').innerText = "واتساب المباشر";
                 document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
@@ -759,8 +681,6 @@
                 document.getElementById('serv3').innerText = "إصلاح سيريال وIMEI";
                 document.getElementById('serv4').innerText = "فك أجهزة التابلت";
                 document.getElementById('txtDiagTitle').innerText = "مساعد التشخيص الذكي";
-                document.getElementById('txtOrderTitle').innerText = "طلب خدمة سريع";
-                document.getElementById('btnSubmitForm').innerText = "إرسال الطلب عبر الواتساب Direct";
                 document.getElementById('txtReceiptTitle').innerText = "مولد كارت الاستلام والضمان";
                 document.getElementById('txtDownloadTitle').innerText = "تحميل أدوات وتعاريف السوفت وير";
                 document.getElementById('txtGalleryTitle').innerText = "معرض الأعمال والخدمات";
@@ -794,22 +714,12 @@
 
         window.onload = function() {
             updateVisitorCount();
-            const savedTheme = localStorage.getItem('selectedThemeIndex');
-            if (savedTheme !== null) {
-                setTheme(parseInt(savedTheme));
+            const savedMode = localStorage.getItem('themeMode');
+            if (savedMode === 'light') {
+                toggleThemeMode();
             }
             runDiagnostic();
         };
-
-        function sendToWhatsApp(e) {
-            e.preventDefault();
-            const model = document.getElementById('phoneModel').value;
-            const service = document.getElementById('serviceType').value;
-            const notes = document.getElementById('notes').value;
-
-            const text = `السلام عليكم، حابب أستفسر عن طلب خدمة سوفت وير:%0A%0A📱 *موديل الجهاز:* ${model}%0A🛠️ *نوع الخدمة:* ${service}%0A📝 *ملاحظات:* ${notes || 'لا يوجد'}`;
-            window.open(`https://wa.me/201064721809?text=${text}`, '_blank');
-        }
 
         function toggleFaq(element) {
             const answer = element.nextElementSibling;
