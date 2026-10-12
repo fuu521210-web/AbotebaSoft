@@ -17,6 +17,7 @@
             --border-glow: rgba(0, 242, 254, 0.45);
             --text-main: #ffffff;
             --text-sub: #a0aec0;
+            --server-gold: #f39c12; /* لون ذهبي ملكي فخم */
         }
 
         body::after {
@@ -78,8 +79,8 @@
         .server-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--success);
-            color: var(--success);
+            border: 1px solid var(--server-gold);
+            color: var(--server-gold);
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.82rem;
@@ -87,22 +88,22 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 0 15px var(--success);
+            box-shadow: 0 0 18px rgba(243, 156, 18, 0.35);
             transition: all 0.4s;
         }
         
         .status-dot {
             width: 9px;
             height: 9px;
-            background-color: var(--success);
+            background-color: var(--server-gold);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--success);
+            box-shadow: 0 0 10px var(--server-gold);
             animation: pulseDot 1.5s infinite;
         }
 
         @keyframes pulseDot {
             0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 15px var(--success); }
+            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 15px var(--server-gold); }
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
@@ -532,51 +533,7 @@
             line-height: 1.8;
         }
 
-        .live-popup {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--primary);
-            color: #fff;
-            padding: 12px 18px;
-            border-radius: 14px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            max-width: 320px;
-            box-sizing: border-box;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .live-popup.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .live-popup i {
-            font-size: 1.8rem;
-            color: var(--success);
-            transition: color 0.4s;
-        }
-        .live-popup-content h5 {
-            margin: 0 0 3px 0;
-            font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: 800;
-            transition: color 0.4s;
-        }
-        .live-popup-content p {
-            margin: 0;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            text-align: right;
-        }
-
-        /* زر الصعود للأعلى فقط في الجانب السفلي */
+        /* الزر العائم للصعود للأعلى فقط */
         .floating-btns {
             position: fixed;
             bottom: 25px;
@@ -673,7 +630,7 @@
     <!-- شريط علوي يجمع حالة السيرفر وثيمات الألوان -->
     <div class="top-bar-container">
         <div class="server-status-top">
-            <span class="status-dot"></span> SERVER: ONLINE 🟢 (استجابة: 0.1s)
+            <span class="status-dot"></span> SERVER: ONLINE 👑 (استجابة: 0.1s)
         </div>
         
         <div class="themes-switcher-bar">
@@ -875,15 +832,6 @@
         </div>
     </div>
 
-    <!-- عنصر الإشعار الحي للمبيعات/الخدمات -->
-    <div id="livePopup" class="live-popup">
-        <i class="fas fa-check-circle"></i>
-        <div class="live-popup-content">
-            <h5 id="popupTitle">طلب خدمة جديد</h5>
-            <p id="popupText">تم الآن بنجاح تخطي آيكلود آيفون 15 برو</p>
-        </div>
-    </div>
-
     <!-- الزر العائم للصعود للأعلى فقط -->
     <div class="floating-btns">
         <button onclick="scrollToTop()" class="float-btn back-to-top" id="topBtn" title="للأعلى"><i class="fas fa-arrow-up"></i></button>
@@ -953,40 +901,11 @@
 
         window.onload = function() {
             updateVisitorCount();
-            startLiveNotifications();
             const savedTheme = localStorage.getItem('selectedThemeIndex');
             if (savedTheme !== null) {
                 setTheme(parseInt(savedTheme));
             }
         };
-
-        const fakeNotifications = [
-            { title: "تم تنفيذ طلب (آيفون)", text: "تم الآن بنجاح تخطي آيكلود آيفون 14 برو ماكس 🟢" },
-            { title: "تفعيل سيرفر فوري", text: "تم خروج تاب مدرسة T509 من المنظومة بنجاح 🟢" },
-            { title: "خدمة شاومي وسامسونج", text: "تم إزالة حساب Google FRP لهاتف Samsung S23 فورياً 🟢" },
-            { title: "طلب جديد عبر الواتساب", text: "تم الانتهاء من إصلاح سيريال IMEI وتفعيل الشبكة 🟢" }
-        ];
-
-        function startLiveNotifications() {
-            const popup = document.getElementById('livePopup');
-            const titleEl = document.getElementById('popupTitle');
-            const textEl = document.getElementById('popupText');
-
-            let index = 0;
-            setInterval(() => {
-                const notif = fakeNotifications[index];
-                titleEl.innerText = notif.title;
-                textEl.innerText = notif.text;
-
-                popup.classList.add('show');
-
-                setTimeout(() => {
-                    popup.classList.remove('show');
-                }, 4000);
-
-                index = (index + 1) % fakeNotifications.length;
-            }, 9000);
-        }
 
         function sendToWhatsApp(e) {
             e.preventDefault();
