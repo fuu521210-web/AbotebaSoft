@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abo Teba Software Services | خدمات وحلول السوفت وير الاحترافية</title>
+    <title>Abo Teba Software Terminal | منصة وسيرفر خدمات السوفت وير</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,21 +12,20 @@
             --secondary: #4facfe;
             --accent: #ff007f;
             --success: #00ff88;
-            --bg-deep: #05070e;
-            --card-bg: rgba(13, 20, 38, 0.85);
-            --border-glow: rgba(0, 242, 254, 0.45);
-            --text-main: #ffffff;
-            --text-sub: #a0aec0;
+            --bg-deep: #030712;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --border-glow: rgba(0, 242, 254, 0.35);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
         }
 
-        /* الثيم الفاتح */
         body.light-theme {
             --primary: #0284c7;
             --secondary: #0ea5e9;
-            --accent: #2563eb;
+            --accent: #d946ef;
             --success: #16a34a;
-            --bg-deep: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --bg-deep: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.9);
             --border-glow: rgba(2, 132, 199, 0.25);
             --text-main: #0f172a;
             --text-sub: #475569;
@@ -41,7 +40,7 @@
             background-size: 400% 100%;
             z-index: 9999;
             animation: moveBorder 3s linear infinite;
-            box-shadow: 0 0 25px var(--primary), 0 0 15px var(--accent);
+            box-shadow: 0 0 20px var(--primary);
         }
 
         @keyframes moveBorder {
@@ -60,12 +59,12 @@
             flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .top-bar-container {
             max-width: 1200px;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 18px auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -95,7 +94,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
         }
 
         .support-status-top {
@@ -110,7 +109,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
         }
         
         .status-dot {
@@ -124,14 +123,8 @@
 
         @keyframes pulseDot {
             0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 15px var(--success); }
+            50% { transform: scale(1.4); opacity: 1; }
             100% { transform: scale(0.9); opacity: 0.7; }
-        }
-
-        .top-tools {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .mode-btn, .lang-btn {
@@ -144,28 +137,24 @@
             font-weight: bold;
             font-size: 0.85rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .mode-btn:hover, .lang-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
+        .mode-btn:hover, .lang-btn:hover { border-color: var(--primary); color: var(--primary); }
 
         header { 
             background: var(--card-bg); 
-            backdrop-filter: blur(18px);
-            padding: 45px 20px; 
+            backdrop-filter: blur(20px);
+            padding: 35px 20px; 
             border: 1px solid var(--border-glow);
             border-radius: 28px; 
-            margin-bottom: 35px; 
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px; 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
         .logo-container {
             position: relative;
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 20px auto;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 15px auto;
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -181,34 +170,105 @@
 
         .header-logo { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; background-color: var(--bg-deep); display: block; }
 
-        h1 { color: var(--primary); margin-bottom: 10px; font-weight: 900; font-size: 2rem; text-shadow: 0 0 25px var(--border-glow); }
-        p { color: var(--text-sub); font-size: 1.2rem; font-weight: 600; }
+        h1 { color: var(--primary); margin-bottom: 8px; font-weight: 900; font-size: 1.9rem; text-shadow: 0 0 20px var(--border-glow); }
+        p { color: var(--text-sub); font-size: 1.1rem; font-weight: 600; margin-top: 0; }
         
-        .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
+        .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 25px; }
 
         .btn { 
-            display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 35px; 
+            display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 30px; 
             color: #fff; text-decoration: none; font-weight: bold; transition: all 0.3s;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); font-size: 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); font-size: 0.95rem;
         }
-        .btn:hover { transform: translateY(-6px); border-color: var(--primary); }
+        .btn:hover { transform: translateY(-4px); border-color: var(--primary); }
         .wa { background: linear-gradient(135deg, #25d366, #1be85e); }
         .fb { background: linear-gradient(135deg, #1877f2, #145dbf); }
         .tg { background: linear-gradient(135deg, #229ED9, #1b7fad); }
         .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
-        /* شبكة الأقسام الجديدة - بنفس شكل سيرفرات السوفت وير */
-        .categories-section {
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
+        /* شريط البحث التفاعلي الفوري */
+        .search-terminal-box {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            position: relative;
             width: 100%;
         }
 
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--border-glow);
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 25px var(--border-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* شريط التبويبات الرئيسي */
+        .terminal-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            color: var(--text-sub);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000;
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px var(--border-glow);
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* شبكة الأقسام */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 18px;
-            margin-top: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .category-card {
@@ -232,52 +292,39 @@
             box-shadow: 0 10px 25px var(--border-glow);
         }
 
-        .category-info h4 {
-            margin: 0 0 4px 0;
-            font-size: 0.98rem;
-            color: var(--text-main);
-            font-weight: 800;
-        }
-
-        .category-info span {
-            font-size: 0.78rem;
-            color: var(--primary);
-            font-weight: 700;
-            display: block;
-            direction: ltr;
-            text-align: right;
-        }
+        .category-info h4 { margin: 0 0 4px 0; font-size: 0.98rem; color: var(--text-main); font-weight: 800; }
+        .category-info span { font-size: 0.78rem; color: var(--primary); font-weight: 700; display: block; direction: ltr; text-align: right; }
 
         .category-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: rgba(0, 242, 254, 0.1);
-            border: 1px solid var(--border-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary);
-            flex-shrink: 0;
+            width: 50px; height: 50px; border-radius: 14px;
+            background: rgba(0, 242, 254, 0.1); border: 1px solid var(--border-glow);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--primary); flex-shrink: 0;
         }
 
-        h2 { color: var(--text-main); margin-bottom: 25px; font-weight: 900; font-size: 1.8rem; }
+        /* جدول المقارنة التفاعلي */
+        .comparison-table {
+            width: 100%; border-collapse: collapse; margin-top: 15px;
+            background: rgba(0,0,0,0.2); border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border-glow); text-align: center;
+        }
+        .comparison-table th { background: rgba(0, 242, 254, 0.15); color: var(--primary); padding: 14px; font-size: 0.95rem; }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-main); font-size: 0.9rem; }
 
         .section-card {
             background: var(--card-bg); backdrop-filter: blur(18px); padding: 35px 25px;
-            margin: 0 auto 40px auto; border-radius: 28px; max-width: 800px; width: 100%;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1px solid var(--border-glow); text-align: right; box-sizing: border-box;
+            margin: 0 auto 30px auto; border-radius: 28px; max-width: 800px; width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 1px solid var(--border-glow); text-align: right; box-sizing: border-box;
         }
 
-        .form-group { margin-bottom: 20px; }
+        .form-group { margin-bottom: 18px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--text-main); }
         .form-control {
-            width: 100%; padding: 15px; border: 1px solid var(--border-glow); border-radius: 16px;
-            font-family: 'Tajawal', sans-serif; font-size: 1rem; box-sizing: border-box; background: rgba(0, 0, 0, 0.2); color: var(--text-main);
+            width: 100%; padding: 14px; border: 1px solid var(--border-glow); border-radius: 16px;
+            font-family: 'Tajawal', sans-serif; font-size: 0.98rem; box-sizing: border-box; background: rgba(0, 0, 0, 0.2); color: var(--text-main);
         }
         .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 20px var(--border-glow); }
-        
+
         .submit-btn {
             width: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; padding: 16px;
             border: none; border-radius: 16px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
@@ -285,75 +332,51 @@
         }
         .submit-btn:hover { transform: translateY(-3px); }
 
-        .diag-result, .receipt-output, .tracker-output, .price-output {
+        .diag-result, .receipt-output, .tracker-output {
             margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 16px;
             border: 1px solid var(--primary); display: none; text-align: center;
         }
 
-        .download-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;
-        }
-        .download-card {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow);
-            padding: 15px; border-radius: 14px; text-align: center;
-        }
+        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+        .download-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow); padding: 15px; border-radius: 14px; text-align: center; }
         .download-card h5 { margin: 0 0 10px 0; color: var(--primary); }
-        .download-card a {
-            display: inline-block; padding: 8px 16px; background: var(--primary); color: #000;
-            text-decoration: none; font-weight: bold; border-radius: 20px; font-size: 0.85rem;
-        }
+        .download-card a { display: inline-block; padding: 8px 16px; background: var(--primary); color: #000; text-decoration: none; font-weight: bold; border-radius: 20px; font-size: 0.85rem; }
 
         .filter-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .filter-btn {
-            background: var(--card-bg); border: 1px solid var(--border-glow); color: var(--text-sub);
-            padding: 10px 22px; border-radius: 25px; cursor: pointer; font-weight: bold; font-family: 'Tajawal', sans-serif; transition: all 0.3s;
-        }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border-glow); color: var(--text-sub); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: 'Tajawal', sans-serif; transition: all 0.3s; }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); }
 
         .grid { max-width: 520px; margin: 0 auto; }
-        .card { 
-            background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border-glow); 
-            border-radius: 22px; padding: 22px; margin-bottom: 30px; box-sizing: border-box; display: block;
-        }
+        .card { background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border-glow); border-radius: 22px; padding: 22px; margin-bottom: 30px; box-sizing: border-box; display: block; }
         .card img { width: 100%; height: 390px; object-fit: cover; border-radius: 16px; cursor: pointer; background: #111; }
-        .card h3 { font-size: 1.2rem; margin-top: 18px; color: var(--primary); font-weight: 700; line-height: 1.4; }
+        .card h3 { font-size: 1.15rem; margin-top: 16px; color: var(--primary); font-weight: 700; }
 
-        .why-us, .reviews-section, .faq-section { max-width: 1200px; margin: 45px auto 0 auto; width: 100%; box-sizing: border-box; }
-        .why-us { background: var(--card-bg); backdrop-filter: blur(12px); padding: 45px 30px; border-radius: 28px; border: 1px solid var(--border-glow); }
-        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-top: 25px; }
-        .why-card { text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 18px; border: 1px solid var(--border-glow); }
-        .why-card i { font-size: 2.8rem; color: var(--success); margin-bottom: 15px; }
-        .why-card h4 { margin: 0 0 8px 0; color: var(--primary); font-size: 1.15rem; }
-        .why-card p { margin: 0; color: var(--text-sub); font-size: 0.95rem; }
+        .why-us, .reviews-section, .faq-section { max-width: 1200px; margin: 40px auto 0 auto; width: 100%; box-sizing: border-box; }
+        .why-us { background: var(--card-bg); backdrop-filter: blur(12px); padding: 40px 25px; border-radius: 28px; border: 1px solid var(--border-glow); }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 20px; }
+        .why-card { text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 18px; border: 1px solid var(--border-glow); }
+        .why-card i { font-size: 2.5rem; color: var(--success); margin-bottom: 12px; }
 
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .review-card { background: var(--card-bg); backdrop-filter: blur(12px); padding: 28px; border-radius: 20px; border: 1px solid var(--border-glow); text-align: right; }
-        .stars { color: #ffc107; margin-bottom: 12px; font-size: 1.1rem; }
-        .review-card p { font-size: 1.02rem; color: var(--text-main); margin-bottom: 15px; line-height: 1.7; }
-        .client-name { font-weight: bold; color: var(--primary); font-size: 1rem; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .review-card { background: var(--card-bg); backdrop-filter: blur(12px); padding: 24px; border-radius: 20px; border: 1px solid var(--border-glow); text-align: right; }
+        .stars { color: #ffc107; margin-bottom: 10px; }
 
         .faq-section { max-width: 900px; text-align: right; }
-        .faq-item { background: var(--card-bg); backdrop-filter: blur(12px); margin-bottom: 15px; border-radius: 16px; border: 1px solid var(--border-glow); overflow: hidden; }
-        .faq-question { padding: 20px 24px; font-weight: bold; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-answer { padding: 0 24px 20px 24px; color: var(--text-sub); font-size: 0.98rem; display: none; line-height: 1.8; }
+        .faq-item { background: var(--card-bg); backdrop-filter: blur(12px); margin-bottom: 12px; border-radius: 16px; border: 1px solid var(--border-glow); overflow: hidden; }
+        .faq-question { padding: 18px 22px; font-weight: bold; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 22px 18px 22px; color: var(--text-sub); font-size: 0.95rem; display: none; line-height: 1.7; }
 
         .floating-btns { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
-        .float-btn {
-            width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.35rem; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer; border: 1px solid var(--border-glow);
-        }
+        .float-btn { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.35rem; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer; border: 1px solid var(--border-glow); }
         .back-to-top { background: var(--accent); border-color: var(--accent); display: none; }
 
-        .modal {
-            display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(15px); justify-content: center; align-items: center;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(15px); justify-content: center; align-items: center; }
         .modal-content { max-width: 92%; max-height: 90vh; border-radius: 18px; border: 2px solid var(--border-glow); }
         .close-btn { position: absolute; top: 25px; right: 35px; color: #fff; font-size: 45px; font-weight: bold; cursor: pointer; }
 
-        footer { margin-top: 50px; padding: 30px; background: var(--card-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--border-glow); border-radius: 22px; }
-        .visitor-counter { font-size: 1.15rem; color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 12px; }
-        .counter-number { font-weight: 900; color: var(--primary); background: rgba(0, 0, 0, 0.3); padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border-glow); font-family: 'Courier New', Courier, monospace; }
+        footer { margin-top: 50px; padding: 25px; background: var(--card-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--border-glow); border-radius: 22px; }
+        .visitor-counter { font-size: 1.1rem; color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .counter-number { font-weight: 900; color: var(--primary); background: rgba(0, 0, 0, 0.3); padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border-glow); font-family: monospace; }
     </style>
 </head>
 <body>
@@ -380,8 +403,8 @@
             <img src="logo.jpg" onerror="this.onerror=null; this.src='logo.png';" alt="Logo" class="header-logo">
         </div>
 
-        <h1>ABO TEBA SOFTWARE SERVICES</h1>
-        <p id="txtSubHeading">الوجهة الأولى لاحتراف خدمات وحلول سوفت وير المحمول</p>
+        <h1>ABO TEBA SOFTWARE TERMINAL</h1>
+        <p id="txtSubHeading">منصة وسيرفر خدمات السوفت وير الشاملة</p>
         
         <div class="social-links">
             <a href="https://wa.me/201064721809" target="_blank" class="btn wa"><i class="fa-brands fa-whatsapp"></i> <span id="btnWa">واتساب المباشر</span></a>
@@ -391,10 +414,23 @@
         </div>
     </header>
 
-    <!-- قسم أقسام السيرفر والخدمات الاحترافية (زي الصورة تماماً) -->
-    <div class="categories-section">
-        <h2><i class="fas fa-th-large"></i> <span>الأقسام والخدمات المتاحة</span></h2>
-        <div class="categories-grid">
+    <!-- محرك البحث الفوري في الخدمات -->
+    <div class="search-terminal-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="liveSearchInput" class="search-input" placeholder="ابحث فوراً عن أي قسم أو خدمة (مثال: Xiaomi, iPhone, FRP, تجديد)..." onkeyup="filterServicesLive()">
+    </div>
+
+    <!-- أزرار التبويبات التفاعلية -->
+    <div class="terminal-tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-categories', this)"><i class="fas fa-th-large"></i> الأقسام والسيرفرات</button>
+        <button class="tab-btn" onclick="switchTab('tab-diag', this)"><i class="fas fa-robot"></i> التشخيص & IMEI</button>
+        <button class="tab-btn" onclick="switchTab('tab-compare', this)"><i class="fas fa-balance-scale"></i> مقارنة خيارات التخطي</button>
+        <button class="tab-btn" onclick="switchTab('tab-tools', this)"><i class="fas fa-tools"></i> الضمان والتحميلات</button>
+    </div>
+
+    <!-- التبويب 1: الأقسام والسيرفرات -->
+    <div id="tab-categories" class="tab-content active">
+        <div class="categories-grid" id="categoriesGrid">
             
             <div class="category-card" onclick="openWaService('قسم أدوات للإيجار Tools for Rent')">
                 <div class="category-info">
@@ -444,7 +480,7 @@
                 <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
             </div>
 
-            <div class="category-card" onclick="openWaService('قسم شحن الألعاب')">
+            <div class="category-card" onclick="openWaService('قسم شحن الألعاب Game Top-Up')">
                 <div class="category-info">
                     <h4>قسم شحن الألعاب</h4>
                     <span>Game Top-Up</span>
@@ -519,82 +555,139 @@
         </div>
     </div>
 
-    <!-- ميزة 1: مساعد التشخيص الذكي -->
-    <div class="section-card">
-        <h2><i class="fas fa-robot"></i> <span id="txtDiagTitle">مساعد التشخيص الذكي</span></h2>
-        <div class="form-group">
-            <label id="lblDiagOS">1. نوع نظام الجهاز:</label>
-            <select id="diagOS" class="form-control" onchange="runDiagnostic()">
-                <option value="apple">Apple iOS (iPhone / iPad)</option>
-                <option value="android">Android (Samsung, Xiaomi, Infinix...)</option>
-            </select>
+    <!-- التبويب 2: مساعد التشخيص & تتبع السيريال -->
+    <div id="tab-diag" class="tab-content">
+        <div class="section-card">
+            <h2><i class="fas fa-robot"></i> <span id="txtDiagTitle">مساعد التشخيص الذكي</span></h2>
+            <div class="form-group">
+                <label id="lblDiagOS">1. نوع نظام الجهاز:</label>
+                <select id="diagOS" class="form-control" onchange="runDiagnostic()">
+                    <option value="apple">Apple iOS (iPhone / iPad)</option>
+                    <option value="android">Android (Samsung, Xiaomi, Infinix...)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="lblDiagIssue">2. ما هي المشكلة الحالية؟</label>
+                <select id="diagIssue" class="form-control" onchange="runDiagnostic()">
+                    <option value="icloud">قفل الحساب (iCloud / Google FRP)</option>
+                    <option value="passcode">رمز الشاشة / الباسورد نسيته</option>
+                    <option value="imei">مشكلة شبكة / السيريال Null / IMEI</option>
+                    <option value="mdm">قفل المنظومة التعليمية MDM</option>
+                </select>
+            </div>
+            <div id="diagResult" class="diag-result"></div>
         </div>
-        <div class="form-group">
-            <label id="lblDiagIssue">2. ما هي المشكلة الحالية؟</label>
-            <select id="diagIssue" class="form-control" onchange="runDiagnostic()">
-                <option value="icloud">قفل الحساب (iCloud / Google FRP)</option>
-                <option value="passcode">رمز الشاشة / الباسورد نسيته</option>
-                <option value="imei">مشكلة شبكة / السيريال Null / IMEI</option>
-                <option value="mdm">قفل المنظومة التعليمية MDM</option>
-            </select>
-        </div>
-        <div id="diagResult" class="diag-result"></div>
-    </div>
 
-    <!-- ميزة 2: مولد كروت الاستلام والضمان -->
-    <div class="section-card">
-        <h2><i class="fas fa-file-invoice"></i> <span id="txtReceiptTitle">مولد كارت الاستلام والضمان</span></h2>
-        <div class="form-group">
-            <label>اسم العميل:</label>
-            <input type="text" id="recClientName" class="form-control" placeholder="اسم العميل">
-        </div>
-        <div class="form-group">
-            <label>موديل الجهاز والسيريال:</label>
-            <input type="text" id="recDevice" class="form-control" placeholder="موديل الجهاز + IMEI">
-        </div>
-        <div class="form-group">
-            <label>الخدمة المقدمة:</label>
-            <input type="text" id="recService" class="form-control" placeholder="تخطي آيكلود / تفليش / إصلاح IMEI">
-        </div>
-        <button type="button" class="submit-btn" onclick="generateReceipt()">
-            <i class="fas fa-print"></i> إصدار كارت الضمان الإلكتروني
-        </button>
-        
-        <div id="receiptOutput" class="receipt-output">
-            <h3 style="color:var(--primary); margin-top:0;">إيصال استلام وضمان - Abo Teba</h3>
-            <p><strong>العميل:</strong> <span id="outClient"></span></p>
-            <p><strong>الجهاز:</strong> <span id="outDevice"></span></p>
-            <p><strong>الخدمة:</strong> <span id="outService"></span></p>
-            <p><strong>التاريخ:</strong> <span id="outDate"></span></p>
-            <p style="color:var(--success); font-size:0.85rem;">🔒 نضمن لك استقرار النظام والخدمة المقدمة كلياً.</p>
-            <button class="mode-btn" onclick="window.print()">طباعة الإيصال 🖨️</button>
+        <div class="section-card">
+            <h2><i class="fas fa-search-location"></i> <span>تتبع حالة الطلب عبر IMEI</span></h2>
+            <div class="form-group">
+                <label>أدخل رقم السيريال (IMEI / Serial Number):</label>
+                <input type="text" id="trackImeiInput" class="form-control" placeholder="مثال: 356789098765432">
+            </div>
+            <button type="button" class="submit-btn" onclick="checkDeviceStatus()">
+                <i class="fas fa-search"></i> استعلام مباشر
+            </button>
+            <div id="trackerResult" class="tracker-output"></div>
         </div>
     </div>
 
-    <!-- ميزة 3: قسم تحميل برامج وتعاريف السوفت وير -->
-    <div class="section-card">
-        <h2><i class="fas fa-download"></i> <span id="txtDownloadTitle">تحميل أدوات وتعاريف السوفت وير</span></h2>
-        <div class="download-grid">
-            <div class="download-card">
-                <h5>Samsung Drivers</h5>
-                <a href="https://developer.samsung.com/android-usb-driver" target="_blank">تحميل المباشر</a>
+    <!-- التبويب 3: مقارنة خيارات التخطي -->
+    <div id="tab-compare" class="tab-content">
+        <div class="section-card" style="max-width:1000px;">
+            <h2><i class="fas fa-balance-scale"></i> <span>مقارنة خيارات التخطي والفك الفوري</span></h2>
+            <p style="color:var(--text-sub); text-align:right;">جدول توضيحي يساعدك على اختيار أنسب نوع خدمة لجهازك:</p>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>نوع الخدمة</th>
+                        <th>الاتصال والشبكة</th>
+                        <th>الإشعارات والخدمات</th>
+                        <th>إعادة التشغيل</th>
+                        <th>التوصية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>تخطي بشبكة (Signal Bypass)</b></td>
+                        <td>🟢 تعمل 100%</td>
+                        <td>🟢 تعمل بالكامل</td>
+                        <td>🟢 طبيعي جداً</td>
+                        <td>ممتاز جداً للاستخدام اليومي</td>
+                    </tr>
+                    <tr>
+                        <td><b>تخطي بدون شبكة (No Signal)</b></td>
+                        <td>🔴 Wi-Fi فقط</td>
+                        <td>🟢 تعمل مع حسابك</td>
+                        <td>🟢 طبيعي جداً</td>
+                        <td>مناسب كجهاز ذكي ثانوي</td>
+                    </tr>
+                    <tr>
+                        <td><b>حذف رسمي (Official Remove)</b></td>
+                        <td>🟢 تعمل رسمياً</td>
+                        <td>🟢 رسمية من السيرفر</td>
+                        <td>🟢 دائمة مدى الحياة</td>
+                        <td>الحل الأمثل والأشمل</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- التبويب 4: الضمان والتحميلات -->
+    <div id="tab-tools" class="tab-content">
+        <div class="section-card">
+            <h2><i class="fas fa-file-invoice"></i> <span id="txtReceiptTitle">مولد كارت الاستلام والضمان</span></h2>
+            <div class="form-group">
+                <label>اسم العميل:</label>
+                <input type="text" id="recClientName" class="form-control" placeholder="اسم العميل">
             </div>
-            <div class="download-card">
-                <h5>MTK USB Drivers</h5>
-                <a href="https://androidmtk.com/download-mtk-usb-all-driver" target="_blank">تحميل المباشر</a>
+            <div class="form-group">
+                <label>موديل الجهاز والسيريال:</label>
+                <input type="text" id="recDevice" class="form-control" placeholder="موديل الجهاز + IMEI">
             </div>
-            <div class="download-card">
-                <h5>Qualcomm Drivers</h5>
-                <a href="https://qualcommdriver.com/" target="_blank">تحميل المباشر</a>
+            <div class="form-group">
+                <label>الخدمة المقدمة:</label>
+                <input type="text" id="recService" class="form-control" placeholder="تخطي آيكلود / تفليش / إصلاح IMEI">
             </div>
-            <div class="download-card">
-                <h5>iTunes for Windows</h5>
-                <a href="https://www.apple.com/itunes/" target="_blank">تحميل المباشر</a>
+            <button type="button" class="submit-btn" onclick="generateReceipt()">
+                <i class="fas fa-print"></i> إصدار كارت الضمان الإلكتروني
+            </button>
+            
+            <div id="receiptOutput" class="receipt-output">
+                <h3 style="color:var(--primary); margin-top:0;">إيصال استلام وضمان - Abo Teba</h3>
+                <p><strong>العميل:</strong> <span id="outClient"></span></p>
+                <p><strong>الجهاز:</strong> <span id="outDevice"></span></p>
+                <p><strong>الخدمة:</strong> <span id="outService"></span></p>
+                <p><strong>التاريخ:</strong> <span id="outDate"></span></p>
+                <p style="color:var(--success); font-size:0.85rem;">🔒 نضمن لك استقرار النظام والخدمة المقدمة كلياً.</p>
+                <button class="mode-btn" onclick="window.print()">طباعة الإيصال 🖨️</button>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-download"></i> <span id="txtDownloadTitle">تحميل أدوات وتعاريف السوفت وير</span></h2>
+            <div class="download-grid">
+                <div class="download-card">
+                    <h5>Samsung Drivers</h5>
+                    <a href="https://developer.samsung.com/android-usb-driver" target="_blank">تحميل المباشر</a>
+                </div>
+                <div class="download-card">
+                    <h5>MTK USB Drivers</h5>
+                    <a href="https://androidmtk.com/download-mtk-usb-all-driver" target="_blank">تحميل المباشر</a>
+                </div>
+                <div class="download-card">
+                    <h5>Qualcomm Drivers</h5>
+                    <a href="https://qualcommdriver.com/" target="_blank">تحميل المباشر</a>
+                </div>
+                <div class="download-card">
+                    <h5>iTunes for Windows</h5>
+                    <a href="https://www.apple.com/itunes/" target="_blank">تحميل المباشر</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- معرض الأعمال -->
+    <!-- معرض الأعمال والنتائج -->
     <h2><span id="txtGalleryTitle">معرض الأعمال والخدمات</span></h2>
 
     <div class="filter-container">
@@ -616,223 +709,4 @@
         <div class="card iphone"><img src="9.jpg" onerror="this.onerror=null; this.src='9.png';" onclick="openModal(this.src)"><h3>تخطي ايفون 7 مع اصلاح بيسباند</h3></div>
         <div class="card android"><img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)"><h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3></div>
         <div class="card android"><img src="11.jpg" onerror="this.onerror=null; this.src='11.png';" onclick="openModal(this.src)"><h3>frp سامسونج</h3></div>
-        <div class="card iphone"><img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 8 بدون شبكه</h3></div>
-    </div>
-
-    <!-- شروط الخدمة والضمان -->
-    <div class="why-us" style="margin-bottom: 45px;">
-        <h2><i class="fas fa-file-contract"></i> <span id="txtPolicyTitle">شروط الخدمة والضمان</span></h2>
-        <div style="text-align: right; color: var(--text-sub); line-height: 1.8; font-size: 0.95rem;">
-            <p>✓ نلتزم بالحفاظ الكامل على خصوصية وأمان بياناتك الشخصية المخزنة داخل الجهاز.</p>
-            <p>✓ تتطلب عمليات السوفت وتخطي الحسابات عمل إعادة ضبط مصنع مسبقة للجهاز.</p>
-            <p>✓ نضمن لك كفاءة واستقرار العملية المنفذة مع تقديم الدعم والخدمة الفنية المستمرة بعد التسليم.</p>
-        </div>
-    </div>
-
-    <div class="why-us">
-        <h2><span id="txtWhyTitle">لماذا تختار خدماتنا؟</span></h2>
-        <div class="why-grid">
-            <div class="why-card">
-                <i class="fas fa-bolt"></i>
-                <h4 id="why1T">سرعة وإتقان</h4>
-                <p id="why1D">إنهاء معظم خدمات السوفت وير خلال وقت قياسي وبدقة عالية.</p>
-            </div>
-            <div class="why-card">
-                <i class="fas fa-shield-alt"></i>
-                <h4 id="why2T">أمان تام</h4>
-                <p id="why2D">الحفاظ على سلامة أجهزتك وبياناتك أثناء العمل.</p>
-            </div>
-            <div class="why-card">
-                <i class="fas fa-headset"></i>
-                <h4 id="why3T">دعم متواصل</h4>
-                <p id="why3D">متابعة واستشارات بعد تقديم الخدمة مباشرة لضمان رضاك.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="reviews-section">
-        <h2><span id="txtReviewsTitle">آراء وتقييمات العملاء</span></h2>
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>"سرعة ممتازة في تخطي الآيكلود واشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو طيبة!"</p>
-                <div class="client-name">- بودي</div>
-            </div>
-            <div class="review-card">
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>"خرجت تاب المدرسة من المنظومة في أقل من نص ساعة وبأعلى كفاءة. شغل محترف جداً."</p>
-                <div class="client-name">- زياد مجدي</div>
-            </div>
-            <div class="review-card">
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>"أفضل مكان لخدمات أجهزة شاومي وسامسونج، تعامل راقي ومصداقية عالية."</p>
-                <div class="client-name">- مصطفى علي</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="faq-section">
-        <h2 style="text-align: center;"><span id="txtFaqTitle">الأسئلة الشائعة</span></h2>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>هل يتم مسح البيانات عند عمل السوفت وير أو تخطي الحساب؟</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                حسب نوع الخدمة؛ خدمات تخطي الحسابات (iCloud / FRP) وعمليات التفليش وإزالة الرموز تتطلب عادةً إعادة ضبط الجهاز وتنسيقه، لكن يتم إبلاغك بالتفاصيل كاملة قبل البدء.
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>كم يستغرق وقت تنفيذ الخدمة؟</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                معظم الخدمات العادية وتخطي الحسابات تستغرق من 15 دقيقة إلى ساعتين. والخدمات التي تتطلب سيرفرات أو أجهزة حديثة يتم تحديد الوقت الدقيق لها عند التواصل.
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>هل يوجد ضمان على الخدمات المقدمة؟</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                نعم، نضمن لك استقرار النظام والخدمة المطلوبة بعد التسليم مع دعم فني متواصل لأي استفسار.
-            </div>
-        </div>
-    </div>
-
-    <div class="floating-btns">
-        <button onclick="scrollToTop()" class="float-btn back-to-top" id="topBtn" title="للأعلى"><i class="fas fa-arrow-up"></i></button>
-    </div>
-
-    <footer>
-        <div class="visitor-counter">
-            <i class="fas fa-users"></i>
-            <span id="txtVisitorLbl">عدد زيارات الموقع:</span>
-            <span class="counter-number" id="vistorCount">2000</span>
-        </div>
-    </footer>
-
-    <div id="imgModal" class="modal" onclick="closeModal()">
-        <span class="close-btn">&times;</span>
-        <img class="modal-content" id="fullImg">
-    </div>
-
-    <script>
-        let currentLang = 'ar';
-        let isLightMode = false;
-
-        function toggleThemeMode() {
-            isLightMode = !isLightMode;
-            if (isLightMode) {
-                document.body.classList.add('light-theme');
-                document.getElementById('modeToggleBtn').innerText = "🌙 الوضع المظلم";
-                localStorage.setItem('themeMode', 'light');
-            } else {
-                document.body.classList.remove('light-theme');
-                document.getElementById('modeToggleBtn').innerText = "☀️ الوضع الفاتح";
-                localStorage.setItem('themeMode', 'dark');
-            }
-        }
-
-        // فتح الواتساب بطلب الخدمة المحددة من الأقسام
-        function openWaService(serviceName) {
-            const text = `السلام عليكم أبو طيبة، حابب أستفسر عن خدمة: ${serviceName}`;
-            window.open(`https://wa.me/201064721809?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        // تشغيل التشخيص الذكي
-        function runDiagnostic() {
-            const os = document.getElementById('diagOS').value;
-            const issue = document.getElementById('diagIssue').value;
-            const resBox = document.getElementById('diagResult');
-            
-            let message = "";
-            if (os === 'apple' && issue === 'icloud') {
-                message = "💡 <b>التشخيص:</b> يتطلب الخدمة تفليش وتخطي سيرفر أبل أونلاين لتجاوز حساب iCloud مع تفعيل كامل الشبكة والاتصال.";
-            } else if (os === 'android' && issue === 'icloud') {
-                message = "💡 <b>التشخيص:</b> يتطلب الخدمة تفليش وفك حماية Google FRP أو حساب Xiaomi Mi Account بنقرة واحدة.";
-            } else if (issue === 'imei') {
-                message = "💡 <b>التشخيص:</b> يتطلب الخدمة إصلاح ملفات NVRAM / Baseband وإعادة كتابة أرقام IMEI الأصلية السليمة لعودة الشبكة.";
-            } else if (issue === 'mdm') {
-                message = "💡 <b>التشخيص:</b> يتطلب الخدمة الخروج الآمن والرسمي من المنظومة التعليمية وقفل MDM بدون مشاكل مستقبلاً.";
-            } else {
-                message = "💡 <b>التشخيص:</b> يتطلب الجهاز عمل سوفت وير كامل وإعادة ضبط مصنع مع فك الرمز وتجاوز الحماية.";
-            }
-
-            resBox.style.display = 'block';
-            resBox.innerHTML = message + `<br><br><a href="https://wa.me/201064721809?text=${encodeURIComponent('السلام عليكم، استفسرت عبر مساعد التشخيص في الموقع بخصوص مشكلة: ' + issue)}" target="_blank" class="submit-btn" style="text-decoration:none; display:inline-flex; width:auto; padding:10px 20px; margin:0 auto;"><i class="fab fa-whatsapp"></i> اطلب الخدمة فوراً لهذه المشكلة</a>`;
-        }
-
-        // مولد كروت الاستلام
-        function generateReceipt() {
-            const client = document.getElementById('recClientName').value || "عميل كريم";
-            const device = document.getElementById('recDevice').value || "غير محدد";
-            const service = document.getElementById('recService').value || "خدمة سوفت وير";
-
-            document.getElementById('outClient').innerText = client;
-            document.getElementById('outDevice').innerText = device;
-            document.getElementById('outService').innerText = service;
-            document.getElementById('outDate').innerText = new Date().toLocaleDateString('ar-EG');
-
-            document.getElementById('receiptOutput').style.display = 'block';
-        }
-
-        // التبديل بين اللغتين العربي والإنجليزي
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.documentElement.lang = currentLang;
-
-            if (currentLang === 'en') {
-                document.getElementById('langToggleBtn').innerText = "عربي";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
-                document.getElementById('txtSupportStatus').innerText = "Live Support: 24/7 Available";
-                document.getElementById('txtSubHeading').innerText = "The First Choice for Mobile Software Solutions";
-                document.getElementById('btnWa').innerText = "Direct WhatsApp";
-                document.getElementById('btnFb').innerText = "Facebook Page";
-                document.getElementById('btnTg').innerText = "Telegram Channel";
-                document.getElementById('btnIg').innerText = "Instagram";
-                document.getElementById('txtDiagTitle').innerText = "Smart Troubleshooting Assistant";
-                document.getElementById('txtReceiptTitle').innerText = "Warranty & Receipt Generator";
-                document.getElementById('txtDownloadTitle').innerText = "Download Software Drivers & Tools";
-                document.getElementById('txtGalleryTitle').innerText = "Work Portfolio & Services";
-                document.getElementById('txtPolicyTitle').innerText = "Terms of Service & Warranty";
-                document.getElementById('txtWhyTitle').innerText = "Why Choose Our Services?";
-                document.getElementById('txtReviewsTitle').innerText = "Client Reviews";
-                document.getElementById('txtFaqTitle').innerText = "Frequently Asked Questions";
-                document.getElementById('txtVisitorLbl').innerText = "Total Visits:";
-            } else {
-                document.getElementById('langToggleBtn').innerText = "English";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
-                document.getElementById('txtSupportStatus').innerText = "الدعم الفني: متاح 24/7 ساعة";
-                document.getElementById('txtSubHeading').innerText = "الوجهة الأولى لاحتراف خدمات وحلول سوفت وير المحمول";
-                document.getElementById('btnWa').innerText = "واتساب المباشر";
-                document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
-                document.getElementById('btnTg').innerText = "قناة التليجرام";
-                document.getElementById('btnIg').innerText = "إنستجرام";
-                document.getElementById('txtDiagTitle').innerText = "مساعد التشخيص الذكي";
-                document.getElementById('txtReceiptTitle').innerText = "مولد كارت الاستلام والضمان";
-                document.getElementById('txtDownloadTitle').innerText = "تحميل أدوات وتعاريف السوفت وير";
-                document.getElementById('txtGalleryTitle').innerText = "معرض الأعمال والخدمات";
-                document.getElementById('txtPolicyTitle').innerText = "شروط الخدمة والضمان";
-                document.getElementById('txtWhyTitle').innerText = "لماذا تختار خدماتنا؟";
-                document.getElementById('txtReviewsTitle').innerText = "آراء وتقييمات العملاء";
-                document.getElementById('txtFaqTitle').innerText = "الأسئلة الشائعة";
-                document.getElementById('txtVisitorLbl').innerText = "عدد زيارات الموقع:";
-            }
-        }
-
-        function openModal(src) {
-            document.getElementById('fullImg').src = src;
-            document.getElementById('imgModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('imgModal').style.display = 'none';
-        }
-
-        function updateVisitorCount() {
-            let count = localStorage.getItem('visitorCount');
-            if (!count || parseInt(count
+        <div class="card iphone"><img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal
