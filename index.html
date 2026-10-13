@@ -65,7 +65,7 @@
 
         .top-bar-container {
             max-width: 1200px;
-            margin: 0 auto 12px auto;
+            margin: 0 auto 20px auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -74,6 +74,13 @@
             padding: 0 5px;
             flex-wrap: wrap;
             gap: 10px;
+        }
+
+        .top-left-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         /* شارة السيرفر باللون الأخضر الصريح */
@@ -90,6 +97,22 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+        }
+
+        /* شارة الدعم الفني المباشر */
+        .support-status-top {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
         }
         
         .status-dot {
@@ -129,36 +152,6 @@
             border-color: var(--primary);
             color: var(--primary);
         }
-
-        .live-stats-bar {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto 25px auto;
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 14px;
-            padding: 15px 20px;
-            box-sizing: border-box;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            align-items: center;
-            backdrop-filter: blur(15px);
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 10px 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .stat-item i { font-size: 1.6rem; color: var(--primary); }
-        .stat-info { text-align: right; }
-        .stat-info h5 { margin: 0; font-size: 0.85rem; color: var(--text-sub); }
-        .stat-info span { font-size: 1.1rem; font-weight: 900; color: var(--text-main); }
 
         header { 
             background: var(--card-bg); 
@@ -314,40 +307,20 @@
 </head>
 <body>
 
-    <!-- شريط علوي يحتوي فقط على شارة السيرفر أونلاين بلون أخضر دون عبارات إضافية -->
+    <!-- الشريط العلوي المعدل: يجمع شارة السيرفر أونلاين والدعم الفني 24/7 وأزرار الوضع واللغة -->
     <div class="top-bar-container">
-        <div class="server-status-top">
-            <span class="status-dot"></span> <span id="txtServerStatus">SERVER: ONLINE</span>
+        <div class="top-left-status">
+            <div class="server-status-top">
+                <span class="status-dot"></span> <span id="txtServerStatus">SERVER: ONLINE</span>
+            </div>
+            <div class="support-status-top">
+                <i class="fas fa-headset"></i> <span id="txtSupportStatus">الدعم الفني: متاح 24/7 ساعة</span>
+            </div>
         </div>
         
         <div class="top-tools">
             <button class="mode-btn" onclick="toggleThemeMode()" id="modeToggleBtn">☀️ الوضع الفاتح</button>
             <button class="lang-btn" onclick="toggleLanguage()" id="langToggleBtn">English</button>
-        </div>
-    </div>
-
-    <!-- شريط الإحصائيات الحية -->
-    <div class="live-stats-bar">
-        <div class="stat-item">
-            <i class="fas fa-microchip"></i>
-            <div class="stat-info">
-                <h5 id="txtStat1Title">حالة السيرفرات</h5>
-                <span style="color: var(--success);" id="txtStat1Val">مفعلة وتعمل بكفاءة</span>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fas fa-headset"></i>
-            <div class="stat-info">
-                <h5 id="txtStat2Title">الدعم الفني المباشر</h5>
-                <span id="txtStat2Val">متاح 24 / 7 ساعة</span>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fas fa-shield-alt"></i>
-            <div class="stat-info">
-                <h5 id="txtStat3Title">الضمان والأمان</h5>
-                <span style="color: var(--primary);" id="txtStat3Val">حماية تامة للبيانات</span>
-            </div>
         </div>
     </div>
 
@@ -650,6 +623,7 @@
             if (currentLang === 'en') {
                 document.getElementById('langToggleBtn').innerText = "عربي";
                 document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
+                document.getElementById('txtSupportStatus').innerText = "Live Support: 24/7 Available";
                 document.getElementById('txtSubHeading').innerText = "The First Choice for Mobile Software Solutions";
                 document.getElementById('btnWa').innerText = "Direct WhatsApp";
                 document.getElementById('btnFb').innerText = "Facebook Page";
@@ -671,6 +645,7 @@
             } else {
                 document.getElementById('langToggleBtn').innerText = "English";
                 document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
+                document.getElementById('txtSupportStatus').innerText = "الدعم الفني: متاح 24/7 ساعة";
                 document.getElementById('txtSubHeading').innerText = "الوجهة الأولى لاحتراف خدمات وحلول سوفت وير المحمول";
                 document.getElementById('btnWa').innerText = "واتساب المباشر";
                 document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
