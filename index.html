@@ -314,10 +314,10 @@
 </head>
 <body>
 
-    <!-- شريط علوي يجمع حالة السيرفر باللون الأخضر، زر اللغة وزر تبديل الوضع (دارك / أبيض) -->
+    <!-- شريط علوي يحتوي فقط على شارة السيرفر أونلاين بلون أخضر دون عبارات إضافية -->
     <div class="top-bar-container">
         <div class="server-status-top">
-            <span class="status-dot"></span> <span id="txtServerStatus">SERVER: ONLINE (استجابة: 0.1s)</span>
+            <span class="status-dot"></span> <span id="txtServerStatus">SERVER: ONLINE</span>
         </div>
         
         <div class="top-tools">
@@ -486,7 +486,7 @@
         <div class="card iphone"><img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 8 بدون شبكه</h3></div>
     </div>
 
-    <!-- ميزة 4: قسم شروط وسياسة الضمان -->
+    <!-- شروط الخدمة والضمان -->
     <div class="why-us" style="margin-bottom: 45px;">
         <h2><i class="fas fa-file-contract"></i> <span id="txtPolicyTitle">شروط الخدمة والضمان</span></h2>
         <div style="text-align: right; color: var(--text-sub); line-height: 1.8; font-size: 0.95rem;">
@@ -649,7 +649,7 @@
 
             if (currentLang === 'en') {
                 document.getElementById('langToggleBtn').innerText = "عربي";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE (Ping: 0.1s)";
+                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
                 document.getElementById('txtSubHeading').innerText = "The First Choice for Mobile Software Solutions";
                 document.getElementById('btnWa').innerText = "Direct WhatsApp";
                 document.getElementById('btnFb').innerText = "Facebook Page";
@@ -670,7 +670,7 @@
                 document.getElementById('txtVisitorLbl').innerText = "Total Visits:";
             } else {
                 document.getElementById('langToggleBtn').innerText = "English";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE (استجابة: 0.1s)";
+                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
                 document.getElementById('txtSubHeading').innerText = "الوجهة الأولى لاحتراف خدمات وحلول سوفت وير المحمول";
                 document.getElementById('btnWa').innerText = "واتساب المباشر";
                 document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
