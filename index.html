@@ -83,7 +83,6 @@
             flex-wrap: wrap;
         }
 
-        /* شارة السيرفر باللون الأخضر الصريح */
         .server-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -99,7 +98,6 @@
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
         }
 
-        /* شارة الدعم الفني المباشر */
         .support-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -199,17 +197,70 @@
         .tg { background: linear-gradient(135deg, #229ED9, #1b7fad); }
         .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
-        .quick-services {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 18px; max-width: 1200px; margin: 0 auto 35px auto; width: 100%;
+        /* شبكة الأقسام الجديدة - بنفس شكل سيرفرات السوفت وير */
+        .categories-section {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            width: 100%;
         }
-        .service-box {
-            background: var(--card-bg); backdrop-filter: blur(12px); padding: 26px 15px;
-            border-radius: 20px; border: 1px solid var(--border-glow); transition: all 0.35s ease;
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-top: 25px;
         }
-        .service-box:hover { transform: translateY(-8px); border-color: var(--primary); }
-        .service-box i { font-size: 2.5rem; color: var(--primary); margin-bottom: 12px; }
-        .service-box h4 { margin: 0; font-size: 1.05rem; color: var(--text-main); }
+
+        .category-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 18px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            backdrop-filter: blur(12px);
+            text-align: right;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px var(--border-glow);
+        }
+
+        .category-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.98rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .category-info span {
+            font-size: 0.78rem;
+            color: var(--primary);
+            font-weight: 700;
+            display: block;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--border-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
 
         h2 { color: var(--text-main); margin-bottom: 25px; font-weight: 900; font-size: 1.8rem; }
 
@@ -234,7 +285,7 @@
         }
         .submit-btn:hover { transform: translateY(-3px); }
 
-        .diag-result, .receipt-output {
+        .diag-result, .receipt-output, .tracker-output, .price-output {
             margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 16px;
             border: 1px solid var(--primary); display: none; text-align: center;
         }
@@ -307,7 +358,7 @@
 </head>
 <body>
 
-    <!-- الشريط العلوي المعدل: يجمع شارة السيرفر أونلاين والدعم الفني 24/7 وأزرار الوضع واللغة -->
+    <!-- الشريط العلوي -->
     <div class="top-bar-container">
         <div class="top-left-status">
             <div class="server-status-top">
@@ -340,22 +391,131 @@
         </div>
     </header>
 
-    <div class="quick-services">
-        <div class="service-box">
-            <i class="fab fa-apple"></i>
-            <h4 id="serv1">تخطي آيكلود iCloud</h4>
-        </div>
-        <div class="service-box">
-            <i class="fab fa-android"></i>
-            <h4 id="serv2">تخطي حساب جوجل FRP</h4>
-        </div>
-        <div class="service-box">
-            <i class="fas fa-microchip"></i>
-            <h4 id="serv3">إصلاح سيريال وIMEI</h4>
-        </div>
-        <div class="service-box">
-            <i class="fas fa-tablet-alt"></i>
-            <h4 id="serv4">فك أجهزة التابلت</h4>
+    <!-- قسم أقسام السيرفر والخدمات الاحترافية (زي الصورة تماماً) -->
+    <div class="categories-section">
+        <h2><i class="fas fa-th-large"></i> <span>الأقسام والخدمات المتاحة</span></h2>
+        <div class="categories-grid">
+            
+            <div class="category-card" onclick="openWaService('قسم أدوات للإيجار Tools for Rent')">
+                <div class="category-info">
+                    <h4>أدوات للإيجار</h4>
+                    <span>Tools for rent</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-clock"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('قسم التفعيل والكريديت Activation Credit')">
+                <div class="category-info">
+                    <h4>قسم التفعيل والكريديت</h4>
+                    <span>Activation Credit</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-key"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('قسم خدمات التخطي IPHONE IPAD Bypass')">
+                <div class="category-info">
+                    <h4>قسم خدمات التخطي</h4>
+                    <span>IPHONE IPAD Bypass</span>
+                </div>
+                <div class="category-icon"><i class="fab fa-apple"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('خدمات الاتشك IPHONE IPAD CHECK')">
+                <div class="category-info">
+                    <h4>خدمات الاتشك IPHONE</h4>
+                    <span>IPAD CHECK</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-search"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('شبكات الآيفون iPhone Carrier Unlock')">
+                <div class="category-info">
+                    <h4>شبكات الآيفون</h4>
+                    <span>iPhone Carrier Unlock</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-sim-card"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('جميع خدمات إزالة شاومي REMOVE MI ACCOUNT')">
+                <div class="category-info">
+                    <h4>جميع خدمات إزالة شاومي</h4>
+                    <span>REMOVE MI ACCOUNT</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('قسم شحن الألعاب')">
+                <div class="category-info">
+                    <h4>قسم شحن الألعاب</h4>
+                    <span>Game Top-Up</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('HONOR FRP KEY FASTBOOT')">
+                <div class="category-info">
+                    <h4>HONOR FRP KEY</h4>
+                    <span>FASTBOOT</span>
+                </div>
+                <div class="category-icon"><i class="fab fa-android"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('Tecno ID / Infinix ID / Cloud ID Officially')">
+                <div class="category-info">
+                    <h4>خدمات حسابات Tecno / Infinix</h4>
+                    <span>Cloud ID Officially</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-cloud"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('Infinix / Tecno / Itel Official MDM Removal')">
+                <div class="category-info">
+                    <h4>Infinix / Tecno / itel</h4>
+                    <span>Official MDM Removal</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-shield-alt"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('Realme Network Unlock')">
+                <div class="category-info">
+                    <h4>فك شبكات ريلمي</h4>
+                    <span>Realme Network Unlock</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-signal"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('قسم تفعيل البرامج | PC Activation')">
+                <div class="category-info">
+                    <h4>قسم تفعيل البرامج</h4>
+                    <span>PC Activation</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-desktop"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('قسم بطاقات شحن Gift Cards')">
+                <div class="category-info">
+                    <h4>قسم بطاقات شحن</h4>
+                    <span>Gift Cards</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-gift"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('خدمات حساب آيكلود iCloud Account Services')">
+                <div class="category-info">
+                    <h4>خدمات حساب آيكلود</h4>
+                    <span>iCloud Account Services</span>
+                </div>
+                <div class="category-icon"><i class="fab fa-apple"></i></div>
+            </div>
+
+            <div class="category-card" onclick="openWaService('iPads WiFi Only iCloud Remove')">
+                <div class="category-info">
+                    <h4>iPads WiFi Only</h4>
+                    <span>iCloud Remove</span>
+                </div>
+                <div class="category-icon"><i class="fas fa-tablet-alt"></i></div>
+            </div>
+
         </div>
     </div>
 
@@ -563,7 +723,6 @@
         let currentLang = 'ar';
         let isLightMode = false;
 
-        // تبديل بين الدارك مود والوضع الأبيض الفاتح
         function toggleThemeMode() {
             isLightMode = !isLightMode;
             if (isLightMode) {
@@ -575,6 +734,12 @@
                 document.getElementById('modeToggleBtn').innerText = "☀️ الوضع الفاتح";
                 localStorage.setItem('themeMode', 'dark');
             }
+        }
+
+        // فتح الواتساب بطلب الخدمة المحددة من الأقسام
+        function openWaService(serviceName) {
+            const text = `السلام عليكم أبو طيبة، حابب أستفسر عن خدمة: ${serviceName}`;
+            window.open(`https://wa.me/201064721809?text=${encodeURIComponent(text)}`, '_blank');
         }
 
         // تشغيل التشخيص الذكي
@@ -629,10 +794,6 @@
                 document.getElementById('btnFb').innerText = "Facebook Page";
                 document.getElementById('btnTg').innerText = "Telegram Channel";
                 document.getElementById('btnIg').innerText = "Instagram";
-                document.getElementById('serv1').innerText = "Bypass iCloud";
-                document.getElementById('serv2').innerText = "Bypass Google FRP";
-                document.getElementById('serv3').innerText = "IMEI & Baseband Repair";
-                document.getElementById('serv4').innerText = "School Tablet Unlock";
                 document.getElementById('txtDiagTitle').innerText = "Smart Troubleshooting Assistant";
                 document.getElementById('txtReceiptTitle').innerText = "Warranty & Receipt Generator";
                 document.getElementById('txtDownloadTitle').innerText = "Download Software Drivers & Tools";
@@ -651,10 +812,6 @@
                 document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
                 document.getElementById('btnTg').innerText = "قناة التليجرام";
                 document.getElementById('btnIg').innerText = "إنستجرام";
-                document.getElementById('serv1').innerText = "تخطي آيكلود iCloud";
-                document.getElementById('serv2').innerText = "تخطي حساب جوجل FRP";
-                document.getElementById('serv3').innerText = "إصلاح سيريال وIMEI";
-                document.getElementById('serv4').innerText = "فك أجهزة التابلت";
                 document.getElementById('txtDiagTitle').innerText = "مساعد التشخيص الذكي";
                 document.getElementById('txtReceiptTitle').innerText = "مولد كارت الاستلام والضمان";
                 document.getElementById('txtDownloadTitle').innerText = "تحميل أدوات وتعاريف السوفت وير";
@@ -678,66 +835,4 @@
 
         function updateVisitorCount() {
             let count = localStorage.getItem('visitorCount');
-            if (!count || parseInt(count) < 2000) {
-                count = 2000;
-            } else {
-                count = parseInt(count) + 1;
-            }
-            localStorage.setItem('visitorCount', count);
-            document.getElementById('vistorCount').innerText = count;
-        }
-
-        window.onload = function() {
-            updateVisitorCount();
-            const savedMode = localStorage.getItem('themeMode');
-            if (savedMode === 'light') {
-                toggleThemeMode();
-            }
-            runDiagnostic();
-        };
-
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
-            
-            if (answer.style.display === "block") {
-                answer.style.display = "none";
-                icon.className = "fas fa-chevron-down";
-            } else {
-                answer.style.display = "block";
-                icon.className = "fas fa-chevron-up";
-            }
-        }
-
-        function filterGallery(category) {
-            const cards = document.querySelectorAll('.grid .card');
-            const btns = document.querySelectorAll('.filter-btn');
-            
-            btns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        window.onscroll = function() {
-            const topBtn = document.getElementById("topBtn");
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                topBtn.style.display = "flex";
-            } else {
-                topBtn.style.display = "none";
-            }
-        };
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
-
-</body>
-</html>
+            if (!count || parseInt(count
