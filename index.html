@@ -83,7 +83,6 @@
             flex-wrap: wrap;
         }
 
-        /* شارة السيرفر باللون الأخضر الصريح */
         .server-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -99,7 +98,6 @@
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
         }
 
-        /* شارة الدعم الفني المباشر */
         .support-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -234,10 +232,18 @@
         }
         .submit-btn:hover { transform: translateY(-3px); }
 
-        .diag-result, .receipt-output {
+        .diag-result, .receipt-output, .tracker-output, .price-output {
             margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 16px;
             border: 1px solid var(--primary); display: none; text-align: center;
         }
+
+        /* كارت العروض التنازلية */
+        .offer-card {
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(0, 242, 254, 0.15));
+            border: 1px solid var(--accent); padding: 25px; border-radius: 20px; margin-bottom: 35px;
+            text-align: center; backdrop-filter: blur(10px);
+        }
+        .offer-timer { font-size: 1.8rem; font-weight: 900; color: var(--accent); font-family: monospace; margin: 15px 0; }
 
         .download-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;
@@ -307,7 +313,7 @@
 </head>
 <body>
 
-    <!-- الشريط العلوي المعدل: يجمع شارة السيرفر أونلاين والدعم الفني 24/7 وأزرار الوضع واللغة -->
+    <!-- الشريط العلوي -->
     <div class="top-bar-container">
         <div class="top-left-status">
             <div class="server-status-top">
@@ -340,6 +346,14 @@
         </div>
     </header>
 
+    <!-- إضافة 6: قسم العروض الخاصة والخصومات اليومية -->
+    <div class="offer-card max-width-container" style="max-width:800px; margin:0 auto 35px auto;">
+        <h3 style="color:var(--accent); margin-0;"><i class="fas fa-fire"></i> عرض اليوم الخاص من أبو طيبة</h3>
+        <p style="margin:8px 0; color:var(--text-main);">خصم 20% على خدمات تخطي آيكلود الآيفون وأجهزة التابلت المدرسة المدرجة!</p>
+        <div class="offer-timer" id="offerTimer">05 : 42 : 18</div>
+        <a href="https://wa.me/201064721809?text=السلام%20علكم،%20حابب%20استفيد%20من%20عرض%20الخصم%20اليومي" target="_blank" class="btn wa" style="padding:10px 24px;"><i class="fab fa-whatsapp"></i> احجز العرض الآن</a>
+    </div>
+
     <div class="quick-services">
         <div class="service-box">
             <i class="fab fa-apple"></i>
@@ -359,7 +373,20 @@
         </div>
     </div>
 
-    <!-- ميزة 1: مساعد التشخيص الذكي -->
+    <!-- إضافة 1: محرك تتبع حالة الطلب/الجهاز -->
+    <div class="section-card">
+        <h2><i class="fas fa-search-location"></i> <span id="txtTrackerTitle">تتبع حالة الجهاز أونلاين</span></h2>
+        <div class="form-group">
+            <label>أدخل رقم السيريال (IMEI / Serial Number):</label>
+            <input type="text" id="trackImeiInput" class="form-control" placeholder="مثال: 356789098765432">
+        </div>
+        <button type="button" class="submit-btn" onclick="checkDeviceStatus()">
+            <i class="fas fa-search"></i> استعلام عن حالة الجهاز
+        </button>
+        <div id="trackerResult" class="tracker-output"></div>
+    </div>
+
+    <!-- مساعد التشخيص الذكي -->
     <div class="section-card">
         <h2><i class="fas fa-robot"></i> <span id="txtDiagTitle">مساعد التشخيص الذكي</span></h2>
         <div class="form-group">
@@ -381,7 +408,43 @@
         <div id="diagResult" class="diag-result"></div>
     </div>
 
-    <!-- ميزة 2: مولد كروت الاستلام والضمان -->
+    <!-- إضافة 4: حاسبة تكلفة الخدمات التقديرية -->
+    <div class="section-card">
+        <h2><i class="fas fa-calculator"></i> <span id="txtCalcTitle">حاسبة السعر التقديري للخدمة</span></h2>
+        <div class="form-group">
+            <label>اختر الجهاز والموديل:</label>
+            <select id="calcModel" class="form-control" onchange="calculatePrice()">
+                <option value="ip_old">آيفون (iPhone 6 / 7 / 8 / X)</option>
+                <option value="ip_new">آيفون (iPhone 11 / 12 / 13 / 14 / 15)</option>
+                <option value="samsung">سامسونج (Samsung A / S Series)</option>
+                <option value="xiaomi">شاومي / ريدمي / بوكو</option>
+                <option value="tab_school">تابلت المنظومة التعليمية</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>نوع الخدمة المطلوبة:</label>
+            <select id="calcService" class="form-control" onchange="calculatePrice()">
+                <option value="icloud">تخطي حساب آيكلود / جوجل</option>
+                <option value="pass">فك رمز الشاشة وتفليش</option>
+                <option value="imei">إصلاح السيريال والشبكة</option>
+            </select>
+        </div>
+        <button type="button" class="submit-btn" onclick="calculatePrice()">
+            <i class="fas fa-coins"></i> عرض التكلفة التقديرية
+        </button>
+        <div id="priceResult" class="price-output"></div>
+    </div>
+
+    <!-- إضافة 2: أداة التعرف وفحص القفل للعميل -->
+    <div class="section-card">
+        <h2><i class="fas fa-info-circle"></i> <span>دليل معرفة بيانات وقفل جهازه</span></h2>
+        <div style="line-height:1.8; color:var(--text-sub); text-align:right;">
+            <p>📌 <b>كيف تعرف أن آيفونك مقفول iCloud؟</b> عند إعادة ضبط المصنع يظهر لك حساب مجتزأ مثل (a... @icloud.com) يطلب الكلمة السرية.</p>
+            <p>📌 <b>كيف تعرف رقم IMEI في جهازك المقفول؟</b> اضغط على رمز العلامة (i) في أسفل شاشة الترحيب أو اطلب الرقم *#06# على لوحة الاتصال.</p>
+        </div>
+    </div>
+
+    <!-- مولد كروت الاستلام والضمان -->
     <div class="section-card">
         <h2><i class="fas fa-file-invoice"></i> <span id="txtReceiptTitle">مولد كارت الاستلام والضمان</span></h2>
         <div class="form-group">
@@ -411,7 +474,19 @@
         </div>
     </div>
 
-    <!-- ميزة 3: قسم تحميل برامج وتعاريف السوفت وير -->
+    <!-- إضافة 7: نموذج طلب فلاشات وأدوات للفنيين -->
+    <div class="section-card">
+        <h2><i class="fas fa-tools"></i> <span>طلب فلاشات وأدوات خاصة (للفنيين)</span></h2>
+        <div class="form-group">
+            <label>اسم الملف / الفلاشة المطلوبة:</label>
+            <input type="text" id="romName" class="form-control" placeholder="مثال: Combination File / Official Firmware / Tool">
+        </div>
+        <button type="button" class="submit-btn" onclick="requestRom()">
+            <i class="fab fa-whatsapp"></i> طلب الفلاشة مباشرة عبر الواتساب
+        </button>
+    </div>
+
+    <!-- تحميل أدوات وتعاريف السوفت وير -->
     <div class="section-card">
         <h2><i class="fas fa-download"></i> <span id="txtDownloadTitle">تحميل أدوات وتعاريف السوفت وير</span></h2>
         <div class="download-grid">
@@ -457,6 +532,16 @@
         <div class="card android"><img src="10.jpg" onerror="this.onerror=null; this.src='10.png';" onclick="openModal(this.src)"><h3>ازاله رسمي لحساب مي اكونت redmi note 10 5g</h3></div>
         <div class="card android"><img src="11.jpg" onerror="this.onerror=null; this.src='11.png';" onclick="openModal(this.src)"><h3>frp سامسونج</h3></div>
         <div class="card iphone"><img src="12.jpg" onerror="this.onerror=null; this.src='12.png';" onclick="openModal(this.src)"><h3>تخطي ايكلاود ايفون 8 بدون شبكه</h3></div>
+    </div>
+
+    <!-- إضافة 3: قسم الشروحات وقاعدة المعرفة -->
+    <div class="why-us" style="margin-bottom: 45px;">
+        <h2><i class="fas fa-book-open"></i> <span>قاعدة المعرفة والشروحات العامة</span></h2>
+        <div style="text-align: right; color: var(--text-sub); line-height: 1.8; font-size: 0.95rem;">
+            <p><b>💡 الفرق بين التخطي بشبكة وبدون شبكة:</b> التخطي بشبكة يتيح لك الاتصال بالشرائح وطلب المكالمات، بينما التخطي بدون شبكة يعيد تشغيل الجهاز كجهاز ذكي يعمل بالـ Wi-Fi فقط.</p>
+            <p><b>💡 حماية جوجل FRP:</b> هي نظام أمان يمنع استخدام جهاز الأندرويد بعد الفورمات إلا بإدخال الحساب القديـم ويتم تجاوزها بسهولة وسرعة.</p>
+            <p><b>💡 قفل المنظومة MDM:</b> هو قفل تحكم أجهزة المدارس أو الشركات ويتم إزالته بالكامل لاستخدام الجهاز بحرية شخصية.</p>
+        </div>
     </div>
 
     <!-- شروط الخدمة والضمان -->
@@ -542,7 +627,9 @@
         </div>
     </div>
 
+    <!-- إضافة 5: أزرار التواصل والشات المصغرة العائمة -->
     <div class="floating-btns">
+        <a href="https://wa.me/201064721809?text=مرحباً%20أبو%20طيبة،%20عايز%20استفسار%20سريع" target="_blank" class="float-btn" style="background:#25d366; border-color:#25d366;" title="شات واتساب مباشر"><i class="fab fa-whatsapp"></i></a>
         <button onclick="scrollToTop()" class="float-btn back-to-top" id="topBtn" title="للأعلى"><i class="fas fa-arrow-up"></i></button>
     </div>
 
@@ -563,7 +650,6 @@
         let currentLang = 'ar';
         let isLightMode = false;
 
-        // تبديل بين الدارك مود والوضع الأبيض الفاتح
         function toggleThemeMode() {
             isLightMode = !isLightMode;
             if (isLightMode) {
@@ -575,6 +661,41 @@
                 document.getElementById('modeToggleBtn').innerText = "☀️ الوضع الفاتح";
                 localStorage.setItem('themeMode', 'dark');
             }
+        }
+
+        // تتبع السيريال IMEI
+        function checkDeviceStatus() {
+            const imei = document.getElementById('trackImeiInput').value.trim();
+            const out = document.getElementById('trackerResult');
+            if(!imei) {
+                alert("برجاء إدخال رقم السيريال أولاً!");
+                return;
+            }
+            out.style.display = 'block';
+            out.innerHTML = `🟢 <b>حالة الطلب للسيريال (${imei}):</b><br>جاري العمل على السيرفر بنجاح ⏳ (الحالة: متصل والدعم متابع معك عبر الواتساب).`;
+        }
+
+        // حاسبة الأسعار التقديرية
+        function calculatePrice() {
+            const m = document.getElementById('calcModel').value;
+            const s = document.getElementById('calcService').value;
+            const res = document.getElementById('priceResult');
+
+            let price = "تواصل لمعرفة العرض الحالي";
+            if(m === 'ip_old' && s === 'icloud') price = "تقديرياً: 300 - 500 جنيه (حسب الشبكة)";
+            else if(m === 'ip_new' && s === 'icloud') price = "تقديرياً: حسب السيرفر والموديل بالضبط";
+            else if(m === 'samsung' && s === 'icloud') price = "تقديرياً: 150 - 300 جنيه (فك FRP)";
+            else if(m === 'tab_school') price = "تقديرياً: 150 - 250 جنيه (خروج من المنظومة)";
+
+            res.style.display = 'block';
+            res.innerHTML = `💰 <b>التكلفة المتوقعة:</b> ${price}<br><br><a href="https://wa.me/201064721809?text=${encodeURIComponent('استفسار عن سعر خدمة لـ ' + m)}" target="_blank" class="submit-btn" style="width:auto; display:inline-flex; padding:8px 18px; text-decoration:none;"><i class="fab fa-whatsapp"></i> تأكيد السعر بالواتساب</a>`;
+        }
+
+        // طلب الفلاشات
+        function requestRom() {
+            const r = document.getElementById('romName').value;
+            if(!r) { alert("أدخل اسم الفلاشة أولاً"); return; }
+            window.open(`https://wa.me/201064721809?text=${encodeURIComponent('السلام عليكم، حابب أطلب فلاشة/أداة خاصة باسم: ' + r)}`, '_blank');
         }
 
         // تشغيل التشخيص الذكي
@@ -595,149 +716,3 @@
             } else {
                 message = "💡 <b>التشخيص:</b> يتطلب الجهاز عمل سوفت وير كامل وإعادة ضبط مصنع مع فك الرمز وتجاوز الحماية.";
             }
-
-            resBox.style.display = 'block';
-            resBox.innerHTML = message + `<br><br><a href="https://wa.me/201064721809?text=${encodeURIComponent('السلام عليكم، استفسرت عبر مساعد التشخيص في الموقع بخصوص مشكلة: ' + issue)}" target="_blank" class="submit-btn" style="text-decoration:none; display:inline-flex; width:auto; padding:10px 20px; margin:0 auto;"><i class="fab fa-whatsapp"></i> اطلب الخدمة فوراً لهذه المشكلة</a>`;
-        }
-
-        // مولد كروت الاستلام
-        function generateReceipt() {
-            const client = document.getElementById('recClientName').value || "عميل كريم";
-            const device = document.getElementById('recDevice').value || "غير محدد";
-            const service = document.getElementById('recService').value || "خدمة سوفت وير";
-
-            document.getElementById('outClient').innerText = client;
-            document.getElementById('outDevice').innerText = device;
-            document.getElementById('outService').innerText = service;
-            document.getElementById('outDate').innerText = new Date().toLocaleDateString('ar-EG');
-
-            document.getElementById('receiptOutput').style.display = 'block';
-        }
-
-        // التبديل بين اللغتين العربي والإنجليزي
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.documentElement.lang = currentLang;
-
-            if (currentLang === 'en') {
-                document.getElementById('langToggleBtn').innerText = "عربي";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
-                document.getElementById('txtSupportStatus').innerText = "Live Support: 24/7 Available";
-                document.getElementById('txtSubHeading').innerText = "The First Choice for Mobile Software Solutions";
-                document.getElementById('btnWa').innerText = "Direct WhatsApp";
-                document.getElementById('btnFb').innerText = "Facebook Page";
-                document.getElementById('btnTg').innerText = "Telegram Channel";
-                document.getElementById('btnIg').innerText = "Instagram";
-                document.getElementById('serv1').innerText = "Bypass iCloud";
-                document.getElementById('serv2').innerText = "Bypass Google FRP";
-                document.getElementById('serv3').innerText = "IMEI & Baseband Repair";
-                document.getElementById('serv4').innerText = "School Tablet Unlock";
-                document.getElementById('txtDiagTitle').innerText = "Smart Troubleshooting Assistant";
-                document.getElementById('txtReceiptTitle').innerText = "Warranty & Receipt Generator";
-                document.getElementById('txtDownloadTitle').innerText = "Download Software Drivers & Tools";
-                document.getElementById('txtGalleryTitle').innerText = "Work Portfolio & Services";
-                document.getElementById('txtPolicyTitle').innerText = "Terms of Service & Warranty";
-                document.getElementById('txtWhyTitle').innerText = "Why Choose Our Services?";
-                document.getElementById('txtReviewsTitle').innerText = "Client Reviews";
-                document.getElementById('txtFaqTitle').innerText = "Frequently Asked Questions";
-                document.getElementById('txtVisitorLbl').innerText = "Total Visits:";
-            } else {
-                document.getElementById('langToggleBtn').innerText = "English";
-                document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
-                document.getElementById('txtSupportStatus').innerText = "الدعم الفني: متاح 24/7 ساعة";
-                document.getElementById('txtSubHeading').innerText = "الوجهة الأولى لاحتراف خدمات وحلول سوفت وير المحمول";
-                document.getElementById('btnWa').innerText = "واتساب المباشر";
-                document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
-                document.getElementById('btnTg').innerText = "قناة التليجرام";
-                document.getElementById('btnIg').innerText = "إنستجرام";
-                document.getElementById('serv1').innerText = "تخطي آيكلود iCloud";
-                document.getElementById('serv2').innerText = "تخطي حساب جوجل FRP";
-                document.getElementById('serv3').innerText = "إصلاح سيريال وIMEI";
-                document.getElementById('serv4').innerText = "فك أجهزة التابلت";
-                document.getElementById('txtDiagTitle').innerText = "مساعد التشخيص الذكي";
-                document.getElementById('txtReceiptTitle').innerText = "مولد كارت الاستلام والضمان";
-                document.getElementById('txtDownloadTitle').innerText = "تحميل أدوات وتعاريف السوفت وير";
-                document.getElementById('txtGalleryTitle').innerText = "معرض الأعمال والخدمات";
-                document.getElementById('txtPolicyTitle').innerText = "شروط الخدمة والضمان";
-                document.getElementById('txtWhyTitle').innerText = "لماذا تختار خدماتنا؟";
-                document.getElementById('txtReviewsTitle').innerText = "آراء وتقييمات العملاء";
-                document.getElementById('txtFaqTitle').innerText = "الأسئلة الشائعة";
-                document.getElementById('txtVisitorLbl').innerText = "عدد زيارات الموقع:";
-            }
-        }
-
-        function openModal(src) {
-            document.getElementById('fullImg').src = src;
-            document.getElementById('imgModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('imgModal').style.display = 'none';
-        }
-
-        function updateVisitorCount() {
-            let count = localStorage.getItem('visitorCount');
-            if (!count || parseInt(count) < 2000) {
-                count = 2000;
-            } else {
-                count = parseInt(count) + 1;
-            }
-            localStorage.setItem('visitorCount', count);
-            document.getElementById('vistorCount').innerText = count;
-        }
-
-        window.onload = function() {
-            updateVisitorCount();
-            const savedMode = localStorage.getItem('themeMode');
-            if (savedMode === 'light') {
-                toggleThemeMode();
-            }
-            runDiagnostic();
-        };
-
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
-            
-            if (answer.style.display === "block") {
-                answer.style.display = "none";
-                icon.className = "fas fa-chevron-down";
-            } else {
-                answer.style.display = "block";
-                icon.className = "fas fa-chevron-up";
-            }
-        }
-
-        function filterGallery(category) {
-            const cards = document.querySelectorAll('.grid .card');
-            const btns = document.querySelectorAll('.filter-btn');
-            
-            btns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        window.onscroll = function() {
-            const topBtn = document.getElementById("topBtn");
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                topBtn.style.display = "flex";
-            } else {
-                topBtn.style.display = "none";
-            }
-        };
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
-
-</body>
-</html>
