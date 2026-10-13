@@ -76,7 +76,7 @@
             gap: 10px;
         }
 
-        /* شارة السيرفر باللون الأخضر الصريح */
+        /* شارة السيرفر */
         .server-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -130,6 +130,75 @@
             color: var(--primary);
         }
 
+        /* شريط الأخبار والتحديثات المتحرك الجديد */
+        .news-ticker-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto 20px auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            padding: 6px 10px;
+            box-sizing: border-box;
+        }
+
+        .news-label {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: #ffffff;
+            font-weight: 900;
+            padding: 8px 16px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            box-shadow: 0 0 15px var(--accent);
+            z-index: 2;
+        }
+
+        .news-ticker {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            position: relative;
+        }
+
+        .news-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: tickerScroll 25s linear infinite;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .news-content span {
+            margin: 0 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-content i {
+            color: var(--primary);
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .news-ticker-container:hover .news-content {
+            animation-play-state: paused;
+        }
+
+        /* شريط الإحصائيات الحية */
         .live-stats-bar {
             max-width: 1200px;
             width: 100%;
@@ -241,7 +310,7 @@
         }
         .submit-btn:hover { transform: translateY(-3px); }
 
-        .diag-result, .receipt-output {
+        .diag-result {
             margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 16px;
             border: 1px solid var(--primary); display: none; text-align: center;
         }
@@ -314,7 +383,7 @@
 </head>
 <body>
 
-    <!-- شريط علوي يحتوي فقط على شارة السيرفر أونلاين بلون أخضر دون عبارات إضافية -->
+    <!-- الشريط العلوي -->
     <div class="top-bar-container">
         <div class="server-status-top">
             <span class="status-dot"></span> <span id="txtServerStatus">SERVER: ONLINE</span>
@@ -323,6 +392,21 @@
         <div class="top-tools">
             <button class="mode-btn" onclick="toggleThemeMode()" id="modeToggleBtn">☀️ الوضع الفاتح</button>
             <button class="lang-btn" onclick="toggleLanguage()" id="langToggleBtn">English</button>
+        </div>
+    </div>
+
+    <!-- شريط الأخبار والتحديثات المباشر -->
+    <div class="news-ticker-container">
+        <div class="news-label">
+            <i class="fas fa-bullhorn"></i> <span id="txtNewsLabel">التحديثات:</span>
+        </div>
+        <div class="news-ticker">
+            <div class="news-content" id="newsTickerContent">
+                <span><i class="fas fa-check-circle"></i> تم تحديث سيرفرات تخطي الآيكلود وآيفون 16 بكفاءة عالية.</span>
+                <span><i class="fas fa-bolt"></i> خروج تابلت المدرسة T509 و X216B من المنظومة خلال دقائق.</span>
+                <span><i class="fas fa-shield-alt"></i> إزالة حسابات شاومي Mi Account ومي أكونت أونلاين فوراً.</span>
+                <span><i class="fas fa-headset"></i> الدعم الفني متواجد ومتاح معك 24 ساعة طوال الأسبوع.</span>
+            </div>
         </div>
     </div>
 
@@ -408,37 +492,7 @@
         <div id="diagResult" class="diag-result"></div>
     </div>
 
-    <!-- ميزة 2: مولد كروت الاستلام والضمان -->
-    <div class="section-card">
-        <h2><i class="fas fa-file-invoice"></i> <span id="txtReceiptTitle">مولد كارت الاستلام والضمان</span></h2>
-        <div class="form-group">
-            <label>اسم العميل:</label>
-            <input type="text" id="recClientName" class="form-control" placeholder="اسم العميل">
-        </div>
-        <div class="form-group">
-            <label>موديل الجهاز والسيريال:</label>
-            <input type="text" id="recDevice" class="form-control" placeholder="موديل الجهاز + IMEI">
-        </div>
-        <div class="form-group">
-            <label>الخدمة المقدمة:</label>
-            <input type="text" id="recService" class="form-control" placeholder="تخطي آيكلود / تفليش / إصلاح IMEI">
-        </div>
-        <button type="button" class="submit-btn" onclick="generateReceipt()">
-            <i class="fas fa-print"></i> إصدار كارت الضمان الإلكتروني
-        </button>
-        
-        <div id="receiptOutput" class="receipt-output">
-            <h3 style="color:var(--primary); margin-top:0;">إيصال استلام وضمان - Abo Teba</h3>
-            <p><strong>العميل:</strong> <span id="outClient"></span></p>
-            <p><strong>الجهاز:</strong> <span id="outDevice"></span></p>
-            <p><strong>الخدمة:</strong> <span id="outService"></span></p>
-            <p><strong>التاريخ:</strong> <span id="outDate"></span></p>
-            <p style="color:var(--success); font-size:0.85rem;">🔒 نضمن لك استقرار النظام والخدمة المقدمة كلياً.</p>
-            <button class="mode-btn" onclick="window.print()">طباعة الإيصال 🖨️</button>
-        </div>
-    </div>
-
-    <!-- ميزة 3: قسم تحميل برامج وتعاريف السوفت وير -->
+    <!-- ميزة 2: قسم تحميل برامج وتعاريف السوفت وير -->
     <div class="section-card">
         <h2><i class="fas fa-download"></i> <span id="txtDownloadTitle">تحميل أدوات وتعاريف السوفت وير</span></h2>
         <div class="download-grid">
@@ -522,7 +576,7 @@
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>"سرعة ممتازة في تخطي الآيكلود واشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو طيبة!"</p>
+                <p>"سرعة ممتازة في تخطي الآيكلود وااشتغلت الشبكة بدون أي مشاكل، تسلم إيدك يا أبو طيبة!"</p>
                 <div class="client-name">- بودي</div>
             </div>
             <div class="review-card">
@@ -627,20 +681,6 @@
             resBox.innerHTML = message + `<br><br><a href="https://wa.me/201064721809?text=${encodeURIComponent('السلام عليكم، استفسرت عبر مساعد التشخيص في الموقع بخصوص مشكلة: ' + issue)}" target="_blank" class="submit-btn" style="text-decoration:none; display:inline-flex; width:auto; padding:10px 20px; margin:0 auto;"><i class="fab fa-whatsapp"></i> اطلب الخدمة فوراً لهذه المشكلة</a>`;
         }
 
-        // مولد كروت الاستلام
-        function generateReceipt() {
-            const client = document.getElementById('recClientName').value || "عميل كريم";
-            const device = document.getElementById('recDevice').value || "غير محدد";
-            const service = document.getElementById('recService').value || "خدمة سوفت وير";
-
-            document.getElementById('outClient').innerText = client;
-            document.getElementById('outDevice').innerText = device;
-            document.getElementById('outService').innerText = service;
-            document.getElementById('outDate').innerText = new Date().toLocaleDateString('ar-EG');
-
-            document.getElementById('receiptOutput').style.display = 'block';
-        }
-
         // التبديل بين اللغتين العربي والإنجليزي
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
@@ -650,6 +690,7 @@
             if (currentLang === 'en') {
                 document.getElementById('langToggleBtn').innerText = "عربي";
                 document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
+                document.getElementById('txtNewsLabel').innerText = "Updates:";
                 document.getElementById('txtSubHeading').innerText = "The First Choice for Mobile Software Solutions";
                 document.getElementById('btnWa').innerText = "Direct WhatsApp";
                 document.getElementById('btnFb').innerText = "Facebook Page";
@@ -660,7 +701,6 @@
                 document.getElementById('serv3').innerText = "IMEI & Baseband Repair";
                 document.getElementById('serv4').innerText = "School Tablet Unlock";
                 document.getElementById('txtDiagTitle').innerText = "Smart Troubleshooting Assistant";
-                document.getElementById('txtReceiptTitle').innerText = "Warranty & Receipt Generator";
                 document.getElementById('txtDownloadTitle').innerText = "Download Software Drivers & Tools";
                 document.getElementById('txtGalleryTitle').innerText = "Work Portfolio & Services";
                 document.getElementById('txtPolicyTitle').innerText = "Terms of Service & Warranty";
@@ -671,6 +711,7 @@
             } else {
                 document.getElementById('langToggleBtn').innerText = "English";
                 document.getElementById('txtServerStatus').innerText = "SERVER: ONLINE";
+                document.getElementById('txtNewsLabel').innerText = "التحديثات:";
                 document.getElementById('txtSubHeading').innerText = "الوجهة الأولى لاحتراف خدمات وحلول سوفت وير المحمول";
                 document.getElementById('btnWa').innerText = "واتساب المباشر";
                 document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
@@ -681,7 +722,6 @@
                 document.getElementById('serv3').innerText = "إصلاح سيريال وIMEI";
                 document.getElementById('serv4').innerText = "فك أجهزة التابلت";
                 document.getElementById('txtDiagTitle').innerText = "مساعد التشخيص الذكي";
-                document.getElementById('txtReceiptTitle').innerText = "مولد كارت الاستلام والضمان";
                 document.getElementById('txtDownloadTitle').innerText = "تحميل أدوات وتعاريف السوفت وير";
                 document.getElementById('txtGalleryTitle').innerText = "معرض الأعمال والخدمات";
                 document.getElementById('txtPolicyTitle').innerText = "شروط الخدمة والضمان";
