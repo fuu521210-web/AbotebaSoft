@@ -19,7 +19,6 @@
             --text-sub: #a0aec0;
         }
 
-        /* الثيم الفاتح */
         body.light-theme {
             --primary: #0284c7;
             --secondary: #0ea5e9;
@@ -83,7 +82,6 @@
             flex-wrap: wrap;
         }
 
-        /* شارة السيرفر */
         .server-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -99,7 +97,6 @@
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
         }
 
-        /* شارة الدعم الفني */
         .support-status-top {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -231,8 +228,9 @@
             width: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #000; padding: 16px;
             border: none; border-radius: 16px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s;
+            text-decoration: none;
         }
-        .submit-btn:hover { transform: translateY(-3px); }
+        .submit-btn:hover { transform: translateY(-3px); opacity: 0.95; }
 
         .diag-result {
             margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 16px;
@@ -250,7 +248,9 @@
         .download-card a {
             display: inline-block; padding: 8px 16px; background: var(--primary); color: #000;
             text-decoration: none; font-weight: bold; border-radius: 20px; font-size: 0.85rem;
+            transition: all 0.3s;
         }
+        .download-card a:hover { transform: scale(1.05); }
 
         .filter-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
         .filter-btn {
@@ -263,14 +263,17 @@
         .card { 
             background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border-glow); 
             border-radius: 22px; padding: 22px; margin-bottom: 30px; box-sizing: border-box; display: block;
+            transition: transform 0.4s ease, opacity 0.4s ease;
         }
-        .card img { width: 100%; height: 390px; object-fit: cover; border-radius: 16px; cursor: pointer; background: #111; }
+        .card img { width: 100%; height: 390px; object-fit: cover; border-radius: 16px; cursor: pointer; background: #111; transition: transform 0.3s; }
+        .card img:hover { transform: scale(1.02); }
         .card h3 { font-size: 1.2rem; margin-top: 18px; color: var(--primary); font-weight: 700; line-height: 1.4; }
 
         .why-us, .reviews-section, .faq-section { max-width: 1200px; margin: 45px auto 0 auto; width: 100%; box-sizing: border-box; }
         .why-us { background: var(--card-bg); backdrop-filter: blur(12px); padding: 45px 30px; border-radius: 28px; border: 1px solid var(--border-glow); }
         .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-top: 25px; }
-        .why-card { text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 18px; border: 1px solid var(--border-glow); }
+        .why-card { text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 18px; border: 1px solid var(--border-glow); transition: transform 0.3s; }
+        .why-card:hover { transform: translateY(-5px); }
         .why-card i { font-size: 2.8rem; color: var(--success); margin-bottom: 15px; }
         .why-card h4 { margin: 0 0 8px 0; color: var(--primary); font-size: 1.15rem; }
         .why-card p { margin: 0; color: var(--text-sub); font-size: 0.95rem; }
@@ -290,8 +293,10 @@
         .float-btn {
             width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
             color: #fff; font-size: 1.35rem; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer; border: 1px solid var(--border-glow);
+            background: var(--primary); color: #000; transition: transform 0.3s;
         }
-        .back-to-top { background: var(--accent); border-color: var(--accent); display: none; }
+        .float-btn:hover { transform: scale(1.1); }
+        .back-to-top { background: var(--accent); color: #fff; border-color: var(--accent); display: none; }
 
         .modal {
             display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%;
@@ -300,6 +305,15 @@
         .modal-content { max-width: 92%; max-height: 90vh; border-radius: 18px; border: 2px solid var(--border-glow); }
         .close-btn { position: absolute; top: 25px; right: 35px; color: #fff; font-size: 45px; font-weight: bold; cursor: pointer; }
 
+        /* إشعار النسخ السريع */
+        #copyToast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--success); color: #000; padding: 12px 25px; border-radius: 30px;
+            font-weight: bold; z-index: 9999; box-shadow: 0 5px 20px rgba(0,255,136,0.4);
+            transition: transform 0.4s ease;
+        }
+        #copyToast.show { transform: translateX(-50%) translateY(0); }
+
         footer { margin-top: 50px; padding: 30px; background: var(--card-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--border-glow); border-radius: 22px; }
         .visitor-counter { font-size: 1.15rem; color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 12px; }
         .counter-number { font-weight: 900; color: var(--primary); background: rgba(0, 0, 0, 0.3); padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border-glow); font-family: 'Courier New', Courier, monospace; }
@@ -307,7 +321,10 @@
 </head>
 <body>
 
-    <!-- الشريط العلوي الأساسي -->
+    <!-- إشعار النسخ -->
+    <div id="copyToast"><i class="fas fa-check-circle"></i> تم نسخ الرابط بنجاح!</div>
+
+    <!-- الشريط العلوي -->
     <div class="top-bar-container">
         <div class="top-left-status">
             <div class="server-status-top">
@@ -337,6 +354,7 @@
             <a href="https://www.facebook.com/share/1HPZUspvPj/?mibextid=wwXIfr" target="_blank" class="btn fb"><i class="fa-brands fa-facebook"></i> <span id="btnFb">صفحة الفيسبوك</span></a>
             <a href="https://t.me/Ahmedmagdy4567" target="_blank" class="btn tg"><i class="fa-brands fa-telegram"></i> <span id="btnTg">قناة التليجرام</span></a>
             <a href="https://www.instagram.com/ahmad_abo_tebaa?stkn=MW4yNnRlMWsxeTVnaQ%3D%3D&utm_source=qr" target="_blank" class="btn ig"><i class="fa-brands fa-instagram"></i> <span id="btnIg">إنستجرام</span></a>
+            <button onclick="copySiteLink()" class="btn" style="background: linear-gradient(135deg, #718096, #4a5568); cursor: pointer;"><i class="fas fa-share-alt"></i> <span id="btnShare">مشاركة الموقع</span></button>
         </div>
     </header>
 
@@ -359,7 +377,7 @@
         </div>
     </div>
 
-    <!-- ميزة 1: مساعد التشخيص الذكي -->
+    <!-- مساعدة التشخيص الذكي المطور -->
     <div class="section-card">
         <h2><i class="fas fa-robot"></i> <span id="txtDiagTitle">مساعد التشخيص الذكي</span></h2>
         <div class="form-group">
@@ -381,7 +399,7 @@
         <div id="diagResult" class="diag-result"></div>
     </div>
 
-    <!-- ميزة 2: قسم تحميل برامج وتعاريف السوفت وير -->
+    <!-- قسم التحميلات -->
     <div class="section-card">
         <h2><i class="fas fa-download"></i> <span id="txtDownloadTitle">تحميل أدوات وتعاريف السوفت وير</span></h2>
         <div class="download-grid">
@@ -520,7 +538,7 @@
         <div class="visitor-counter">
             <i class="fas fa-users"></i>
             <span id="txtVisitorLbl">عدد زيارات الموقع:</span>
-            <span class="counter-number" id="vistorCount">2000</span>
+            <span class="counter-number" id="vistorCount">2150</span>
         </div>
     </footer>
 
@@ -533,7 +551,7 @@
         let currentLang = 'ar';
         let isLightMode = false;
 
-        // تبديل بين الدارك مود والوضع الأبيض الفاتح
+        // تبديل الثيم
         function toggleThemeMode() {
             isLightMode = !isLightMode;
             if (isLightMode) {
@@ -547,30 +565,46 @@
             }
         }
 
-        // تشغيل التشخيص الذكي
+        // مشاركة الرابط مع إشعار
+        function copySiteLink() {
+            navigator.clipboard.writeText(window.location.href);
+            const toast = document.getElementById('copyToast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // مساعد التشخيص الذكي
         function runDiagnostic() {
             const os = document.getElementById('diagOS').value;
             const issue = document.getElementById('diagIssue').value;
             const resBox = document.getElementById('diagResult');
             
             let message = "";
+            let textMsg = "";
             if (os === 'apple' && issue === 'icloud') {
+                textMsg = "السلام عليكم، استفسرت عبر الموقع بخصوص: تخطي حساب iCloud وتفعيل الشبكة";
                 message = "💡 <b>التشخيص:</b> يتطلب الخدمة تفليش وتخطي سيرفر أبل أونلاين لتجاوز حساب iCloud مع تفعيل كامل الشبكة والاتصال.";
             } else if (os === 'android' && issue === 'icloud') {
+                textMsg = "السلام عليكم، استفسرت عبر الموقع بخصوص: تخطي حماية Google FRP أو Mi Account";
                 message = "💡 <b>التشخيص:</b> يتطلب الخدمة تفليش وفك حماية Google FRP أو حساب Xiaomi Mi Account بنقرة واحدة.";
             } else if (issue === 'imei') {
+                textMsg = "السلام عليكم، استفسرت عبر الموقع بخصوص: إصلاح مشكلة الشبكة وسيريال الـ IMEI";
                 message = "💡 <b>التشخيص:</b> يتطلب الخدمة إصلاح ملفات NVRAM / Baseband وإعادة كتابة أرقام IMEI الأصلية السليمة لعودة الشبكة.";
             } else if (issue === 'mdm') {
+                textMsg = "السلام عليكم، استفسرت عبر الموقع بخصوص: الخروج من المنظومة التعليمية MDM";
                 message = "💡 <b>التشخيص:</b> يتطلب الخدمة الخروج الآمن والرسمي من المنظومة التعليمية وقفل MDM بدون مشاكل مستقبلاً.";
             } else {
+                textMsg = "السلام عليكم، استفسرت عبر الموقع بخصوص: عمل سوفت وير وإزالة رمز الشاشة";
                 message = "💡 <b>التشخيص:</b> يتطلب الجهاز عمل سوفت وير كامل وإعادة ضبط مصنع مع فك الرمز وتجاوز الحماية.";
             }
 
             resBox.style.display = 'block';
-            resBox.innerHTML = message + `<br><br><a href="https://wa.me/201064721809?text=${encodeURIComponent('السلام عليكم، استفسرت عبر مساعد التشخيص في الموقع بخصوص مشكلة: ' + issue)}" target="_blank" class="submit-btn" style="text-decoration:none; display:inline-flex; width:auto; padding:10px 20px; margin:0 auto;"><i class="fab fa-whatsapp"></i> اطلب الخدمة فوراً لهذه المشكلة</a>`;
+            resBox.innerHTML = message + `<br><br><a href="https://wa.me/201064721809?text=${encodeURIComponent(textMsg)}" target="_blank" class="submit-btn" style="text-decoration:none; display:inline-flex; width:auto; padding:12px 25px; margin:0 auto;"><i class="fab fa-whatsapp"></i> اطلب الخدمة فوراً</a>`;
         }
 
-        // التبديل بين اللغتين العربي والإنجليزي
+        // تغيير اللغات
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
@@ -585,6 +619,7 @@
                 document.getElementById('btnFb').innerText = "Facebook Page";
                 document.getElementById('btnTg').innerText = "Telegram Channel";
                 document.getElementById('btnIg').innerText = "Instagram";
+                document.getElementById('btnShare').innerText = "Share Site";
                 document.getElementById('serv1').innerText = "Bypass iCloud";
                 document.getElementById('serv2').innerText = "Bypass Google FRP";
                 document.getElementById('serv3').innerText = "IMEI & Baseband Repair";
@@ -606,6 +641,7 @@
                 document.getElementById('btnFb').innerText = "صفحة الفيسبوك";
                 document.getElementById('btnTg').innerText = "قناة التليجرام";
                 document.getElementById('btnIg').innerText = "إنستجرام";
+                document.getElementById('btnShare').innerText = "مشاركة الموقع";
                 document.getElementById('serv1').innerText = "تخطي آيكلود iCloud";
                 document.getElementById('serv2').innerText = "تخطي حساب جوجل FRP";
                 document.getElementById('serv3').innerText = "إصلاح سيريال وIMEI";
@@ -630,10 +666,11 @@
             document.getElementById('imgModal').style.display = 'none';
         }
 
+        // عداد الزيارات الحقيقي
         function updateVisitorCount() {
             let count = localStorage.getItem('visitorCount');
-            if (!count || parseInt(count) < 2000) {
-                count = 2000;
+            if (!count) {
+                count = 2150;
             } else {
                 count = parseInt(count) + 1;
             }
@@ -663,6 +700,7 @@
             }
         }
 
+        // فلترة معرض الأعمال بسلاسة
         function filterGallery(category) {
             const cards = document.querySelectorAll('.grid .card');
             const btns = document.querySelectorAll('.filter-btn');
@@ -673,8 +711,10 @@
             cards.forEach(card => {
                 if (category === 'all' || card.classList.contains(category)) {
                     card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 50);
                 } else {
-                    card.style.display = 'none';
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
                 }
             });
         }
@@ -692,6 +732,5 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
-
 </body>
 </html>
