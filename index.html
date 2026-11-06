@@ -3,1260 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cashy Link Plus - نظام إدارة محلات تحويل الكاش والخدمات</title>
-    <!-- Tailwind CSS -->
+    <title>إدارة فودافون كاش - VF Cash Manager Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font Cairo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                        },
-                        navy: {
-                            800: '#0f172a',
-                            900: '#020617',
-                        }
-                    },
-                    fontFamily: {
-                        cairo: ['Cairo', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        body { font-family: 'Cairo', sans-serif; }
-        /* Print Styles */
-        @media print {
-            body * { visibility: hidden; }
-            #printable-receipt, #printable-receipt * { visibility: visible; }
-            #printable-receipt { position: absolute; left: 0; top: 0; width: 100%; }
-            .no-print { display: none !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; }
+        .bg-vf { background-color: #e60000; }
+        .text-vf { color: #e60000; }
+        .border-vf { border-color: #e60000; }
+        .pulse-alarm { animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.7); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(230, 0, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 0, 0, 0); }
         }
-        /* Custom Scrollbars */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+<body class="text-slate-800">
 
-    <!-- Header / Navigation Bar -->
-    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-30 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo & Brand -->
-                <div class="flex items-center space-x-3 space-x-reverse">
-                    <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-2.5 rounded-xl shadow-lg shadow-emerald-500/20">
-                        <i class="fa-solid fa-wallet text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <span class="text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Cashy Link</span>
-                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full mr-1 border border-emerald-500/30">Pro</span>
-                    </div>
-                </div>
-
-                <!-- Navigation Tabs (Desktop) -->
-                <nav class="hidden lg:flex space-x-1 space-x-reverse text-sm font-semibold">
-                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn active px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 space-x-reverse bg-emerald-600 text-white">
-                        <i class="fa-solid fa-chart-pie"></i><span>الرئيسية</span>
-                    </button>
-                    <button onclick="switchTab('transfers')" id="nav-transfers" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-money-bill-transfer"></i><span>المحافظ والتحويلات</span>
-                    </button>
-                    <button onclick="switchTab('debts')" id="nav-debts" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-book-bookmark"></i><span>الديون والأجل</span>
-                    </button>
-                    <button onclick="switchTab('maintenance')" id="nav-maintenance" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-screwdriver-wrench"></i><span>الصيانة والمصروفات</span>
-                    </button>
-                    <button onclick="switchTab('machines')" id="nav-machines" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-cash-register"></i><span>ماكينات الدفع</span>
-                    </button>
-                    <button onclick="switchTab('reports')" id="nav-reports" class="nav-btn px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-file-invoice-dollar"></i><span>التقارير</span>
-                    </button>
-                </nav>
-
-                <!-- User Profile & Staff Toggle -->
-                <div class="flex items-center space-x-3 space-x-reverse">
-                    <div class="bg-slate-700/60 p-1.5 rounded-lg border border-slate-600 flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-user-shield text-emerald-400 mr-1"></i>
-                        <select id="currentUser" onchange="changeUserRole()" class="bg-transparent text-xs font-semibold focus:outline-none text-slate-200 cursor-pointer">
-                            <option value="المشرف (أحمد)" class="bg-slate-800">المشرف (أحمد) - Admin</option>
-                            <option value="كاشير (محمد)" class="bg-slate-800">كاشير (محمد) - Cashier</option>
-                            <option value="كاشير (سارة)" class="bg-slate-800">كاشير (سارة) - Cashier</option>
-                        </select>
-                    </div>
-                </div>
+    <!-- Navbar -->
+    <header class="bg-vf text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <i class="fa-solid font-bold fa-mobile-screen-button text-2xl"></i>
+                <h1 class="text-xl font-extrabold tracking-wide">VF Cash Manager Pro</h1>
             </div>
-        </div>
-        <!-- Mobile Navigation Menu -->
-        <div class="lg:hidden bg-slate-800/95 border-t border-slate-700 px-2 py-2 flex overflow-x-auto space-x-2 space-x-reverse text-xs">
-            <button onclick="switchTab('dashboard')" class="mobile-nav-btn active px-3 py-1.5 rounded-lg whitespace-nowrap bg-emerald-600 text-white">الرئيسية</button>
-            <button onclick="switchTab('transfers')" class="mobile-nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-slate-300 hover:bg-slate-700">المحافظ والتحويلات</button>
-            <button onclick="switchTab('debts')" class="mobile-nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-slate-300 hover:bg-slate-700">الديون والأجل</button>
-            <button onclick="switchTab('maintenance')" class="mobile-nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-slate-300 hover:bg-slate-700">الصيانة والمصروفات</button>
-            <button onclick="switchTab('machines')" class="mobile-nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-slate-300 hover:bg-slate-700">ماكينات الدفع</button>
-            <button onclick="switchTab('reports')" class="mobile-nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-slate-300 hover:bg-slate-700">التقارير</button>
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <button onclick="simulateIncomingSMS()" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold px-3 py-1.5 rounded-lg text-sm shadow flex items-center gap-2 transition">
+                    <i class="fa-solid fa-bell fa-bounce"></i>
+                    تجربة وصول تحويل (Live SMS)
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow">
+    <div class="max-w-7xl mx-auto px-4 py-6">
 
-        <!-- ================= TAB 1: DASHBOARD ================= -->
-        <section id="tab-dashboard" class="tab-content space-y-6">
-            <!-- Alert Limits Banner -->
-            <div id="limitAlertsContainer" class="hidden bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 text-amber-300 flex items-start space-x-3 space-x-reverse shadow-lg">
-                <i class="fa-solid fa-triangle-exclamation text-xl mt-0.5 text-amber-400"></i>
-                <div class="flex-1">
-                    <h4 class="font-bold text-sm text-amber-200">تنبيه ليميت المحافظ!</h4>
-                    <p id="limitAlertsText" class="text-xs mt-1 leading-relaxed text-amber-300/90"></p>
+        <!-- Top Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-center text-slate-500 text-sm font-semibold mb-2">
+                    <span>السيولة النقدية (الدرج)</span>
+                    <i class="fa-solid fa-money-bill-wave text-emerald-500 text-lg"></i>
                 </div>
+                <div class="text-2xl font-black text-slate-800"><span id="drawerCash">0</span> ج.م</div>
+                <div class="text-xs text-slate-400 mt-1">الكاش المتوفر في المحل</div>
             </div>
 
-            <!-- Top Quick Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Total Balance -->
-                <div class="bg-slate-800/80 border border-slate-700/70 rounded-2xl p-4 shadow-sm backdrop-blur-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-400">إجمالي كاش المحافظ</span>
-                        <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg text-sm"><i class="fa-solid fa-wallet"></i></span>
-                    </div>
-                    <div class="mt-2 flex items-baseline justify-between">
-                        <span id="stat-total-wallet" class="text-2xl font-extrabold text-slate-100">0.00</span>
-                        <span class="text-xs text-slate-400">ج.م</span>
-                    </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-center text-slate-500 text-sm font-semibold mb-2">
+                    <span>إجمالي خطوط فودافون</span>
+                    <i class="fa-solid fa-wallet text-vf text-lg"></i>
                 </div>
-                <!-- Today Transactions -->
-                <div class="bg-slate-800/80 border border-slate-700/70 rounded-2xl p-4 shadow-sm backdrop-blur-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-400">إجمالي عمليات اليوم</span>
-                        <span class="p-2 bg-blue-500/10 text-blue-400 rounded-lg text-sm"><i class="fa-solid fa-arrow-right-arrow-left"></i></span>
-                    </div>
-                    <div class="mt-2 flex items-baseline justify-between">
-                        <span id="stat-today-volume" class="text-2xl font-extrabold text-slate-100">0.00</span>
-                        <span class="text-xs text-slate-400">ج.م</span>
-                    </div>
-                </div>
-                <!-- Net Profit Today -->
-                <div class="bg-slate-800/80 border border-slate-700/70 rounded-2xl p-4 shadow-sm backdrop-blur-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-400">صافي أرباح اليوم</span>
-                        <span class="p-2 bg-teal-500/10 text-teal-400 rounded-lg text-sm"><i class="fa-solid fa-sack-dollar"></i></span>
-                    </div>
-                    <div class="mt-2 flex items-baseline justify-between">
-                        <span id="stat-today-profit" class="text-2xl font-extrabold text-teal-400">0.00</span>
-                        <span class="text-xs text-slate-400">ج.م</span>
-                    </div>
-                </div>
-                <!-- Customer Debts Total -->
-                <div class="bg-slate-800/80 border border-slate-700/70 rounded-2xl p-4 shadow-sm backdrop-blur-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-400">إجمالي الديون الخارجية</span>
-                        <span class="p-2 bg-rose-500/10 text-rose-400 rounded-lg text-sm"><i class="fa-solid fa-user-minus"></i></span>
-                    </div>
-                    <div class="mt-2 flex items-baseline justify-between">
-                        <span id="stat-total-debts" class="text-2xl font-extrabold text-rose-400">0.00</span>
-                        <span class="text-xs text-slate-400">ج.م</span>
-                    </div>
-                </div>
+                <div class="text-2xl font-black text-slate-800"><span id="totalWalletsBalance">0</span> ج.م</div>
+                <div class="text-xs text-slate-400 mt-1">الرصيد الرقمي في الحسابات</div>
             </div>
 
-            <!-- Wallets Limit Monitor Widget -->
-            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-base text-slate-200 flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-chart-line text-emerald-400"></i>
-                        <span>حالة المحافظ وحدود السحب والتسجيل (Limits)</span>
-                    </h3>
-                    <button onclick="openWalletModal()" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors flex items-center space-x-1 space-x-reverse">
-                        <i class="fa-solid fa-plus"></i><span>إضافة محفظة</span>
-                    </button>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-center text-slate-500 text-sm font-semibold mb-2">
+                    <span>أرباح اليوم (عمولات)</span>
+                    <i class="fa-solid fa-chart-line text-blue-500 text-lg"></i>
                 </div>
-                
-                <div id="dashboardWalletsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Wallets Dynamic Rendering -->
-                </div>
+                <div class="text-2xl font-black text-emerald-600">+<span id="todayProfits">0</span> ج.م</div>
+                <div class="text-xs text-slate-400 mt-1">صافي مكسب الخدمات اليوم</div>
             </div>
 
-            <!-- Recent Transactions Table & Quick Transfer Action -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Recent Activity Feed -->
-                <div class="lg:col-span-2 bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-bold text-slate-200 text-base">آخر العمليات المنجزة</h3>
-                        <button onclick="switchTab('transfers')" class="text-xs text-emerald-400 hover:underline">عرض الكل</button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-right text-xs">
-                            <thead class="bg-slate-700/50 text-slate-300 font-semibold">
-                                <tr>
-                                    <th class="p-2.5 rounded-r-lg">النوع</th>
-                                    <th class="p-2.5">المحفظة / الرقم</th>
-                                    <th class="p-2.5">المبلغ</th>
-                                    <th class="p-2.5">العمولة/الربح</th>
-                                    <th class="p-2.5">الكاشير</th>
-                                    <th class="p-2.5 rounded-l-lg">التاريخ</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recentTransactionsTable" class="divide-y divide-slate-700/50">
-                                <!-- Rendered dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-center text-slate-500 text-sm font-semibold mb-2">
+                    <span>عدد عمليات اليوم</span>
+                    <i class="fa-solid fa-arrow-left-right text-purple-500 text-lg"></i>
                 </div>
-
-                <!-- Fast Actions Panel -->
-                <div class="bg-gradient-to-br from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-slate-200 text-base mb-3 flex items-center space-x-2 space-x-reverse">
-                            <i class="fa-solid fa-bolt text-amber-400"></i>
-                            <span>إجراء سريع جداً</span>
-                        </h3>
-                        <p class="text-xs text-slate-400 mb-4">يمكنك تنفيذ عملية تحويل أو سحب فورية وتسجيلها تلقائياً بالدفتر.</p>
-                        
-                        <div class="space-y-3">
-                            <button onclick="quickActionModal('transfer')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-between">
-                                <span><i class="fa-solid fa-paper-plane ml-2"></i> تحويل كاش سريع</span>
-                                <i class="fa-solid fa-chevron-left text-xs opacity-70"></i>
-                            </button>
-                            <button onclick="quickActionModal('withdraw')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-between">
-                                <span><i class="fa-solid fa-hand-holding-dollar ml-2"></i> سحب كاش سريع</span>
-                                <i class="fa-solid fa-chevron-left text-xs opacity-70"></i>
-                            </button>
-                            <button onclick="quickActionModal('debt')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-between border border-slate-600">
-                                <span><i class="fa-solid fa-user-pen ml-2"></i> تسجـيل ديـن / آجل</span>
-                                <i class="fa-solid fa-chevron-left text-xs opacity-70"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 p-3 bg-slate-900/60 rounded-xl border border-slate-700/60 text-xs text-slate-400 flex items-center justify-between">
-                        <span><i class="fa-solid fa-shield-halved text-emerald-400 ml-1"></i> النظام مؤمن وتلقائي</span>
-                        <span class="text-emerald-400 font-mono">v2.4 Pro</span>
-                    </div>
-                </div>
+                <div class="text-2xl font-black text-slate-800"><span id="todayCount">0</span> عملية</div>
+                <div class="text-xs text-slate-400 mt-1">سحب وتحويل واستلام</div>
             </div>
-        </section>
+        </div>
 
-        <!-- ================= TAB 2: WALLETS & TRANSFERS ================= -->
-        <section id="tab-transfers" class="tab-content hidden space-y-6">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-800 p-4 rounded-2xl border border-slate-700">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-100">إدارة المحافظ ومعاملات السحب والتحويل</h2>
-                    <p class="text-xs text-slate-400 mt-1">سجل جميع حركات المحافظ الإلكترونية وحساب العمولات والأرباح تلقائياً</p>
-                </div>
-                <div class="flex items-center space-x-2 space-x-reverse w-full sm:w-auto">
-                    <button onclick="openWalletModal()" class="flex-1 sm:flex-none bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors border border-slate-600 flex items-center justify-center space-x-1 space-x-reverse">
-                        <i class="fa-solid fa-plus text-emerald-400"></i><span>إضافة محفظة جديدة</span>
-                    </button>
-                    <button onclick="openTransferModal()" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg transition-colors flex items-center justify-center space-x-1 space-x-reverse">
-                        <i class="fa-solid fa-plus-circle"></i><span>عملية سحب / تحويل جديدة</span>
-                    </button>
-                </div>
-            </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            <!-- Wallets Quick View Cards -->
-            <div id="allWalletsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Rendered Dynamically -->
-            </div>
-
-            <!-- Detailed Transactions Log Table -->
-            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
-                    <h3 class="font-bold text-slate-200 text-base">جدول كافة المعاملات والحركات</h3>
-                    <!-- Search & Filter Controls -->
-                    <div class="flex items-center space-x-2 space-x-reverse w-full md:w-auto">
-                        <div class="relative flex-1 md:w-64">
-                            <input type="text" id="transferSearchInput" oninput="renderTransfersTable()" placeholder="بحث بالرقم أو العميل..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 pr-8">
-                            <i class="fa-solid fa-magnifying-glass absolute right-2.5 top-2.5 text-slate-500 text-xs"></i>
-                        </div>
-                        <select id="transferTypeFilter" onchange="renderTransfersTable()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
-                            <option value="ALL">كل الأنواع</option>
-                            <option value="تحويل">تحويل كاش</option>
-                            <option value="سحب">سحب كاش</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-right text-xs">
-                        <thead class="bg-slate-700/60 text-slate-300 font-semibold">
-                            <tr>
-                                <th class="p-3 rounded-r-lg">التاريخ والوقت</th>
-                                <th class="p-3">النوع</th>
-                                <th class="p-3">المحفظة المستعملة</th>
-                                <th class="p-3">رقم العميل / العملية</th>
-                                <th class="p-3">المبلغ</th>
-                                <th class="p-3">الرسوم/العمولة</th>
-                                <th class="p-3">صافي الربح</th>
-                                <th class="p-3">الموظف (الكاشير)</th>
-                                <th class="p-3 rounded-l-lg text-center">إجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transfersFullTable" class="divide-y divide-slate-700/40">
-                            <!-- Rendered dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= TAB 3: CUSTOMER DEBTS & LEDGER ================= -->
-        <section id="tab-debts" class="tab-content hidden space-y-6">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-800 p-4 rounded-2xl border border-slate-700">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-100">تسجيل الديون والحسابات الآجلة للزبائن</h2>
-                    <p class="text-xs text-slate-400 mt-1">متابعة دقيقة لكل مبالغ الديون، والمتحصلات وتسديد الحسابات بانتظام</p>
-                </div>
-                <button onclick="openDebtModal()" class="w-full sm:w-auto bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg transition-colors flex items-center justify-center space-x-1 space-x-reverse">
-                    <i class="fa-solid fa-user-plus"></i><span>تسجيل دين / حساب آجل جديد</span>
-                </button>
-            </div>
-
-            <!-- Debtors Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Customer List Card -->
-                <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm lg:col-span-1">
-                    <h3 class="font-bold text-slate-200 text-sm mb-3">قائمة العملاء المدينين</h3>
-                    <div id="debtorsList" class="space-y-2 max-h-[500px] overflow-y-auto pr-1">
-                        <!-- Rendered dynamically -->
-                    </div>
-                </div>
-
-                <!-- Debts History & Ledger -->
-                <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm lg:col-span-2">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-bold text-slate-200 text-base">سجل الديون والمدفوعات الآجلة</h3>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-right text-xs">
-                            <thead class="bg-slate-700/50 text-slate-300 font-semibold">
-                                <tr>
-                                    <th class="p-3">اسم الزبون</th>
-                                    <th class="p-3">الهاتف</th>
-                                    <th class="p-3">المبلغ المتبقي</th>
-                                    <th class="p-3">ملاحظات/سبب الدين</th>
-                                    <th class="p-3">التاريخ</th>
-                                    <th class="p-3 text-center">سداد الدين</th>
-                                </tr>
-                            </thead>
-                            <tbody id="debtsTable" class="divide-y divide-slate-700/40">
-                                <!-- Rendered dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= TAB 4: MAINTENANCE & EXPENSES ================= -->
-        <section id="tab-maintenance" class="tab-content hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                <!-- Maintenance & Spare Parts Section -->
-                <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-700 pb-3">
-                        <div>
-                            <h3 class="font-bold text-slate-200 text-base flex items-center space-x-2 space-x-reverse">
-                                <i class="fa-solid fa-mobile-screen-button text-blue-400"></i>
-                                <span>قسم الصيانة وقطع الغيار</span>
-                            </h3>
-                            <p class="text-xs text-slate-400">تسجيل أجهزة الصيانة، التكلفة، والأرباح</p>
-                        </div>
-                        <button onclick="openMaintenanceModal()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors">
-                            <i class="fa-solid fa-plus ml-1"></i> صيانة جديدة
+            <!-- Section 1: Wallets & Limit Progress -->
+            <div class="space-y-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="font-bold text-lg text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-sim-card text-vf"></i> خطوط المحل والليميت
+                        </h2>
+                        <button onclick="addNewLine()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2 py-1 rounded">
+                            + إضافة خط
                         </button>
                     </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-right text-xs">
-                            <thead class="bg-slate-700/50 text-slate-300">
-                                <tr>
-                                    <th class="p-2.5">الجهاز/الزبون</th>
-                                    <th class="p-2.5">العطل / قطعة الغيار</th>
-                                    <th class="p-2.5">التكلفة</th>
-                                    <th class="p-2.5">الإجمالي المستلم</th>
-                                    <th class="p-2.5">الربح</th>
-                                </tr>
-                            </thead>
-                            <tbody id="maintenanceTable" class="divide-y divide-slate-700/40">
-                                <!-- Rendered dynamically -->
-                            </tbody>
-                        </table>
+                    <div id="linesContainer" class="space-y-4">
+                        <!-- Loaded Dynamically -->
                     </div>
                 </div>
 
-                <!-- Daily Shop Expenses Section -->
-                <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-700 pb-3">
-                        <div>
-                            <h3 class="font-bold text-slate-200 text-base flex items-center space-x-2 space-x-reverse">
-                                <i class="fa-solid fa-receipt text-rose-400"></i>
-                                <span>مصروفات المحل اليومية</span>
-                            </h3>
-                            <p class="text-xs text-slate-400">تسجيل الإيجار، الكهرباء، العمالة، النثريات</p>
-                        </div>
-                        <button onclick="openExpenseModal()" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors">
-                            <i class="fa-solid fa-plus ml-1"></i> إضافة مصروف
-                        </button>
+                <!-- Live Auto-Detector Widget -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 rounded-xl shadow-md border border-slate-700">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> ميزة التنبيه الفوري
+                        </span>
+                        <i class="fa-solid fa-wifi text-slate-400"></i>
                     </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-right text-xs">
-                            <thead class="bg-slate-700/50 text-slate-300">
-                                <tr>
-                                    <th class="p-2.5">بند المصروف</th>
-                                    <th class="p-2.5">المبلغ</th>
-                                    <th class="p-2.5">الموظف المسجل</th>
-                                    <th class="p-2.5">التاريخ</th>
-                                </tr>
-                            </thead>
-                            <tbody id="expensesTable" class="divide-y divide-slate-700/40">
-                                <!-- Rendered dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ================= TAB 5: POS MACHINES (FAWRY/AMAN/MASARY) ================= -->
-        <section id="tab-machines" class="tab-content hidden space-y-6">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-800 p-4 rounded-2xl border border-slate-700">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-100">إدارة ماكينات الدفع الإلكتروني (فوري / أمان / مصاري)</h2>
-                    <p class="text-xs text-slate-400 mt-1">متابعة أرصدة الماكينات وحساب النواقص التلقائي للتأكد من رصيد المحل</p>
-                </div>
-                <button onclick="openMachineModal()" class="bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">
-                    <i class="fa-solid fa-plus ml-1"></i> إضافة ماكينة / شحن رصيد
-                </button>
-            </div>
-
-            <!-- Machines Grid Cards -->
-            <div id="machinesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Rendered dynamically -->
-            </div>
-        </section>
-
-        <!-- ================= TAB 6: REPORTS & SHIFTS ================= -->
-        <section id="tab-reports" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-sm space-y-6">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-700 pb-4">
-                    <div>
-                        <h2 class="text-lg font-bold text-slate-100">التقارير المالية وإقفال الشفت اليومي</h2>
-                        <p class="text-xs text-slate-400 mt-1">توليد تقارير شاملة عن الأرباح والمصروفات والعمولات الجاهزة للطباعة</p>
-                    </div>
-                    <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-600 flex items-center space-x-2 space-x-reverse">
-                        <i class="fa-solid fa-print text-emerald-400"></i><span>طباعة التقرير الشامل</span>
+                    <h3 class="font-bold text-base mb-1">الربط واستقبال الرسائل</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        عند استقبال أي إشعار تحويل، يقوم النظام بتنبيهك بصوت مرتفع وإضافة المبلغ فوراً لرصيد الخط المحدد مع تحديث الليميت.
+                    </p>
+                    <button onclick="simulateIncomingSMS()" class="w-full bg-vf hover:bg-red-700 text-white font-bold py-2 rounded-lg text-sm shadow transition">
+                        تجربة إرسال تحويل وهمي للمحل
                     </button>
                 </div>
+            </div>
 
-                <!-- Report Summary Breakdown Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-                        <span class="text-xs text-slate-400">إجمالي أرباح العمولات</span>
-                        <div id="rep-transfers-profit" class="text-xl font-bold text-emerald-400 mt-1">0.00 ج.م</div>
-                    </div>
-                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-                        <span class="text-xs text-slate-400">إجمالي أرباح الصيانة</span>
-                        <div id="rep-maintenance-profit" class="text-xl font-bold text-blue-400 mt-1">0.00 ج.م</div>
-                    </div>
-                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-                        <span class="text-xs text-slate-400">إجمالي المصروفات</span>
-                        <div id="rep-total-expenses" class="text-xl font-bold text-rose-400 mt-1">0.00 ج.م</div>
-                    </div>
-                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-                        <span class="text-xs text-slate-400">صافي الربح الفعلي النهائي</span>
-                        <div id="rep-net-final-profit" class="text-2xl font-black text-amber-400 mt-1">0.00 ج.م</div>
-                    </div>
+            <!-- Section 2: Quick Operation Form -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="font-bold text-lg text-slate-800 mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-yellow-500"></i> تنفيذ عملية جديدة
+                    </h2>
+
+                    <form id="txForm" onsubmit="handleTransaction(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">نوع العملية</label>
+                                <select id="txType" onchange="calculateCommissions()" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none text-sm font-semibold">
+                                    <option value="transfer">تحويل كاش (إرسال لزبون)</option>
+                                    <option value="withdraw">سحب كاش (استلام من زبون)</option>
+                                    <option value="receive_deposit">استقبال تحويل مباشر (إيداع للخط)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">اختر خط المحل</label>
+                                <select id="txLine" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none text-sm font-semibold">
+                                    <!-- Options generated by JS -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">مبلغ العملية (ج.م)</label>
+                                <input type="number" id="txAmount" oninput="calculateCommissions()" placeholder="مثال: 1000" required class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none text-sm font-bold">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">رقم الزبون (اختياري)</label>
+                                <input type="text" id="txCustomer" placeholder="010XXXXXXXX" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Calculations Preview -->
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 grid grid-cols-3 gap-2 text-center">
+                            <div>
+                                <div class="text-xs text-slate-500">رسوم فودافون</div>
+                                <div id="vfFee" class="text-sm font-bold text-slate-700">0 ج.م</div>
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500">عمولة المحل (ربحك)</label>
+                                <input type="number" id="shopFee" oninput="calculateCommissions(true)" value="0" class="w-20 text-center mx-auto block p-1 border rounded text-sm font-bold text-emerald-600 bg-white">
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500">المطلوب من الزبون</div>
+                                <div id="totalCustomerPay" class="text-base font-black text-vf">0 ج.م</div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-vf hover:bg-red-700 text-white font-extrabold py-3 rounded-lg text-base shadow transition">
+                            حفظ وتأكيد العملية
+                        </button>
+                    </form>
                 </div>
 
-                <!-- Detailed Performance by Cashier -->
-                <div>
-                    <h3 class="font-bold text-slate-200 text-sm mb-3">تقرير أداء الكاشيرات والموظفين</h3>
+                <!-- Recent Transactions History -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="font-bold text-lg text-slate-800 mb-4 flex items-center justify-between">
+                        <span><i class="fa-solid fa-list-check text-slate-600"></i> سجل العمليات الأخيرة</span>
+                        <button onclick="clearHistory()" class="text-xs text-red-500 hover:underline">مسح السجل</button>
+                    </h2>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-right text-xs">
-                            <thead class="bg-slate-700/50 text-slate-300">
-                                <tr>
-                                    <th class="p-3">اسم الموظف</th>
-                                    <th class="p-3">عدد العمليات</th>
-                                    <th class="p-3">إجمالي القيمة التداولية</th>
-                                    <th class="p-3">الأرباح المحققة</th>
+                        <table class="w-full text-right border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-600 text-xs font-bold">
+                                    <th class="p-3">الوقت</th>
+                                    <th class="p-3">النوع</th>
+                                    <th class="p-3">الخط</th>
+                                    <th class="p-3">المبلغ</th>
+                                    <th class="p-3">العمولة</th>
+                                    <th class="p-3">الزبون</th>
                                 </tr>
                             </thead>
-                            <tbody id="cashierReportTable" class="divide-y divide-slate-700/40">
-                                <!-- Dynamic -->
+                            <tbody id="txHistoryTable" class="text-sm divide-y divide-slate-100">
+                                <!-- Loaded dynamically -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        </section>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800 text-slate-500 text-xs py-4 text-center">
-        <p>برنامج Cashy Link لإدارة محلات الكاش والصيانة © 2026 - جميع الحقوق محفوظة</p>
-    </footer>
-
-    <!-- ================= MODALS ================= -->
-
-    <!-- Modal 1: Add/Edit Wallet Modal -->
-    <div id="walletModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
-            <h3 class="font-bold text-lg text-slate-100 mb-4">إضافة / تعديل محفظة جديدة</h3>
-            <form onsubmit="handleSaveWallet(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">اسم المحفظة / المزود</label>
-                    <input type="text" id="wName" required placeholder="مثال: فودافون كاش - الخط الرئيسي" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">رقم المحفظة</label>
-                    <input type="text" id="wPhone" required placeholder="010xxxxxxx" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">الرصيد الحالي (ج.م)</label>
-                    <input type="number" id="wBalance" step="0.01" required placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">الليميت اليومي (ج.م)</label>
-                        <input type="number" id="wDailyLimit" value="60000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">الليميت الشهري (ج.م)</label>
-                        <input type="number" id="wMonthlyLimit" value="200000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                    </div>
-                </div>
-                <div class="flex justify-end space-x-2 space-x-reverse pt-2">
-                    <button type="button" onclick="closeModal('walletModal')" class="px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">إلغاء</button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold">حفظ المحفظة</button>
-                </div>
-            </form>
         </div>
     </div>
 
-    <!-- Modal 2: Transfer / Withdraw Transaction Modal -->
-    <div id="transferModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative">
-            <h3 id="transferModalTitle" class="font-bold text-lg text-slate-100 mb-4">تسجيل عملية سحب / تحويل كاش</h3>
-            <form onsubmit="handleSaveTransfer(event)" class="space-y-4">
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">نوع العملية</label>
-                        <select id="tType" onchange="calcTransferFees()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                            <option value="تحويل">تحويل كاش (إرسال)</option>
-                            <option value="سحب">سحب كاش (استلام)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">المحفظة المستخدمة</label>
-                        <select id="tWalletId" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                            <!-- Dynamic options -->
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">رقم العميل</label>
-                        <input type="text" id="tCustomerPhone" required placeholder="01xxxxxxxx" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">المبلغ (ج.م)</label>
-                        <input type="number" id="tAmount" step="1" required oninput="calcTransferFees()" placeholder="1000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3 bg-slate-900/60 p-3 rounded-xl border border-slate-700/60">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">رسوم المحفظة/العمولة</label>
-                        <input type="number" id="tFee" step="0.5" value="0" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-emerald-400 mb-1">صافي الربح للمحل</label>
-                        <input type="number" id="tProfit" step="0.5" value="0" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-emerald-300 font-bold">
-                    </div>
-                </div>
-                <div class="flex justify-end space-x-2 space-x-reverse pt-2">
-                    <button type="button" onclick="closeModal('transferModal')" class="px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">إلغاء</button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold">تأكيد وتنفيذ الحركة</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal 3: Add Debt Modal -->
-    <div id="debtModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-md p-6 shadow-2xl">
-            <h3 class="font-bold text-lg text-slate-100 mb-4">تسجيل حساب آجل / دين جديد</h3>
-            <form onsubmit="handleSaveDebt(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">اسم الزبون / العميل</label>
-                    <input type="text" id="dCustomerName" required placeholder="اسم العميل" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-rose-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">رقم الهاتف</label>
-                    <input type="text" id="dCustomerPhone" placeholder="01xxxxxxxxx" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-rose-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">مبلغ الدين (ج.م)</label>
-                    <input type="number" id="dAmount" step="1" required placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-rose-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">ملاحظات / سبب الدين</label>
-                    <input type="text" id="dNotes" placeholder="مثال: كروت شحن / تحويل آجل" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none">
-                </div>
-                <div class="flex justify-end space-x-2 space-x-reverse pt-2">
-                    <button type="button" onclick="closeModal('debtModal')" class="px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">إلغاء</button>
-                    <button type="submit" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold">حفظ الدين</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal 4: Maintenance Modal -->
-    <div id="maintModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-md p-6 shadow-2xl">
-            <h3 class="font-bold text-lg text-slate-100 mb-4">تسجيل عملية صيانة جديدة</h3>
-            <form onsubmit="handleSaveMaintenance(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">اسم العميل ورقم الجهاز</label>
-                    <input type="text" id="mDevice" required placeholder="مثال: سامسونج A52 - أحمد" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">وصف العطل / قطعة الغيار</label>
-                    <input type="text" id="mDescription" required placeholder="مثال: تغيير شاشة + باغة" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">تكلفة قطع الغيار</label>
-                        <input type="number" id="mCost" step="1" required placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">المبلغ المطلوب من الزبون</label>
-                        <input type="number" id="mPrice" step="1" required placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100">
-                    </div>
-                </div>
-                <div class="flex justify-end space-x-2 space-x-reverse pt-2">
-                    <button type="button" onclick="closeModal('maintModal')" class="px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">إلغاء</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold">تسجيل الصيانة</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal 5: Expense Modal -->
-    <div id="expenseModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-md p-6 shadow-2xl">
-            <h3 class="font-bold text-lg text-slate-100 mb-4">تسجيل مصروفات</h3>
-            <form onsubmit="handleSaveExpense(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">بند المصروفات</label>
-                    <input type="text" id="eTitle" required placeholder="مثال: فاتورة كهرباء / عشاء عمال" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">المبلغ (ج.م)</label>
-                    <input type="number" id="eAmount" step="1" required placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100">
-                </div>
-                <div class="flex justify-end space-x-2 space-x-reverse pt-2">
-                    <button type="button" onclick="closeModal('expenseModal')" class="px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">إلغاء</button>
-                    <button type="submit" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-semibold">تسجيل المصروف</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal 6: Machine Modal -->
-    <div id="machineModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-md p-6 shadow-2xl">
-            <h3 class="font-bold text-lg text-slate-100 mb-4">إضافة / تحديث ماكينة دفع إلكتروني</h3>
-            <form onsubmit="handleSaveMachine(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">اسم الماكينة / الشراكة</label>
-                    <input type="text" id="macName" required placeholder="مثال: ماكينة فوري 1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">الرصيد الفعلي الحالي (ج.م)</label>
-                    <input type="number" id="macBalance" step="1" required placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">الحد الأدنى المطلوب متوفر</label>
-                    <input type="number" id="macMin" step="1" value="1000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100">
-                </div>
-                <div class="flex justify-end space-x-2 space-x-reverse pt-2">
-                    <button type="button" onclick="closeModal('machineModal')" class="px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">إلغاء</button>
-                    <button type="submit" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-semibold">حفظ البيانات</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Hidden Printable Receipt Template -->
-    <div id="printable-receipt" class="p-6 bg-white text-black font-sans hidden">
-        <div class="text-center border-b pb-4 mb-4">
-            <h1 class="text-xl font-bold">Cashy Link - إيصال عملية</h1>
-            <p class="text-xs text-gray-600">فرع خدمات المحافظ الإلكترونية والصيانة</p>
-        </div>
-        <div id="receiptBody" class="space-y-2 text-sm">
-            <!-- Receipt content dynamically injected -->
-        </div>
-        <div class="border-t pt-4 mt-6 text-center text-xs text-gray-500">
-            شكراً لتعاملكم معنا!
-        </div>
-    </div>
-
-
-    <!-- JavaScript Application Logic -->
     <script>
-        // Data State Management & LocalStorage Initialization
-        const defaultWallets = [
-            { id: 'w1', name: 'فودافون كاش 1', phone: '01012345678', balance: 14500, dailyLimit: 60000, dailyUsed: 12000, monthlyLimit: 200000, monthlyUsed: 45000 },
-            { id: 'w2', name: 'اتصالات كاش', phone: '01198765432', balance: 8200, dailyLimit: 60000, dailyUsed: 54000, monthlyLimit: 200000, monthlyUsed: 180000 },
-            { id: 'w3', name: 'أورنج كاش', phone: '01234567890', balance: 5000, dailyLimit: 60000, dailyUsed: 3000, monthlyLimit: 200000, monthlyUsed: 22000 }
-        ];
+        // Data State
+        let store = JSON.parse(localStorage.getItem('vf_store_data')) || {
+            drawerCash: 5000,
+            lines: [
+                { id: 1, name: 'الخط الرئيسي', phone: '01012345678', balance: 12500, dailyUsed: 4500, dailyLimit: 60000, monthlyUsed: 25000, monthlyLimit: 200000 },
+                { id: 2, name: 'خط الفرعي 2', phone: '01098765432', balance: 8000, dailyUsed: 12000, dailyLimit: 60000, monthlyUsed: 65000, monthlyLimit: 200000 }
+            ],
+            transactions: []
+        };
 
-        const defaultTransfers = [
-            { id: 't1', date: '2026-11-06 14:30', type: 'تحويل', walletId: 'w1', walletName: 'فودافون كاش 1', customerPhone: '01099887766', amount: 2000, fee: 10, profit: 15, user: 'المشرف (أحمد)' },
-            { id: 't2', date: '2026-11-06 15:10', type: 'سحب', walletId: 'w2', walletName: 'اتصالات كاش', customerPhone: '01122334455', amount: 5000, fee: 50, profit: 50, user: 'كاشير (محمد)' }
-        ];
-
-        const defaultDebts = [
-            { id: 'd1', name: 'محمود السيد', phone: '01055443322', amount: 450, notes: 'تحويل كاش مؤجل', date: '2026-11-05' },
-            { id: 'd2', name: 'كريم خالد', phone: '01211223344', amount: 1200, notes: 'شاشة هاتف صيانة', date: '2026-11-04' }
-        ];
-
-        const defaultMaintenance = [
-            { id: 'm1', device: 'آيفون 11 - شريف', description: 'تغيير بطارية أصلية', cost: 600, price: 850, profit: 250, date: '2026-11-06' }
-        ];
-
-        const defaultExpenses = [
-            { id: 'e1', title: 'ضيافة المحل + كهرباء', amount: 150, user: 'المشرف (أحمد)', date: '2026-11-06' }
-        ];
-
-        const defaultMachines = [
-            { id: 'mac1', name: 'ماكينة فوري الرئيسية', balance: 3400, minLimit: 1000 },
-            { id: 'mac2', name: 'ماكينة أمان 2', balance: 650, minLimit: 1000 }
-        ];
-
-        // Global State variables
-        let wallets = JSON.parse(localStorage.getItem('cashy_wallets')) || defaultWallets;
-        let transfers = JSON.parse(localStorage.getItem('cashy_transfers')) || defaultTransfers;
-        let debts = JSON.parse(localStorage.getItem('cashy_debts')) || defaultDebts;
-        let maintenance = JSON.parse(localStorage.getItem('cashy_maint')) || defaultMaintenance;
-        let expenses = JSON.parse(localStorage.getItem('cashy_exp')) || defaultExpenses;
-        let machines = JSON.parse(localStorage.getItem('cashy_mac')) || defaultMachines;
-
-        // Save State to LocalStorage
         function saveData() {
-            localStorage.setItem('cashy_wallets', JSON.stringify(wallets));
-            localStorage.setItem('cashy_transfers', JSON.stringify(transfers));
-            localStorage.setItem('cashy_debts', JSON.stringify(debts));
-            localStorage.setItem('cashy_maint', JSON.stringify(maintenance));
-            localStorage.setItem('cashy_exp', JSON.stringify(expenses));
-            localStorage.setItem('cashy_mac', JSON.stringify(machines));
-            renderAll();
+            localStorage.setItem('vf_store_data', JSON.stringify(store));
+            render();
         }
 
-        // Initialize App on DOM Load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderAll();
-        });
-
-        // Tab Switching Logic
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.nav-btn, .mobile-nav-btn').forEach(el => {
-                el.classList.remove('bg-emerald-600', 'text-white', 'active');
-                el.classList.add('text-slate-300');
-            });
-
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-            const targetNav = document.getElementById(`nav-${tabId}`);
-            if (targetNav) {
-                targetNav.classList.add('bg-emerald-600', 'text-white', 'active');
-                targetNav.classList.remove('text-slate-300');
-            }
-        }
-
-        // Render All UI Sections
-        function renderAll() {
-            renderDashboard();
-            renderWallets();
-            renderTransfersTable();
-            renderDebts();
-            renderMaintenance();
-            renderExpenses();
-            renderMachines();
-            renderReports();
-        }
-
-        // Render Dashboard Stats & Widgets
-        function renderDashboard() {
-            // Stats Calculations
-            const totalWalletBalance = wallets.reduce((acc, w) => acc + (w.balance || 0), 0);
+        function render() {
+            // Update Totals
+            document.getElementById('drawerCash').innerText = store.drawerCash.toLocaleString();
             
-            const todayStr = new Date().toISOString().slice(0, 10);
-            const todayTrans = transfers.filter(t => t.date.startsWith(todayStr));
-            const todayVolume = todayTrans.reduce((acc, t) => acc + Number(t.amount), 0);
-            const todayTransProfit = todayTrans.reduce((acc, t) => acc + Number(t.profit), 0);
-            const todayMaintProfit = maintenance.filter(m => m.date.startsWith(todayStr)).reduce((acc, m) => acc + Number(m.profit), 0);
-            const todayExpenses = expenses.filter(e => e.date.startsWith(todayStr)).reduce((acc, e) => acc + Number(e.amount), 0);
+            const totalWallet = store.lines.reduce((acc, l) => acc + l.balance, 0);
+            document.getElementById('totalWalletsBalance').innerText = totalWallet.toLocaleString();
 
-            const netTodayProfit = (todayTransProfit + todayMaintProfit) - todayExpenses;
-            const totalDebts = debts.reduce((acc, d) => acc + Number(d.amount), 0);
+            const today = new Date().toLocaleDateString();
+            const todayTxs = store.transactions.filter(t => new Date(t.date).toLocaleDateString() === today);
+            
+            const todayProfit = todayTxs.reduce((acc, t) => acc + (t.shopFee || 0), 0);
+            document.getElementById('todayProfits').innerText = todayProfit.toLocaleString();
+            document.getElementById('todayCount').innerText = todayTxs.length;
 
-            document.getElementById('stat-total-wallet').textContent = totalWalletBalance.toLocaleString();
-            document.getElementById('stat-today-volume').textContent = todayVolume.toLocaleString();
-            document.getElementById('stat-today-profit').textContent = netTodayProfit.toLocaleString();
-            document.getElementById('stat-total-debts').textContent = totalDebts.toLocaleString();
+            // Render Lines
+            const linesContainer = document.getElementById('linesContainer');
+            const txLineSelect = document.getElementById('txLine');
+            linesContainer.innerHTML = '';
+            txLineSelect.innerHTML = '';
 
-            // Limits Warning Check
-            const alerts = [];
-            wallets.forEach(w => {
-                const dailyRatio = (w.dailyUsed / w.dailyLimit) * 100;
-                const monthlyRatio = (w.monthlyUsed / w.monthlyLimit) * 100;
+            store.lines.forEach(line => {
+                const dailyPercent = Math.min(100, Math.round((line.dailyUsed / line.dailyLimit) * 100));
+                const monthlyPercent = Math.min(100, Math.round((line.monthlyUsed / line.monthlyLimit) * 100));
+                
+                let limitColor = 'bg-emerald-500';
+                if (dailyPercent > 80) limitColor = 'bg-yellow-500';
+                if (dailyPercent >= 98) limitColor = 'bg-red-600';
 
-                if (dailyRatio >= 85) {
-                    alerts.push(`المحفظة <strong>${w.name}</strong> وصلت إلى (${dailyRatio.toFixed(0)}%) من الليميت اليومي.`);
-                }
-                if (monthlyRatio >= 85) {
-                    alerts.push(`المحفظة <strong>${w.name}</strong> اقتربت جداً من الليميت الشهري (${monthlyRatio.toFixed(0)}%).`);
-                }
-            });
-
-            const alertContainer = document.getElementById('limitAlertsContainer');
-            if (alerts.length > 0) {
-                alertContainer.classList.remove('hidden');
-                document.getElementById('limitAlertsText').innerHTML = alerts.join('<br>');
-            } else {
-                alertContainer.classList.add('hidden');
-            }
-
-            // Dashboard Wallets Progress Cards
-            const grid = document.getElementById('dashboardWalletsGrid');
-            grid.innerHTML = wallets.map(w => {
-                const dPct = Math.min(100, (w.dailyUsed / w.dailyLimit) * 100).toFixed(0);
-                return `
-                <div class="bg-slate-900/60 border border-slate-700/80 p-4 rounded-xl">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="font-bold text-xs text-slate-200">${w.name}</span>
-                        <span class="text-xs font-mono font-bold text-emerald-400">${Number(w.balance).toLocaleString()} ج.م</span>
-                    </div>
-                    <div class="text-[11px] text-slate-400 mb-1 flex justify-between">
-                        <span>الليميت اليومي:</span>
-                        <span>${w.dailyUsed.toLocaleString()} / ${w.dailyLimit.toLocaleString()} ج.م</span>
-                    </div>
-                    <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden mb-2">
-                        <div class="h-full ${dPct > 85 ? 'bg-amber-500' : 'bg-emerald-500'}" style="width: ${dPct}%"></div>
-                    </div>
-                </div>`;
-            }).join('');
-
-            // Recent Transactions Table (Limit 5)
-            const recentBody = document.getElementById('recentTransactionsTable');
-            recentBody.innerHTML = transfers.slice(-5).reverse().map(t => `
-                <tr class="hover:bg-slate-700/30">
-                    <td class="p-2.5"><span class="px-2 py-0.5 rounded-full text-[10px] ${t.type === 'تحويل' ? 'bg-blue-500/20 text-blue-400' : 'bg-emerald-500/20 text-emerald-400'}">${t.type}</span></td>
-                    <td class="p-2.5 font-mono text-slate-300">${t.walletName}<br><span class="text-[10px] text-slate-400">${t.customerPhone}</span></td>
-                    <td class="p-2.5 font-bold">${Number(t.amount).toLocaleString()} ج.م</td>
-                    <td class="p-2.5 text-teal-400 font-semibold">+${t.profit} ج.م</td>
-                    <td class="p-2.5 text-slate-400">${t.user || 'الربط'}</td>
-                    <td class="p-2.5 text-slate-400">${t.date.split(' ')[1] || t.date}</td>
-                </tr>
-            `).join('');
-        }
-
-        // Render Wallets Tab
-        function renderWallets() {
-            const grid = document.getElementById('allWalletsGrid');
-            grid.innerHTML = wallets.map(w => `
-                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3 relative overflow-hidden">
-                    <div class="flex items-center justify-between">
-                        <span class="font-bold text-sm text-slate-100">${w.name}</span>
-                        <span class="text-xs text-slate-400 font-mono">${w.phone}</span>
-                    </div>
-                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/50">
-                        <div class="text-xs text-slate-400">الرصيد المتاح</div>
-                        <div class="text-xl font-black text-emerald-400 font-mono mt-0.5">${Number(w.balance).toLocaleString()} <span class="text-xs font-normal">ج.م</span></div>
-                    </div>
-                    <div class="space-y-1.5 text-xs text-slate-300">
-                        <div class="flex justify-between text-[11px]">
-                            <span>استهلاك اليوم:</span>
-                            <span class="font-semibold">${w.dailyUsed.toLocaleString()} / ${w.dailyLimit.toLocaleString()}</span>
+                linesContainer.innerHTML += `
+                    <div class="border border-slate-200 rounded-lg p-3 bg-slate-50">
+                        <div class="flex justify-between items-start mb-1">
+                            <div>
+                                <span class="font-bold text-slate-800 text-sm">${line.name}</span>
+                                <span class="text-xs text-slate-500 block">${line.phone}</span>
+                            </div>
+                            <span class="text-base font-black text-vf">${line.balance.toLocaleString()} ج.م</span>
                         </div>
-                        <div class="flex justify-between text-[11px]">
-                            <span>استهلاك الشهر:</span>
-                            <span class="font-semibold">${w.monthlyUsed.toLocaleString()} / ${w.monthlyLimit.toLocaleString()}</span>
+                        <div class="space-y-1.5 mt-2">
+                            <div>
+                                <div class="flex justify-between text-xs text-slate-500 mb-0.5">
+                                    <span>الليميت اليومي: ${line.dailyUsed.toLocaleString()} / ${line.dailyLimit.toLocaleString()}</span>
+                                    <span class="font-bold">${dailyPercent}%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                    <div class="${limitColor} h-1.5 rounded-full" style="width: ${dailyPercent}%"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
 
-            // Populate Wallet dropdown in modal
-            const select = document.getElementById('tWalletId');
-            select.innerHTML = wallets.map(w => `<option value="${w.id}">${w.name} (رصيد: ${w.balance} ج.م)</option>`).join('');
-        }
-
-        // Render Transfers Table with Filters
-        function renderTransfersTable() {
-            const search = (document.getElementById('transferSearchInput')?.value || '').toLowerCase();
-            const filterType = document.getElementById('transferTypeFilter')?.value || 'ALL';
-
-            const filtered = transfers.filter(t => {
-                const matchesSearch = t.customerPhone.includes(search) || t.walletName.toLowerCase().includes(search);
-                const matchesType = filterType === 'ALL' || t.type === filterType;
-                return matchesSearch && matchesType;
-            }).reverse();
-
-            const tbody = document.getElementById('transfersFullTable');
-            tbody.innerHTML = filtered.map(t => `
-                <tr class="hover:bg-slate-700/30">
-                    <td class="p-3 text-slate-400 font-mono text-[11px]">${t.date}</td>
-                    <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${t.type === 'تحويل' ? 'bg-blue-500/20 text-blue-400' : 'bg-emerald-500/20 text-emerald-400'}">${t.type}</span></td>
-                    <td class="p-3 font-semibold text-slate-200">${t.walletName}</td>
-                    <td class="p-3 font-mono text-slate-300">${t.customerPhone}</td>
-                    <td class="p-3 font-bold text-slate-100">${Number(t.amount).toLocaleString()} ج.م</td>
-                    <td class="p-3 text-slate-400">${t.fee} ج.م</td>
-                    <td class="p-3 text-emerald-400 font-bold">+${t.profit} ج.م</td>
-                    <td class="p-3 text-slate-400">${t.user}</td>
-                    <td class="p-3 text-center">
-                        <button onclick="printReceipt('${t.id}')" title="طباعة إيصال" class="p-1.5 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300">
-                            <i class="fa-solid fa-print"></i>
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // Render Debts Tab
-        function renderDebts() {
-            const debtorsList = document.getElementById('debtorsList');
-            const debtsTable = document.getElementById('debtsTable');
-
-            debtorsList.innerHTML = debts.map(d => `
-                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700 flex items-center justify-between">
-                    <div>
-                        <div class="font-bold text-xs text-slate-200">${d.name}</div>
-                        <div class="text-[10px] text-slate-400 font-mono">${d.phone || 'بدون رقم'}</div>
-                    </div>
-                    <div class="text-rose-400 font-bold text-xs">${Number(d.amount).toLocaleString()} ج.م</div>
-                </div>
-            `).join('');
-
-            debtsTable.innerHTML = debts.map(d => `
-                <tr class="hover:bg-slate-700/30">
-                    <td class="p-3 font-bold text-slate-200">${d.name}</td>
-                    <td class="p-3 font-mono text-slate-300">${d.phone || '-'}</td>
-                    <td class="p-3 text-rose-400 font-bold">${Number(d.amount).toLocaleString()} ج.م</td>
-                    <td class="p-3 text-slate-400">${d.notes || '-'}</td>
-                    <td class="p-3 text-slate-400 text-[11px]">${d.date}</td>
-                    <td class="p-3 text-center">
-                        <button onclick="settleDebt('${d.id}')" class="px-3 py-1 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white rounded-lg text-[11px] transition-colors">
-                            تسديد وتصفية
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // Render Maintenance Tab
-        function renderMaintenance() {
-            const tbody = document.getElementById('maintenanceTable');
-            tbody.innerHTML = maintenance.map(m => `
-                <tr class="hover:bg-slate-700/30">
-                    <td class="p-2.5 font-semibold text-slate-200">${m.device}</td>
-                    <td class="p-2.5 text-slate-300">${m.description}</td>
-                    <td class="p-2.5 text-rose-400">${m.cost} ج.م</td>
-                    <td class="p-2.5 font-bold">${m.price} ج.م</td>
-                    <td class="p-2.5 text-emerald-400 font-bold">+${m.profit} ج.م</td>
-                </tr>
-            `).join('');
-        }
-
-        // Render Expenses Tab
-        function renderExpenses() {
-            const tbody = document.getElementById('expensesTable');
-            tbody.innerHTML = expenses.map(e => `
-                <tr class="hover:bg-slate-700/30">
-                    <td class="p-2.5 font-semibold text-slate-200">${e.title}</td>
-                    <td class="p-2.5 text-rose-400 font-bold">${e.amount} ج.م</td>
-                    <td class="p-2.5 text-slate-400">${e.user}</td>
-                    <td class="p-2.5 text-slate-400 text-[11px]">${e.date}</td>
-                </tr>
-            `).join('');
-        }
-
-        // Render Machines Tab
-        function renderMachines() {
-            const grid = document.getElementById('machinesGrid');
-            grid.innerHTML = machines.map(m => {
-                const isLow = m.balance < m.minLimit;
-                return `
-                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 space-y-4">
-                    <div class="flex items-center justify-between">
-                        <span class="font-bold text-slate-100">${m.name}</span>
-                        ${isLow ? '<span class="bg-rose-500/20 text-rose-400 text-[10px] px-2 py-0.5 rounded-full border border-rose-500/30">رصيد منخفض</span>' : '<span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded-full">جاهزة</span>'}
-                    </div>
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700/60">
-                        <span class="text-xs text-slate-400">الرصيد التقديري بالماكينة</span>
-                        <div class="text-2xl font-black font-mono text-purple-400 mt-1">${Number(m.balance).toLocaleString()} ج.م</div>
-                    </div>
-                    <div class="text-xs text-slate-400 flex justify-between">
-                        <span>الحد الأدنى الأمان:</span>
-                        <span class="font-mono text-slate-200">${m.minLimit} ج.م</span>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        // Render Reports Tab
-        function renderReports() {
-            const transProf = transfers.reduce((acc, t) => acc + Number(t.profit), 0);
-            const maintProf = maintenance.reduce((acc, m) => acc + Number(m.profit), 0);
-            const totalExp = expenses.reduce((acc, e) => acc + Number(e.amount), 0);
-            const netFinal = (transProf + maintProf) - totalExp;
-
-            document.getElementById('rep-transfers-profit').textContent = transProf.toLocaleString() + ' ج.م';
-            document.getElementById('rep-maintenance-profit').textContent = maintProf.toLocaleString() + ' ج.م';
-            document.getElementById('rep-total-expenses').textContent = totalExp.toLocaleString() + ' ج.م';
-            document.getElementById('rep-net-final-profit').textContent = netFinal.toLocaleString() + ' ج.م';
-
-            // Cashier Reports Grouping
-            const cashierMap = {};
-            transfers.forEach(t => {
-                const u = t.user || 'غير معروف';
-                if (!cashierMap[u]) cashierMap[u] = { count: 0, volume: 0, profit: 0 };
-                cashierMap[u].count += 1;
-                cashierMap[u].volume += Number(t.amount);
-                cashierMap[u].profit += Number(t.profit);
+                txLineSelect.innerHTML += `<option value="${line.id}">${line.name} (${line.phone}) - المتبقي: ${line.balance}ج</option>`;
             });
 
-            const tbody = document.getElementById('cashierReportTable');
-            tbody.innerHTML = Object.keys(cashierMap).map(u => `
-                <tr class="hover:bg-slate-700/30">
-                    <td class="p-3 font-bold text-slate-200">${u}</td>
-                    <td class="p-3">${cashierMap[u].count} عملية</td>
-                    <td class="p-3 font-mono">${cashierMap[u].volume.toLocaleString()} ج.م</td>
-                    <td class="p-3 text-emerald-400 font-bold">+${cashierMap[u].profit.toLocaleString()} ج.م</td>
-                </tr>
-            `).join('');
+            // Render History
+            const historyTable = document.getElementById('txHistoryTable');
+            historyTable.innerHTML = '';
+            store.transactions.slice(0, 10).forEach(t => {
+                let badge = t.type === 'withdraw' ? '<span class="text-blue-600 bg-blue-50 px-2 py-0.5 rounded font-bold text-xs">سحب</span>'
+                          : t.type === 'transfer' ? '<span class="text-red-600 bg-red-50 px-2 py-0.5 rounded font-bold text-xs">تحويل</span>'
+                          : '<span class="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-bold text-xs">استقبال</span>';
+
+                const line = store.lines.find(l => l.id == t.lineId);
+                const time = new Date(t.date).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+                historyTable.innerHTML += `
+                    <tr>
+                        <td class="p-3 text-slate-500 text-xs">${time}</td>
+                        <td class="p-3">${badge}</td>
+                        <td class="p-3 font-semibold text-xs">${line ? line.name : 'ممسوح'}</td>
+                        <td class="p-3 font-bold">${t.amount.toLocaleString()} ج.م</td>
+                        <td class="p-3 text-emerald-600 font-bold">+${t.shopFee} ج.م</td>
+                        <td class="p-3 text-slate-500 text-xs">${t.customer || '-'}</td>
+                    </tr>
+                `;
+            });
         }
 
-        // Action Handlers & Calculations
-        function calcTransferFees() {
-            const amount = Number(document.getElementById('tAmount').value || 0);
-            const type = document.getElementById('tType').value;
+        // Automatic Commission Calculations
+        let isManualShopFee = false;
+        function calculateCommissions(manual = false) {
+            if (manual) isManualShopFee = true;
+            
+            const type = document.getElementById('txType').value;
+            const amount = parseFloat(document.getElementById('txAmount').value) || 0;
+            const shopFeeInput = document.getElementById('shopFee');
 
-            let fee = 0;
-            let profit = 0;
-
-            if (amount > 0) {
-                if (type === 'سحب') {
-                    // Standard 1% rule demo calculation
-                    fee = Math.max(5, amount * 0.01);
-                    profit = fee * 0.5; // Shop margin
-                } else {
-                    // Transfer rule
-                    fee = Math.max(5, Math.ceil(amount / 1000) * 5);
-                    profit = fee;
-                }
+            let vfFee = 0;
+            // Vodafone Standard Fee Rule (Simulated)
+            if (type === 'withdraw') {
+                vfFee = amount <= 500 ? 3 : Math.ceil(amount * 0.01);
+            } else if (type === 'transfer') {
+                vfFee = 1; 
             }
 
-            document.getElementById('tFee').value = fee;
-            document.getElementById('tProfit').value = profit;
-        }
+            if (!isManualShopFee) {
+                // Auto Shop Profit Rule: 5 EGP per 1000 EGP as default
+                const calculatedShopFee = amount > 0 ? Math.max(5, Math.ceil(amount * 0.005)) : 0;
+                shopFeeInput.value = calculatedShopFee;
+            }
 
-        // Modal Controls
-        function openWalletModal() { document.getElementById('walletModal').classList.remove('hidden'); }
-        function openTransferModal() { document.getElementById('transferModal').classList.remove('hidden'); }
-        function openDebtModal() { document.getElementById('debtModal').classList.remove('hidden'); }
-        function openMaintenanceModal() { document.getElementById('maintModal').classList.remove('hidden'); }
-        function openExpenseModal() { document.getElementById('expenseModal').classList.remove('hidden'); }
-        function openMachineModal() { document.getElementById('machineModal').classList.remove('hidden'); }
-        
-        function closeModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
+            const shopFee = parseFloat(shopFeeInput.value) || 0;
 
-        function quickActionModal(type) {
+            document.getElementById('vfFee').innerText = vfFee + ' ج.م';
+            
+            let total = 0;
             if (type === 'transfer') {
-                openTransferModal();
-                document.getElementById('tType').value = 'تحويل';
+                total = amount + shopFee + vfFee;
             } else if (type === 'withdraw') {
-                openTransferModal();
-                document.getElementById('tType').value = 'سحب';
-            } else if (type === 'debt') {
-                openDebtModal();
-            }
-        }
-
-        // Forms Handlers
-        function handleSaveWallet(e) {
-            e.preventDefault();
-            const newW = {
-                id: 'w_' + Date.now(),
-                name: document.getElementById('wName').value,
-                phone: document.getElementById('wPhone').value,
-                balance: Number(document.getElementById('wBalance').value),
-                dailyLimit: Number(document.getElementById('wDailyLimit').value),
-                dailyUsed: 0,
-                monthlyLimit: Number(document.getElementById('wMonthlyLimit').value),
-                monthlyUsed: 0
-            };
-            wallets.push(newW);
-            saveData();
-            closeModal('walletModal');
-        }
-
-        function handleSaveTransfer(e) {
-            e.preventDefault();
-            const wId = document.getElementById('tWalletId').value;
-            const wallet = wallets.find(w => w.id === wId);
-            const amount = Number(document.getElementById('tAmount').value);
-            const type = document.getElementById('tType').value;
-            const user = document.getElementById('currentUser').value;
-
-            if (!wallet) return;
-
-            // Balance Adjustment
-            if (type === 'تحويل') {
-                if (wallet.balance < amount) {
-                    alert('عفواً، رصيد المحفظة لا يكفي لإتمام عملية التحويل!');
-                    return;
-                }
-                wallet.balance -= amount;
+                total = amount - vfFee;
             } else {
-                wallet.balance += amount;
+                total = amount;
+            }
+            document.getElementById('totalCustomerPay').innerText = total.toLocaleString() + ' ج.م';
+        }
+
+        // Handle Form Submission
+        function handleTransaction(e) {
+            e.preventDefault();
+            const type = document.getElementById('txType').value;
+            const lineId = parseInt(document.getElementById('txLine').value);
+            const amount = parseFloat(document.getElementById('txAmount').value);
+            const shopFee = parseFloat(document.getElementById('shopFee').value) || 0;
+            const customer = document.getElementById('txCustomer').value;
+
+            const line = store.lines.find(l => l.id === lineId);
+
+            if (type === 'transfer' && line.balance < amount) {
+                Swal.fire('خطأ!', 'رصيد المحفظة لا يكفي للتحويل', 'error');
+                return;
             }
 
-            wallet.dailyUsed += amount;
-            wallet.monthlyUsed += amount;
+            if (type === 'withdraw' && store.drawerCash < amount) {
+                Swal.fire('تحذير!', 'الكاش في الدرج لا يكفي لتسليم الزبون', 'warning');
+            }
 
-            const newTransfer = {
-                id: 't_' + Date.now(),
-                date: new Date().toISOString().replace('T', ' ').slice(0, 16),
-                type: type,
-                walletId: wId,
-                walletName: wallet.name,
-                customerPhone: document.getElementById('tCustomerPhone').value,
-                amount: amount,
-                fee: Number(document.getElementById('tFee').value),
-                profit: Number(document.getElementById('tProfit').value),
-                user: user
-            };
+            // Update Balances
+            if (type === 'transfer') {
+                line.balance -= amount;
+                store.drawerCash += (amount + shopFee);
+                line.dailyUsed += amount;
+                line.monthlyUsed += amount;
+            } else if (type === 'withdraw') {
+                line.balance += amount;
+                store.drawerCash -= (amount - shopFee);
+                line.dailyUsed += amount;
+                line.monthlyUsed += amount;
+            } else if (type === 'receive_deposit') {
+                line.balance += amount;
+                line.dailyUsed += amount;
+                line.monthlyUsed += amount;
+            }
 
-            transfers.push(newTransfer);
+            store.transactions.unshift({
+                id: Date.now(),
+                type,
+                lineId,
+                amount,
+                shopFee,
+                customer,
+                date: new Date().toISOString()
+            });
+
+            isManualShopFee = false;
+            document.getElementById('txForm').reset();
+            calculateCommissions();
             saveData();
-            closeModal('transferModal');
+
+            Swal.fire({
+                icon: 'success',
+                title: 'تمت العملية بنجاح!',
+                timer: 1500,
+                showConfirmButton: false
+            });
         }
 
-        function handleSaveDebt(e) {
-            e.preventDefault();
-            const newDebt = {
-                id: 'd_' + Date.now(),
-                name: document.getElementById('dCustomerName').value,
-                phone: document.getElementById('dCustomerPhone').value,
-                amount: Number(document.getElementById('dAmount').value),
-                notes: document.getElementById('dNotes').value,
-                date: new Date().toISOString().slice(0, 10)
-            };
-            debts.push(newDebt);
-            saveData();
-            closeModal('debtModal');
+        // Simulate Live Incoming VF Cash SMS Alert
+        function simulateIncomingSMS() {
+            const randomLine = store.lines[0];
+            const randomAmount = [200, 500, 1000, 1500, 3000][Math.floor(Math.random() * 5)];
+            const fakeSender = '010' + Math.floor(10000000 + Math.random() * 90000000);
+
+            // Play Beep Sound Effect
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.4);
+
+            Swal.fire({
+                title: '<span class="text-vf font-bold"><i class="fa-solid fa-bell"></i> تم استقبال تحويل جديد!</span>',
+                html: `
+                    <div class="text-right space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <p><strong>المبلغ المستلم:</strong> <span class="text-emerald-600 font-extrabold text-lg">${randomAmount} ج.م</span></p>
+                        <p><strong>من رقم:</strong> ${fakeSender}</p>
+                        <p><strong>حساب الخط:</strong> ${randomLine.name} (${randomLine.phone})</p>
+                        <p class="text-xs text-slate-400">نص الرسالة: تم استقبال مبلغ ${randomAmount} ج.م من ${fakeSender} بنجاح.</p>
+                    </div>
+                `,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#e60000',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'تأكيد وإضافة للرصيد فوراً',
+                cancelButtonText: 'إلغاء'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    randomLine.balance += randomAmount;
+                    randomLine.dailyUsed += randomAmount;
+                    randomLine.monthlyUsed += randomAmount;
+
+                    store.transactions.unshift({
+                        id: Date.now(),
+                        type: 'receive_deposit',
+                        lineId: randomLine.id,
+                        amount: randomAmount,
+                        shopFee: 0,
+                        customer: fakeSender,
+                        date: new Date().toISOString()
+                    });
+
+                    saveData();
+                    Swal.fire('تم التحديث!', `تم تحديث رصيد ${randomLine.name} بنجاح.`, 'success');
+                }
+            });
         }
 
-        function settleDebt(debtId) {
-            if (confirm('هل أنت تأكد من تسديد هذا الدين بالكامل؟')) {
-                debts = debts.filter(d => d.id !== debtId);
+        function addNewLine() {
+            Swal.fire({
+                title: 'إضافة خط جديد',
+                html: `
+                    <input id="lineName" class="swal2-input" placeholder="اسم الخط (مثال: المحل الرئيسي)">
+                    <input id="linePhone" class="swal2-input" placeholder="رقم الهاتف">
+                    <input id="lineBalance" type="number" class="swal2-input" placeholder="الرصيد الحالي (ج.م)">
+                `,
+                confirmButtonText: 'حفظ',
+                confirmButtonColor: '#e60000',
+                preConfirm: () => {
+                    return {
+                        name: document.getElementById('lineName').value,
+                        phone: document.getElementById('linePhone').value,
+                        balance: parseFloat(document.getElementById('lineBalance').value) || 0
+                    }
+                }
+            }).then((res) => {
+                if (res.isConfirmed && res.value.name) {
+                    store.lines.push({
+                        id: Date.now(),
+                        name: res.value.name,
+                        phone: res.value.phone,
+                        balance: res.value.balance,
+                        dailyUsed: 0,
+                        dailyLimit: 60000,
+                        monthlyUsed: 0,
+                        monthlyLimit: 200000
+                    });
+                    saveData();
+                }
+            });
+        }
+
+        function clearHistory() {
+            if (confirm('هل أنت تأكد من مسح كافة السجلات؟')) {
+                store.transactions = [];
                 saveData();
             }
         }
 
-        function handleSaveMaintenance(e) {
-            e.preventDefault();
-            const cost = Number(document.getElementById('mCost').value);
-            const price = Number(document.getElementById('mPrice').value);
-            const newM = {
-                id: 'm_' + Date.now(),
-                device: document.getElementById('mDevice').value,
-                description: document.getElementById('mDescription').value,
-                cost: cost,
-                price: price,
-                profit: price - cost,
-                date: new Date().toISOString().slice(0, 10)
-            };
-            maintenance.push(newM);
-            saveData();
-            closeModal('maintModal');
-        }
-
-        function handleSaveExpense(e) {
-            e.preventDefault();
-            const user = document.getElementById('currentUser').value;
-            const newE = {
-                id: 'e_' + Date.now(),
-                title: document.getElementById('eTitle').value,
-                amount: Number(document.getElementById('eAmount').value),
-                user: user,
-                date: new Date().toISOString().slice(0, 10)
-            };
-            expenses.push(newE);
-            saveData();
-            closeModal('expenseModal');
-        }
-
-        function handleSaveMachine(e) {
-            e.preventDefault();
-            const newMac = {
-                id: 'mac_' + Date.now(),
-                name: document.getElementById('macName').value,
-                balance: Number(document.getElementById('macBalance').value),
-                minLimit: Number(document.getElementById('macMin').value)
-            };
-            machines.push(newMac);
-            saveData();
-            closeModal('machineModal');
-        }
-
-        function changeUserRole() {
-            renderAll();
-        }
-
-        // Print Transaction Receipt
-        function printReceipt(transferId) {
-            const t = transfers.find(item => item.id === transferId);
-            if (!t) return;
-
-            const receiptHtml = `
-                <div class="flex justify-between"><span>رقم العملية:</span> <strong>${t.id}</strong></div>
-                <div class="flex justify-between"><span>التاريخ والوقت:</span> <span>${t.date}</span></div>
-                <div class="flex justify-between"><span>نوع الحركة:</span> <strong>${t.type} كاش</strong></div>
-                <div class="flex justify-between"><span>المحفظة:</span> <span>${t.walletName}</span></div>
-                <div class="flex justify-between"><span>رقم العميل:</span> <span>${t.customerPhone}</span></div>
-                <hr class="my-2 border-dashed">
-                <div class="flex justify-between text-base font-bold"><span>المبلغ:</span> <span>${t.amount} ج.م</span></div>
-                <div class="flex justify-between"><span>الرسوم:</span> <span>${t.fee} ج.م</span></div>
-                <hr class="my-2 border-dashed">
-                <div class="flex justify-between text-xs"><span>الكاشير المنفذ:</span> <span>${t.user}</span></div>
-            `;
-
-            document.getElementById('receiptBody').innerHTML = receiptHtml;
-            window.print();
-        }
+        // Init App
+        render();
+        calculateCommissions();
     </script>
 </body>
 </html>
